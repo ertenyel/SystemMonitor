@@ -8,7 +8,9 @@ namespace SystemMonitor
 {
     public partial class MainForm : Form
     {
-        string numberAuditValue;
+        public static string timeWritten;
+        public static string audit;
+        string numberAuditValue;        
         double recSegmentsValue;
         double sentSegmentsValue;
         double procesLoadValue;
@@ -24,11 +26,18 @@ namespace SystemMonitor
             InitializeComponent();
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            StatConLbl.Text =  SqlLiteDataBase.SqlCreateSysRes();
+            StatConLbl.Text = SqlLiteDataBase.SqlCreateSecurity();
+        }
+
         private void MainStartBtn_Click(object sender, EventArgs e)
         {
             if (!btnMainStartBool)
             {
                 MainStartBtn.Text = "Stop monitoring";
+                BtnStopWrk.Enabled = true;
                 btnMainStartBool = true;
                 MainTimerProgram.Enabled = true;
                 TimerWrkProgram.Enabled = true;
@@ -38,6 +47,7 @@ namespace SystemMonitor
             else
             {
                 MainStartBtn.Text = "Start monitoring";
+                BtnStopWrk.Enabled = false;
                 btnMainStartBool = false;
                 MainTimerProgram.Stop();
                 TimerWrkProgram.Stop();
@@ -64,13 +74,15 @@ namespace SystemMonitor
                     itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue), true);
             }
 
+            SqlLiteDataBase.SqlAddSysRes(listBox2.Items.Count, (int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue));
+
             //if (Chart.i % 100 == 0 && Chart.i != 0)
             //{
             //    ChartForSysRes.Series[0].Points.Clear();
             //    ChartForSysRes.Series[1].Points.Clear();
             //    ChartForSysRes.Series[2].Points.Clear();
             //    ChartForTCPCon.Series[0].Points.Clear();
-            //    ChartForTCPCon.Series[1].Points.Clear();
+            //    ChartForTCPCon.Series[1].Points.Clear();6
             //    ChartForTCPCon.Series[2].Points.Clear();
             //    Chart.i++;
             //}
@@ -117,8 +129,15 @@ namespace SystemMonitor
             if (Chart.i == 0)
             {
                 for (int i = evLog.Entries.Count-1; i > evLog.Entries.Count-10; i--)
+                {
                     listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].Category}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
-
+                    if (i - (evLog.Entries.Count - 10) == 1)
+                    {
+                        timeWritten = evLog.Entries[i].TimeWritten.ToString("dd.MM.yyyy HH:mm:ss");
+                        audit = evLog.Entries[i].EntryType.ToString();
+                    }
+                }
+                listBox6.Items.Add(SqlLiteDataBase.SqlAddSecurity(timeWritten, audit));
                 listBox4.Items.Add("\n\t" + DateTime.Now + "\n");
                 listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text);
             }
@@ -127,8 +146,15 @@ namespace SystemMonitor
                 if (numberAuditValue != NumberOfAuditTB.Text)
                 {
                     for (int i = evLog.Entries.Count - 1; i > evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)); i--)
+                    {
                         listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].Message}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
-
+                        if ((i - evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue))) == 1)
+                        {
+                            timeWritten = evLog.Entries[i].TimeWritten.ToString("dd.MM.yyyy HH:mm:ss");
+                            audit = evLog.Entries[i].EntryType.ToString();
+                        }
+                    }
+                    SqlLiteDataBase.SqlAddSecurity(timeWritten, audit);
                     listBox4.Items.Add("\n\t" + DateTime.Now + "\n");
                     listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text + "\t" + "difference: " + Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)));
                 }
@@ -218,5 +244,41 @@ namespace SystemMonitor
                 btnWrkBool = 1;
             }
         }
+
+        private void ConnectToSqlData_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlConnect();
+
+        //SysRes history
+        private void CreateTableSysRes_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlCreateSysRes();
+        private void AddToTableSysRes_Click(object sender, EventArgs e)
+        {
+            if (SqlLiteDataBase.SqlReadAllSysRes() != null)
+            {
+                dataGridSysRes.Rows.Clear();
+
+                for (int i = 0; i < SqlLiteDataBase.SqlReadAllSysRes().Rows.Count; i++)
+                  dataGridSysRes.Rows.Add(SqlLiteDataBase.SqlReadAllSysRes().Rows[i].ItemArray);
+            }
+            else
+                listBox5.Items.Add("The data was not uploaded");
+        }
+        private void DeleteTableSysRes_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlDeleteSysRes();
+        private void ClearTableDataSysRes_Click(object sender, EventArgs e) => dataGridSysRes.Rows.Clear();
+
+        //Security history
+        private void CreateTableSecurity_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlCreateSecurity();
+        private void AddToTableSecurity_Click(object sender, EventArgs e)
+        {
+            if (SqlLiteDataBase.SqlReadAllSecurity() != null)
+            {
+                dataGridViewSecurity.Rows.Clear();
+
+                for (int i = 0; i < SqlLiteDataBase.SqlReadAllSecurity().Rows.Count; i++)
+                    dataGridViewSecurity.Rows.Add(SqlLiteDataBase.SqlReadAllSecurity().Rows[i].ItemArray);
+            }
+            else
+                listBox6.Items.Add("The data was not uploaded");
+        }
+        private void DeleteToTableSecurity_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlDeleteSecurity();
+        private void ClearTableSecurity_Click(object sender, EventArgs e) => dataGridViewSecurity.Rows.Clear();
     }
 }
