@@ -10,16 +10,16 @@ namespace SystemMonitor
     {
         public static string timeWritten;
         public static string audit;
-        string numberAuditValue;        
-        double recSegmentsValue;
-        double sentSegmentsValue;
-        double procesLoadValue;
-        double physicalDiscValue;
-        double memoryValue;
-        bool btnMainStartBool = false;
-        int waitForCounterProc;
-        int itemsCount = 0;
-        int btnWrkBool = 1;
+        public string numberAuditValue;
+        public double recSegmentsValue;
+        public double sentSegmentsValue;
+        public double procesLoadValue;
+        public double physicalDiscValue;
+        public double memoryValue;
+        public static bool btnMainStartBool = false;
+        public static int waitForCounterProc;
+        public static int itemsCount = 0;
+        public int btnWrkBool = 1;
 
         public MainForm()
         {
@@ -30,6 +30,7 @@ namespace SystemMonitor
         {
             StatConLbl.Text =  SqlLiteDataBase.SqlCreateSysRes();
             StatConLbl.Text = SqlLiteDataBase.SqlCreateSecurity();
+            StatConLbl.Text = SqlLiteDataBase.SqlCreateNetwork();
         }
 
         private void MainStartBtn_Click(object sender, EventArgs e)
@@ -58,42 +59,17 @@ namespace SystemMonitor
 
         private void TimerProcLoad_Tick(object sender, EventArgs e)
         {
+            var chart = new Chart();
             SystemResourses();
             ShowActiveTcpConnections();
             SecurityLog();
-
-            // todo: Реализовать очистку графика через определенное время 
-            if (btnWrkBool == 1)
-            {
-                InitializeParameters((int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue),
-                    itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue));
-            }
-            else
-            {
-                InitializeParameters((int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue),
-                    itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue), true);
-            }
-
+            ConditionOfInitiComp();
             SqlLiteDataBase.SqlAddSysRes(listBox2.Items.Count, (int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue));
-
-            //if (Chart.i % 100 == 0 && Chart.i != 0)
-            //{
-            //    ChartForSysRes.Series[0].Points.Clear();
-            //    ChartForSysRes.Series[1].Points.Clear();
-            //    ChartForSysRes.Series[2].Points.Clear();
-            //    ChartForTCPCon.Series[0].Points.Clear();
-            //    ChartForTCPCon.Series[1].Points.Clear();6
-            //    ChartForTCPCon.Series[2].Points.Clear();
-            //    Chart.i++;
-            //}
-            //else
-            //{
-                
-            //}
-
+            SqlLiteDataBase.SqlAddNetwork(itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue));
+            clearChartsMethod(true);
         }
-
-        public void SystemResourses()
+        //System resourses
+        private void SystemResourses()
         {
             procesLoadValue = Processor.NextValue();
             physicalDiscValue = 100-Disk.NextValue();
@@ -119,8 +95,8 @@ namespace SystemMonitor
             }
             waitForCounterProc++;
         }
-
-        public void SecurityLog()
+        //Security log
+        private void SecurityLog()
         {
             var evLog = new EventLog();
             evLog.Log = "Security";
@@ -161,8 +137,8 @@ namespace SystemMonitor
             }
             numberAuditValue = Convert.ToString(evLog.Entries.Count);
         }
-
-        public void ShowActiveTcpConnections()
+        // TCP connections
+        private void ShowActiveTcpConnections()
         {
             recSegmentsValue = BytesReceived.NextValue();
             sentSegmentsValue = SentBytes.NextValue();
@@ -183,6 +159,7 @@ namespace SystemMonitor
             {
                 Chart.FillChart(valueCPUX, valueDiscX, valueMemX, valueConX, valueConRecX, valueConSentX);
 
+                ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScaleView.Zoom(10, 100);
                 ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScaleView.Zoom(10, 100);
                 ChartForTCPCon.ChartAreas[ChartForTCPCon.Series["Tcp connections count"].ChartArea].AxisX.ScaleView.Zoom(10, 100);
 
@@ -263,6 +240,19 @@ namespace SystemMonitor
         }
         private void DeleteTableSysRes_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlDeleteSysRes();
         private void ClearTableDataSysRes_Click(object sender, EventArgs e) => dataGridSysRes.Rows.Clear();
+        private void GoBtnSysRes_Click(object sender, EventArgs e)
+        {
+            if (SqlLiteDataBase.LetsQuery(richTextBoxSysRes.Text) != null)
+            {
+                dataGridSysRes.Rows.Clear();
+
+                for (int i = 0; i < SqlLiteDataBase.LetsQuery(richTextBoxSysRes.Text).Rows.Count; i++)
+                    dataGridSysRes.Rows.Add(SqlLiteDataBase.LetsQuery(richTextBoxSysRes.Text).Rows[i].ItemArray);
+            }
+            else
+                listBox5.Items.Add("The data was not uploaded");
+        }
+        private void ClearSysRes_Click(object sender, EventArgs e) => richTextBoxSysRes.Clear();
 
         //Security history
         private void CreateTableSecurity_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlCreateSecurity();
@@ -280,5 +270,92 @@ namespace SystemMonitor
         }
         private void DeleteToTableSecurity_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlDeleteSecurity();
         private void ClearTableSecurity_Click(object sender, EventArgs e) => dataGridViewSecurity.Rows.Clear();
+        private void GoBtnSecurity_Click(object sender, EventArgs e)
+        {
+            if (SqlLiteDataBase.LetsQuery(richTextBoxSecurity.Text) != null)
+            {
+                dataGridViewSecurity.Rows.Clear();
+
+                for (int i = 0; i < SqlLiteDataBase.LetsQuery(richTextBoxSecurity.Text).Rows.Count; i++)
+                    dataGridViewSecurity.Rows.Add(SqlLiteDataBase.LetsQuery(richTextBoxSecurity.Text).Rows[i].ItemArray);
+            }
+            else
+                listBox6.Items.Add("The data was not uploaded");
+        }
+        private void ClearSecurity_Click(object sender, EventArgs e) => richTextBoxSecurity.Clear();
+
+        //Network history
+        private void CreateTableNetwork_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlCreateNetwork();
+        private void AddToTableNetwork_Click(object sender, EventArgs e)
+        {
+            if (SqlLiteDataBase.SqlReadAllNetwork() != null)
+            {
+                dataGridNetwork.Rows.Clear();
+
+                for (int i = 0; i < SqlLiteDataBase.SqlReadAllNetwork().Rows.Count; i++)
+                    dataGridNetwork.Rows.Add(SqlLiteDataBase.SqlReadAllNetwork().Rows[i].ItemArray);
+            }
+            else
+                listBox7.Items.Add("The data was not uploaded");
+        }
+        private void DeleteTableNetwork_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlDeleteNetwork();
+        private void ClearTableNetwork_Click(object sender, EventArgs e) => dataGridNetwork.Rows.Clear();
+        private void GoBtnNetwork_Click(object sender, EventArgs e)
+        {
+            if (SqlLiteDataBase.LetsQuery(richTextBoxNetwork.Text) != null)
+            {
+                dataGridNetwork.Rows.Clear();
+
+                for (int i = 0; i < SqlLiteDataBase.LetsQuery(richTextBoxNetwork.Text).Rows.Count; i++)
+                    dataGridNetwork.Rows.Add(SqlLiteDataBase.LetsQuery(richTextBoxNetwork.Text).Rows[i].ItemArray);
+            }
+            else
+                listBox7.Items.Add("The data was not uploaded");
+        }
+        private void ClearNetwork_Click(object sender, EventArgs e) => richTextBoxNetwork.Clear();
+
+        //button clear charts
+        private void ClearCharts_Click(object sender, EventArgs e) => clearChartsMethod(false);
+
+        //methods clear charts
+        private void clearChartsMethod(bool ifCondition = true)
+        {
+            if (ifCondition)
+            {
+                if (Chart.i % 1000 == 0 && Chart.i != 0)
+                {
+                    ChartForSysRes.Series[0].Points.Clear();
+                    ChartForSysRes.Series[1].Points.Clear();
+                    ChartForSysRes.Series[2].Points.Clear();
+                    ChartForTCPCon.Series[0].Points.Clear();
+                    ChartForTCPCon.Series[1].Points.Clear();
+                    ChartForTCPCon.Series[2].Points.Clear();
+                }
+            }
+            else
+            {
+                ChartForSysRes.Series[0].Points.Clear();
+                ChartForSysRes.Series[1].Points.Clear();
+                ChartForSysRes.Series[2].Points.Clear();
+                ChartForTCPCon.Series[0].Points.Clear();
+                ChartForTCPCon.Series[1].Points.Clear();
+                ChartForTCPCon.Series[2].Points.Clear();
+            }
+        }
+
+        //methods initialize component
+        private void ConditionOfInitiComp()
+        {
+            if (btnWrkBool == 1)
+            {
+                InitializeParameters((int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue),
+                    itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue));
+            }
+            else
+            {
+                InitializeParameters((int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue),
+                    itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue), true);
+            }
+        }
     }
 }

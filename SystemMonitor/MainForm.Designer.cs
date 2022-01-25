@@ -114,6 +114,21 @@ namespace SystemMonitor
             this.timeSecurity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entryType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.listBox7 = new System.Windows.Forms.ListBox();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.ClearTableNetwork = new System.Windows.Forms.Button();
+            this.DeleteTableNetwork = new System.Windows.Forms.Button();
+            this.CreateTableNetwork = new System.Windows.Forms.Button();
+            this.AddToTableNetwork = new System.Windows.Forms.Button();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.dataGridNetwork = new System.Windows.Forms.DataGridView();
+            this.idNetwork = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timeNetwork = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.connectionsCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receivedBytes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sentByte = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimerWrkProgram = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.MainStartBtn = new System.Windows.Forms.ToolStripButton();
@@ -129,6 +144,21 @@ namespace SystemMonitor
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.StatConLbl = new System.Windows.Forms.ToolStripLabel();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.richTextBoxSysRes = new System.Windows.Forms.RichTextBox();
+            this.GoBtnSysRes = new System.Windows.Forms.Button();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.GoBtnSecurity = new System.Windows.Forms.Button();
+            this.richTextBoxSecurity = new System.Windows.Forms.RichTextBox();
+            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.GoBtnNetwork = new System.Windows.Forms.Button();
+            this.richTextBoxNetwork = new System.Windows.Forms.RichTextBox();
+            this.ClearNetwork = new System.Windows.Forms.Button();
+            this.ClearSecurity = new System.Windows.Forms.Button();
+            this.ClearSysRes = new System.Windows.Forms.Button();
+            this.ClearCharts = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.Processor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Disk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Memory)).BeginInit();
@@ -162,7 +192,17 @@ namespace SystemMonitor
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecurity)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            this.groupBox15.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            this.groupBox17.SuspendLayout();
+            this.groupBox18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridNetwork)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.groupBox19.SuspendLayout();
+            this.groupBox20.SuspendLayout();
+            this.groupBox21.SuspendLayout();
+            this.groupBox22.SuspendLayout();
             this.SuspendLayout();
             // 
             // Processor
@@ -648,9 +688,10 @@ namespace SystemMonitor
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.groupBox20);
+            this.groupBox7.Controls.Add(this.groupBox19);
             this.groupBox7.Controls.Add(this.groupBox10);
             this.groupBox7.Controls.Add(this.groupBox9);
-            this.groupBox7.Controls.Add(this.dataGridSysRes);
             this.groupBox7.Location = new System.Drawing.Point(8, 6);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(1321, 679);
@@ -664,7 +705,7 @@ namespace SystemMonitor
             this.groupBox10.Controls.Add(this.DeleteTableSysRes);
             this.groupBox10.Controls.Add(this.CreateTableSysRes);
             this.groupBox10.Controls.Add(this.AddToTableSysRes);
-            this.groupBox10.Location = new System.Drawing.Point(936, 14);
+            this.groupBox10.Location = new System.Drawing.Point(936, 25);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(379, 135);
             this.groupBox10.TabIndex = 10;
@@ -723,6 +764,7 @@ namespace SystemMonitor
             // 
             // listBox5
             // 
+            this.listBox5.BackColor = System.Drawing.SystemColors.Control;
             this.listBox5.FormattingEnabled = true;
             this.listBox5.ItemHeight = 20;
             this.listBox5.Location = new System.Drawing.Point(6, 28);
@@ -742,7 +784,7 @@ namespace SystemMonitor
             this.percmemory});
             this.dataGridSysRes.Location = new System.Drawing.Point(6, 25);
             this.dataGridSysRes.Name = "dataGridSysRes";
-            this.dataGridSysRes.Size = new System.Drawing.Size(924, 648);
+            this.dataGridSysRes.Size = new System.Drawing.Size(912, 345);
             this.dataGridSysRes.TabIndex = 0;
             // 
             // idSysRes
@@ -754,6 +796,7 @@ namespace SystemMonitor
             // 
             // timeSysRes
             // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle6.Format = "G";
             dataGridViewCellStyle6.NullValue = null;
             this.timeSysRes.DefaultCellStyle = dataGridViewCellStyle6;
@@ -798,6 +841,7 @@ namespace SystemMonitor
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.groupBox21);
             this.groupBox11.Controls.Add(this.groupBox14);
             this.groupBox11.Controls.Add(this.groupBox13);
             this.groupBox11.Controls.Add(this.groupBox12);
@@ -820,6 +864,7 @@ namespace SystemMonitor
             // 
             // listBox6
             // 
+            this.listBox6.BackColor = System.Drawing.SystemColors.Control;
             this.listBox6.FormattingEnabled = true;
             this.listBox6.HorizontalScrollbar = true;
             this.listBox6.ItemHeight = 20;
@@ -884,9 +929,9 @@ namespace SystemMonitor
             // groupBox12
             // 
             this.groupBox12.Controls.Add(this.dataGridViewSecurity);
-            this.groupBox12.Location = new System.Drawing.Point(6, 25);
+            this.groupBox12.Location = new System.Drawing.Point(6, 291);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(931, 648);
+            this.groupBox12.Size = new System.Drawing.Size(931, 382);
             this.groupBox12.TabIndex = 0;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Data table";
@@ -898,9 +943,9 @@ namespace SystemMonitor
             this.idSecurity,
             this.timeSecurity,
             this.entryType});
-            this.dataGridViewSecurity.Location = new System.Drawing.Point(6, 25);
+            this.dataGridViewSecurity.Location = new System.Drawing.Point(6, 21);
             this.dataGridViewSecurity.Name = "dataGridViewSecurity";
-            this.dataGridViewSecurity.Size = new System.Drawing.Size(919, 617);
+            this.dataGridViewSecurity.Size = new System.Drawing.Size(919, 355);
             this.dataGridViewSecurity.TabIndex = 0;
             // 
             // idSecurity
@@ -921,12 +966,149 @@ namespace SystemMonitor
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.Silver;
+            this.tabPage6.Controls.Add(this.groupBox15);
             this.tabPage6.Location = new System.Drawing.Point(4, 29);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(1343, 711);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Network history";
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.groupBox22);
+            this.groupBox15.Controls.Add(this.groupBox16);
+            this.groupBox15.Controls.Add(this.groupBox17);
+            this.groupBox15.Controls.Add(this.groupBox18);
+            this.groupBox15.Location = new System.Drawing.Point(6, 6);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(1327, 679);
+            this.groupBox15.TabIndex = 1;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "Network history";
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.listBox7);
+            this.groupBox16.Location = new System.Drawing.Point(943, 165);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(378, 508);
+            this.groupBox16.TabIndex = 2;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "Errors or exeptions";
+            // 
+            // listBox7
+            // 
+            this.listBox7.BackColor = System.Drawing.SystemColors.Control;
+            this.listBox7.FormattingEnabled = true;
+            this.listBox7.HorizontalScrollbar = true;
+            this.listBox7.ItemHeight = 20;
+            this.listBox7.Location = new System.Drawing.Point(6, 18);
+            this.listBox7.Name = "listBox7";
+            this.listBox7.Size = new System.Drawing.Size(366, 484);
+            this.listBox7.TabIndex = 0;
+            // 
+            // groupBox17
+            // 
+            this.groupBox17.Controls.Add(this.ClearTableNetwork);
+            this.groupBox17.Controls.Add(this.DeleteTableNetwork);
+            this.groupBox17.Controls.Add(this.CreateTableNetwork);
+            this.groupBox17.Controls.Add(this.AddToTableNetwork);
+            this.groupBox17.Location = new System.Drawing.Point(943, 25);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(378, 134);
+            this.groupBox17.TabIndex = 1;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "Control";
+            // 
+            // ClearTableNetwork
+            // 
+            this.ClearTableNetwork.Location = new System.Drawing.Point(196, 78);
+            this.ClearTableNetwork.Name = "ClearTableNetwork";
+            this.ClearTableNetwork.Size = new System.Drawing.Size(174, 47);
+            this.ClearTableNetwork.TabIndex = 10;
+            this.ClearTableNetwork.Text = "Clear this table";
+            this.ClearTableNetwork.UseVisualStyleBackColor = true;
+            this.ClearTableNetwork.Click += new System.EventHandler(this.ClearTableNetwork_Click);
+            // 
+            // DeleteTableNetwork
+            // 
+            this.DeleteTableNetwork.Location = new System.Drawing.Point(6, 78);
+            this.DeleteTableNetwork.Name = "DeleteTableNetwork";
+            this.DeleteTableNetwork.Size = new System.Drawing.Size(184, 47);
+            this.DeleteTableNetwork.TabIndex = 12;
+            this.DeleteTableNetwork.Text = "Delete table";
+            this.DeleteTableNetwork.UseVisualStyleBackColor = true;
+            this.DeleteTableNetwork.Click += new System.EventHandler(this.DeleteTableNetwork_Click);
+            // 
+            // CreateTableNetwork
+            // 
+            this.CreateTableNetwork.Location = new System.Drawing.Point(6, 25);
+            this.CreateTableNetwork.Name = "CreateTableNetwork";
+            this.CreateTableNetwork.Size = new System.Drawing.Size(184, 47);
+            this.CreateTableNetwork.TabIndex = 11;
+            this.CreateTableNetwork.Text = "Create table";
+            this.CreateTableNetwork.UseVisualStyleBackColor = true;
+            this.CreateTableNetwork.Click += new System.EventHandler(this.CreateTableNetwork_Click);
+            // 
+            // AddToTableNetwork
+            // 
+            this.AddToTableNetwork.Location = new System.Drawing.Point(196, 25);
+            this.AddToTableNetwork.Name = "AddToTableNetwork";
+            this.AddToTableNetwork.Size = new System.Drawing.Size(174, 47);
+            this.AddToTableNetwork.TabIndex = 9;
+            this.AddToTableNetwork.Text = "Fill to table";
+            this.AddToTableNetwork.UseVisualStyleBackColor = true;
+            this.AddToTableNetwork.Click += new System.EventHandler(this.AddToTableNetwork_Click);
+            // 
+            // groupBox18
+            // 
+            this.groupBox18.Controls.Add(this.dataGridNetwork);
+            this.groupBox18.Location = new System.Drawing.Point(6, 289);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(931, 384);
+            this.groupBox18.TabIndex = 0;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "Data table";
+            // 
+            // dataGridNetwork
+            // 
+            this.dataGridNetwork.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridNetwork.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idNetwork,
+            this.timeNetwork,
+            this.connectionsCount,
+            this.receivedBytes,
+            this.sentByte});
+            this.dataGridNetwork.Location = new System.Drawing.Point(6, 25);
+            this.dataGridNetwork.Name = "dataGridNetwork";
+            this.dataGridNetwork.Size = new System.Drawing.Size(919, 353);
+            this.dataGridNetwork.TabIndex = 0;
+            // 
+            // idNetwork
+            // 
+            this.idNetwork.HeaderText = "ID";
+            this.idNetwork.Name = "idNetwork";
+            // 
+            // timeNetwork
+            // 
+            this.timeNetwork.HeaderText = "Time";
+            this.timeNetwork.Name = "timeNetwork";
+            // 
+            // connectionsCount
+            // 
+            this.connectionsCount.HeaderText = "Number connections";
+            this.connectionsCount.Name = "connectionsCount";
+            // 
+            // receivedBytes
+            // 
+            this.receivedBytes.HeaderText = "Received bytes";
+            this.receivedBytes.Name = "receivedBytes";
+            // 
+            // sentByte
+            // 
+            this.sentByte.HeaderText = "Sent bytes";
+            this.sentByte.Name = "sentByte";
             // 
             // TimerWrkProgram
             // 
@@ -935,12 +1117,15 @@ namespace SystemMonitor
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MainStartBtn,
             this.toolStripSeparator1,
             this.BtnStopWrk,
             this.toolStripSeparator2,
+            this.ClearCharts,
+            this.toolStripSeparator6,
             this.ConnectToSqlData,
             this.toolStripSeparator5,
             this.toolStripLabel1,
@@ -1051,6 +1236,155 @@ namespace SystemMonitor
             this.StatConLbl.Size = new System.Drawing.Size(93, 24);
             this.StatConLbl.Text = "Disconnected";
             // 
+            // groupBox19
+            // 
+            this.groupBox19.Controls.Add(this.dataGridSysRes);
+            this.groupBox19.Location = new System.Drawing.Point(6, 297);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(924, 376);
+            this.groupBox19.TabIndex = 11;
+            this.groupBox19.TabStop = false;
+            this.groupBox19.Text = "Output";
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.ClearSysRes);
+            this.groupBox20.Controls.Add(this.GoBtnSysRes);
+            this.groupBox20.Controls.Add(this.richTextBoxSysRes);
+            this.groupBox20.Location = new System.Drawing.Point(6, 25);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(924, 272);
+            this.groupBox20.TabIndex = 12;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "Filtering by request";
+            // 
+            // richTextBoxSysRes
+            // 
+            this.richTextBoxSysRes.BackColor = System.Drawing.SystemColors.Control;
+            this.richTextBoxSysRes.Location = new System.Drawing.Point(6, 25);
+            this.richTextBoxSysRes.Name = "richTextBoxSysRes";
+            this.richTextBoxSysRes.Size = new System.Drawing.Size(912, 207);
+            this.richTextBoxSysRes.TabIndex = 0;
+            this.richTextBoxSysRes.Text = "";
+            // 
+            // GoBtnSysRes
+            // 
+            this.GoBtnSysRes.Location = new System.Drawing.Point(480, 238);
+            this.GoBtnSysRes.Name = "GoBtnSysRes";
+            this.GoBtnSysRes.Size = new System.Drawing.Size(216, 28);
+            this.GoBtnSysRes.TabIndex = 9;
+            this.GoBtnSysRes.Text = "Go";
+            this.GoBtnSysRes.UseVisualStyleBackColor = true;
+            this.GoBtnSysRes.Click += new System.EventHandler(this.GoBtnSysRes_Click);
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.ClearSecurity);
+            this.groupBox21.Controls.Add(this.GoBtnSecurity);
+            this.groupBox21.Controls.Add(this.richTextBoxSecurity);
+            this.groupBox21.Location = new System.Drawing.Point(6, 25);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(931, 269);
+            this.groupBox21.TabIndex = 13;
+            this.groupBox21.TabStop = false;
+            this.groupBox21.Text = "Filtering by request";
+            // 
+            // GoBtnSecurity
+            // 
+            this.GoBtnSecurity.Location = new System.Drawing.Point(487, 235);
+            this.GoBtnSecurity.Name = "GoBtnSecurity";
+            this.GoBtnSecurity.Size = new System.Drawing.Size(216, 28);
+            this.GoBtnSecurity.TabIndex = 9;
+            this.GoBtnSecurity.Text = "Go";
+            this.GoBtnSecurity.UseVisualStyleBackColor = true;
+            this.GoBtnSecurity.Click += new System.EventHandler(this.GoBtnSecurity_Click);
+            // 
+            // richTextBoxSecurity
+            // 
+            this.richTextBoxSecurity.BackColor = System.Drawing.SystemColors.Control;
+            this.richTextBoxSecurity.Location = new System.Drawing.Point(6, 25);
+            this.richTextBoxSecurity.Name = "richTextBoxSecurity";
+            this.richTextBoxSecurity.Size = new System.Drawing.Size(919, 207);
+            this.richTextBoxSecurity.TabIndex = 0;
+            this.richTextBoxSecurity.Text = "";
+            // 
+            // groupBox22
+            // 
+            this.groupBox22.Controls.Add(this.ClearNetwork);
+            this.groupBox22.Controls.Add(this.GoBtnNetwork);
+            this.groupBox22.Controls.Add(this.richTextBoxNetwork);
+            this.groupBox22.Location = new System.Drawing.Point(6, 25);
+            this.groupBox22.Name = "groupBox22";
+            this.groupBox22.Size = new System.Drawing.Size(931, 269);
+            this.groupBox22.TabIndex = 14;
+            this.groupBox22.TabStop = false;
+            this.groupBox22.Text = "Filtering by request";
+            // 
+            // GoBtnNetwork
+            // 
+            this.GoBtnNetwork.Location = new System.Drawing.Point(487, 235);
+            this.GoBtnNetwork.Name = "GoBtnNetwork";
+            this.GoBtnNetwork.Size = new System.Drawing.Size(216, 28);
+            this.GoBtnNetwork.TabIndex = 9;
+            this.GoBtnNetwork.Text = "Go";
+            this.GoBtnNetwork.UseVisualStyleBackColor = true;
+            this.GoBtnNetwork.Click += new System.EventHandler(this.GoBtnNetwork_Click);
+            // 
+            // richTextBoxNetwork
+            // 
+            this.richTextBoxNetwork.BackColor = System.Drawing.SystemColors.Control;
+            this.richTextBoxNetwork.Location = new System.Drawing.Point(6, 25);
+            this.richTextBoxNetwork.Name = "richTextBoxNetwork";
+            this.richTextBoxNetwork.Size = new System.Drawing.Size(919, 207);
+            this.richTextBoxNetwork.TabIndex = 0;
+            this.richTextBoxNetwork.Text = "";
+            // 
+            // ClearNetwork
+            // 
+            this.ClearNetwork.Location = new System.Drawing.Point(709, 235);
+            this.ClearNetwork.Name = "ClearNetwork";
+            this.ClearNetwork.Size = new System.Drawing.Size(216, 28);
+            this.ClearNetwork.TabIndex = 10;
+            this.ClearNetwork.Text = "Clear textbox";
+            this.ClearNetwork.UseVisualStyleBackColor = true;
+            this.ClearNetwork.Click += new System.EventHandler(this.ClearNetwork_Click);
+            // 
+            // ClearSecurity
+            // 
+            this.ClearSecurity.Location = new System.Drawing.Point(709, 235);
+            this.ClearSecurity.Name = "ClearSecurity";
+            this.ClearSecurity.Size = new System.Drawing.Size(216, 28);
+            this.ClearSecurity.TabIndex = 10;
+            this.ClearSecurity.Text = "Clear textbox";
+            this.ClearSecurity.UseVisualStyleBackColor = true;
+            this.ClearSecurity.Click += new System.EventHandler(this.ClearSecurity_Click);
+            // 
+            // ClearSysRes
+            // 
+            this.ClearSysRes.Location = new System.Drawing.Point(702, 238);
+            this.ClearSysRes.Name = "ClearSysRes";
+            this.ClearSysRes.Size = new System.Drawing.Size(216, 28);
+            this.ClearSysRes.TabIndex = 10;
+            this.ClearSysRes.Text = "Clear textbox";
+            this.ClearSysRes.UseVisualStyleBackColor = true;
+            this.ClearSysRes.Click += new System.EventHandler(this.ClearSysRes_Click);
+            // 
+            // ClearCharts
+            // 
+            this.ClearCharts.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ClearCharts.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
+            this.ClearCharts.Image = ((System.Drawing.Image)(resources.GetObject("ClearCharts.Image")));
+            this.ClearCharts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ClearCharts.Name = "ClearCharts";
+            this.ClearCharts.Size = new System.Drawing.Size(89, 24);
+            this.ClearCharts.Text = "Clear Charts";
+            this.ClearCharts.Click += new System.EventHandler(this.ClearCharts_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 27);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1103,8 +1437,18 @@ namespace SystemMonitor
             this.groupBox13.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSecurity)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox17.ResumeLayout(false);
+            this.groupBox18.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridNetwork)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.groupBox19.ResumeLayout(false);
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox22.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1188,15 +1532,45 @@ namespace SystemMonitor
         private System.Windows.Forms.Button AddToTableSecurity;
         private System.Windows.Forms.DataGridView dataGridViewSecurity;
         private System.Windows.Forms.DataGridViewTextBoxColumn idSecurity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn timeSecurity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn entryType;
+        private System.Windows.Forms.ListBox listBox6;
         private System.Windows.Forms.DataGridViewTextBoxColumn idSysRes;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeSysRes;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberprocess;
         private System.Windows.Forms.DataGridViewTextBoxColumn percproc;
         private System.Windows.Forms.DataGridViewTextBoxColumn percdisc;
         private System.Windows.Forms.DataGridViewTextBoxColumn percmemory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn timeSecurity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn entryType;
-        private System.Windows.Forms.ListBox listBox6;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.ListBox listBox7;
+        private System.Windows.Forms.GroupBox groupBox17;
+        private System.Windows.Forms.Button ClearTableNetwork;
+        private System.Windows.Forms.Button DeleteTableNetwork;
+        private System.Windows.Forms.Button CreateTableNetwork;
+        private System.Windows.Forms.Button AddToTableNetwork;
+        private System.Windows.Forms.GroupBox groupBox18;
+        private System.Windows.Forms.DataGridView dataGridNetwork;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idNetwork;
+        private System.Windows.Forms.DataGridViewTextBoxColumn timeNetwork;
+        private System.Windows.Forms.DataGridViewTextBoxColumn connectionsCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn receivedBytes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sentByte;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.RichTextBox richTextBoxSysRes;
+        private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.Button GoBtnSysRes;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.Button GoBtnSecurity;
+        private System.Windows.Forms.RichTextBox richTextBoxSecurity;
+        private System.Windows.Forms.GroupBox groupBox22;
+        private System.Windows.Forms.Button GoBtnNetwork;
+        private System.Windows.Forms.RichTextBox richTextBoxNetwork;
+        private System.Windows.Forms.Button ClearSysRes;
+        private System.Windows.Forms.Button ClearSecurity;
+        private System.Windows.Forms.Button ClearNetwork;
+        private System.Windows.Forms.ToolStripButton ClearCharts;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }
 
