@@ -83,18 +83,28 @@ namespace SystemMonitor
             PhysicalDiscTB.Text = Convert.ToString(physicalDiscValue);
             MemoryTB.Text = Convert.ToString(memoryValue);
 
-            if (waitForCounterProc == 0 || waitForCounterProc == 20)
+            if (CaptureBtnSysRes.Checked == true)
             {
-                listBox2.Items.Clear();
-                foreach (var item in Process.GetProcesses())
-                    listBox2.Items.Add($"Id: {item.Id}\t\tName: {item.ProcessName}");
                 CountProcesses.Text = $"Number of processes";
                 NumberOfProcTB.Text = $"{listBox2.Items.Count}";
-                if (waitForCounterProc == 20)
-                    waitForCounterProc = 1;
+                return;
             }
-            waitForCounterProc++;
+            else
+            {
+                if (waitForCounterProc == 0 || waitForCounterProc == 20)
+                {
+                    listBox2.Items.Clear();
+                    foreach (var item in Process.GetProcesses())
+                        listBox2.Items.Add($"Id: {item.Id}\t\tName: {item.ProcessName}");
+                    CountProcesses.Text = $"Number of processes";
+                    NumberOfProcTB.Text = $"{listBox2.Items.Count}";
+                    if (waitForCounterProc == 20)
+                        waitForCounterProc = 0;
+                }
+                waitForCounterProc++;
+            }
         }
+
         //Security log
         private void SecurityLog()
         {
@@ -106,7 +116,7 @@ namespace SystemMonitor
             {
                 for (int i = evLog.Entries.Count-1; i > evLog.Entries.Count-10; i--)
                 {
-                    listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].Category}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
+                    listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].UserName}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
                     if (i - (evLog.Entries.Count - 10) == 1)
                     {
                         timeWritten = evLog.Entries[i].TimeWritten.ToString("dd.MM.yyyy HH:mm:ss");
@@ -123,7 +133,7 @@ namespace SystemMonitor
                 {
                     for (int i = evLog.Entries.Count - 1; i > evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)); i--)
                     {
-                        listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].Message}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
+                        listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].UserName}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
                         if ((i - evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue))) == 1)
                         {
                             timeWritten = evLog.Entries[i].TimeWritten.ToString("dd.MM.yyyy HH:mm:ss");
@@ -132,7 +142,7 @@ namespace SystemMonitor
                     }
                     SqlLiteDataBase.SqlAddSecurity(timeWritten, audit);
                     listBox4.Items.Add("\n\t" + DateTime.Now + "\n");
-                    listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text + "\t" + "difference: " + Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)));
+                    listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text + "\tdifference: " + Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)));
                 }
             }
             numberAuditValue = Convert.ToString(evLog.Entries.Count);
@@ -145,12 +155,19 @@ namespace SystemMonitor
             ReceivedBytesLabel.Text = "Received bytes: " + recSegmentsValue + " bytes/sec";
             BytesSentLabel.Text = "Sent bytes: " + sentSegmentsValue + " bytes/sec";
 
-            itemsCount = 0;
-            listBox1.Items.Clear();
-            TcpConnectionInformation[] connections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
-            foreach (var c in connections)
-                listBox1.Items.Add($"{itemsCount++}. >> \t" + $" Local connection\t{c.LocalEndPoint} <==> {c.RemoteEndPoint}\t remoute connection");
-            LabelItemsCount.Text = "Connections count: " + itemsCount;
+            if (CaptureBtnNetwork.Checked == true)
+            {
+                LabelItemsCount.Text = "Connections count: " + itemsCount;
+                return;
+            }
+            else
+            {
+                itemsCount = 0;
+                listBox1.Items.Clear();
+                TcpConnectionInformation[] connections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+                foreach (var c in connections)
+                    listBox1.Items.Add($"{itemsCount++}. >> \t" + $" Local connection\t{c.LocalEndPoint} <==> {c.RemoteEndPoint}\t remoute connection");
+            }
         }
 
         public void InitializeParameters(int valueCPUX, int valueDiscX, int valueMemX, int valueConX, int valueConRecX, int valueConSentX, bool count = false)
@@ -168,20 +185,6 @@ namespace SystemMonitor
 
                 ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScaleView.SmallScrollSize = 0;
                 ChartForTCPCon.ChartAreas[ChartForTCPCon.Series["Tcp connections count"].ChartArea].AxisX.ScaleView.SmallScrollSize = 0;
-
-                //for (int k = 0; k < Chart.procX.Count; k++)
-                //{
-                //    ChartForSysRes.Series["CPU"].Points.AddXY(Chart.procX[k], Chart.procY[k]);
-                //    ChartForSysRes.Series["Phisycal disc"].Points.AddXY(Chart.discX[k], Chart.diskY[k]);
-                //    ChartForSysRes.Series["Memory"].Points.AddXY(Chart.memX[k], Chart.memY[k]);
-                //}
-
-                //for (int k = 0; k < Chart.conX.Count; k++)
-                //{
-                //    ChartForTCPCon.Series["Tcp connections count"].Points.AddXY(Chart.conX[k], Chart.conY[k]);
-                //    ChartForTCPCon.Series["Received bytes"].Points.AddXY(Chart.conRecX[k], Chart.conRexY[k]);
-                //    ChartForTCPCon.Series["Sent bytes"].Points.AddXY(Chart.conSentX[k], Chart.conSentY[k]);
-                //}
 
                 for (int k = 0; k < Chart.procX.Count; k++)
                 {
