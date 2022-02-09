@@ -19,7 +19,7 @@ namespace SystemMonitor
         public static bool btnMainStartBool = false;
         public static int waitForCounterProc;
         public static int itemsCount = 0;
-        public int btnWrkBool = 1;
+        public bool btnWrkBool = true;
 
         public MainForm()
         {
@@ -35,11 +35,11 @@ namespace SystemMonitor
 
         private void MainStartBtn_Click(object sender, EventArgs e)
         {
-            if (!btnMainStartBool)
+            if (!btnMainStartBool)     
             {
                 MainStartBtn.Text = "Stop monitoring";
                 BtnStopWrk.Enabled = true;
-                btnMainStartBool = true;
+                btnMainStartBool = true;    
                 MainTimerProgram.Enabled = true;
                 TimerWrkProgram.Enabled = true;
                 MainTimerProgram.Start();
@@ -213,15 +213,15 @@ namespace SystemMonitor
 
         private void BtnStopWrk_Click(object sender, EventArgs e)
         {
-            if (btnWrkBool == 1)
+            if (btnWrkBool)
             {
                 BtnStopWrk.Text = "Start visualization";
-                btnWrkBool = 0;
+                btnWrkBool = false;
             }
             else
             {
                 BtnStopWrk.Text = "Stop rendering";
-                btnWrkBool = 1;
+                btnWrkBool = true;
             }
         }
 
@@ -349,7 +349,7 @@ namespace SystemMonitor
         //methods initialize component
         private void ConditionOfInitiComp()
         {
-            if (btnWrkBool == 1)
+            if (btnWrkBool)
             {
                 InitializeParameters((int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue),
                     itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue));
@@ -359,6 +359,12 @@ namespace SystemMonitor
                 InitializeParameters((int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue),
                     itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue), true);
             }
+        }
+
+        private void OpenAnalysisBtn_Click(object sender, EventArgs e)
+        {
+            var dataAnalysisForm = new DataAnalysisForm();
+            dataAnalysisForm.Show();
         }
     }
 }
