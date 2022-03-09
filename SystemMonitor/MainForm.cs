@@ -20,6 +20,7 @@ namespace SystemMonitor
         public static int waitForCounterProc;
         public static int itemsCount = 0;
         public bool btnWrkBool = true;
+        private static int countProcess;
 
         public MainForm()
         {
@@ -58,23 +59,26 @@ namespace SystemMonitor
         }
 
         private void TimerProcLoad_Tick(object sender, EventArgs e)
-        {
-            var chart = new Chart();
+        {            
             SystemResourses();
             ShowActiveTcpConnections();
             SecurityLog();
             ConditionOfInitiComp();
-            SqlLiteDataBase.SqlAddSysRes(listBox2.Items.Count, (int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue));
+            SqlLiteDataBase.SqlAddSysRes(countProcess, (int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue));
             SqlLiteDataBase.SqlAddNetwork(itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue));
             clearChartsMethod(true);
         }
-        //System resourses
+        //System resources
         private void SystemResourses()
         {
-            procesLoadValue = Processor.NextValue();
-            physicalDiscValue = 100-Disk.NextValue();
+            countProcess = Process.GetProcesses().Length;
+            procesLoadValue = Processor.NextValue();            
+            physicalDiscValue = 100 - Math.Round(Disk.NextValue());
             memoryValue = Memory.NextValue();
 
+            if (physicalDiscValue < 0) physicalDiscValue = 0;
+            CountProcesses.Text = $"Number of processes";
+            NumberOfProcTB.Text = $"{countProcess}";
             ProcessLoadLabel.Text = "Processor load " + (int)Math.Round(procesLoadValue) + " %";
             LabelPhysicalDisk.Text = "Phisycal disk load " + (int)Math.Round(physicalDiscValue) + " %";
             LabelMemoryLoad.Text = "Memory load " + (int)Math.Round(memoryValue) + " %";
@@ -84,98 +88,97 @@ namespace SystemMonitor
             MemoryTB.Text = Convert.ToString(memoryValue);
 
             if (CaptureBtnSysRes.Checked == true)
-            {
-                CountProcesses.Text = $"Number of processes";
-                NumberOfProcTB.Text = $"{listBox2.Items.Count}";
                 return;
-            }
             else
             {
-                if (waitForCounterProc == 0 || waitForCounterProc == 20)
+                foreach (var item in Process.GetProcesses())
                 {
-                    listBox2.Items.Clear();
-                    foreach (var item in Process.GetProcesses())
-                        listBox2.Items.Add($"Id: {item.Id}\t\tName: {item.ProcessName}");
-                    CountProcesses.Text = $"Number of processes";
-                    NumberOfProcTB.Text = $"{listBox2.Items.Count}";
-                    if (waitForCounterProc == 20)
-                        waitForCounterProc = 0;
+                    string processName = $"Id: {item.Id}\t\tName: {item.ProcessName}";
+                    if (listBox2.Items.Count-1 > countProcess)
+                        listBox2.Items.Clear();
+                    if (!listBox2.Items.Contains(processName))
+                        listBox2.Items.Add(processName);
                 }
-                waitForCounterProc++;
             }
+            textBox1.Text = listBox2.Items.Count.ToString();
         }
 
         //Security log
         private void SecurityLog()
         {
-            var evLog = new EventLog();
-            evLog.Log = "Security";
-            NumberOfAuditTB.Text = Convert.ToString(evLog.Entries.Count);
+            if (checkBox1.Checked)
+            {                
+                var evLog = new EventLog();
+                evLog.Log = "Security";
+                NumberOfAuditTB.Text = Convert.ToString(evLog.Entries.Count);
 
-            if (Chart.i == 0)
-            {
-                for (int i = evLog.Entries.Count-1; i > evLog.Entries.Count-10; i--)
+                if (Charts.i == 0)
                 {
-                    listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].UserName}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
-                    if (i - (evLog.Entries.Count - 10) == 1)
-                    {
-                        timeWritten = evLog.Entries[i].TimeWritten.ToString("dd.MM.yyyy HH:mm:ss");
-                        audit = evLog.Entries[i].EntryType.ToString();
-                    }
-                }
-                listBox6.Items.Add(SqlLiteDataBase.SqlAddSecurity(timeWritten, audit));
-                listBox4.Items.Add("\n\t" + DateTime.Now + "\n");
-                listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text);
-            }
-            else
-            {
-                if (numberAuditValue != NumberOfAuditTB.Text)
-                {
-                    for (int i = evLog.Entries.Count - 1; i > evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)); i--)
+                    for (int i = evLog.Entries.Count - 1; i > evLog.Entries.Count - 10; i--)
                     {
                         listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].UserName}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
-                        if ((i - evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue))) == 1)
+                        if (i - (evLog.Entries.Count - 10) == 1)
                         {
                             timeWritten = evLog.Entries[i].TimeWritten.ToString("dd.MM.yyyy HH:mm:ss");
                             audit = evLog.Entries[i].EntryType.ToString();
                         }
                     }
-                    SqlLiteDataBase.SqlAddSecurity(timeWritten, audit);
+                    listBox6.Items.Add(SqlLiteDataBase.SqlAddSecurity(timeWritten, audit));
                     listBox4.Items.Add("\n\t" + DateTime.Now + "\n");
-                    listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text + "\tdifference: " + Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)));
+                    listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text);
                 }
+                else
+                {
+                    if (numberAuditValue != NumberOfAuditTB.Text)
+                    {
+                        for (int i = evLog.Entries.Count - 1; i > evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)); i--)
+                        {
+                            listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].UserName}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
+                            if ((i - evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue))) == 1)
+                            {
+                                timeWritten = evLog.Entries[i].TimeWritten.ToString("dd.MM.yyyy HH:mm:ss");
+                                audit = evLog.Entries[i].EntryType.ToString();
+                            }
+                        }
+                        SqlLiteDataBase.SqlAddSecurity(timeWritten, audit);
+                        listBox4.Items.Add("\n\t" + DateTime.Now + "\n");
+                        listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text + "\tdifference: " + Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)));
+                    }
+                }
+                numberAuditValue = Convert.ToString(evLog.Entries.Count);
             }
-            numberAuditValue = Convert.ToString(evLog.Entries.Count);
         }
         // TCP connections
         private void ShowActiveTcpConnections()
         {
+            TcpConnectionInformation[] connections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
+            string[] newTcpConnections = new string[connections.Length];
+            itemsCount = connections.Length;
+            for (int i = 0; i < connections.Length; i++)
+                foreach (var item in connections)
+                    newTcpConnections[i] = $"{item.LocalEndPoint} <==> {item.RemoteEndPoint} \t {item.State}";
+
             recSegmentsValue = BytesReceived.NextValue();
             sentSegmentsValue = SentBytes.NextValue();
+
+            LabelItemsCount.Text = "Connections count: " + itemsCount;
             ReceivedBytesLabel.Text = "Received bytes: " + recSegmentsValue + " bytes/sec";
             BytesSentLabel.Text = "Sent bytes: " + sentSegmentsValue + " bytes/sec";
 
             if (CaptureBtnNetwork.Checked == true)
-            {
-                LabelItemsCount.Text = "Connections count: " + itemsCount;
                 return;
-            }
             else
-            {
-                itemsCount = 0;
-                listBox1.Items.Clear();
-                TcpConnectionInformation[] connections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
-                foreach (var c in connections)
-                    listBox1.Items.Add($"{itemsCount++}. >> \t" + $" Local connection\t{c.LocalEndPoint} <==> {c.RemoteEndPoint}\t remoute connection");
+            {                
+                foreach (var item in newTcpConnections)
+                    if (!listBox1.Items.Contains(item))
+                        listBox1.Items.Add(item);
             }
         }
 
-        public void InitializeParameters(int valueCPUX, int valueDiscX, int valueMemX, int valueConX, int valueConRecX, int valueConSentX, bool count = false)
+        public void InitializeParameters(int valueCPUY, int valueDiscY, int valueMemY, int valueConY, int valueConRecY, int valueConSentY, bool count = false)
         {
             if (!count)
             {
-                Chart.FillChart(valueCPUX, valueDiscX, valueMemX, valueConX, valueConRecX, valueConSentX);
-
                 ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScaleView.Zoom(10, 100);
                 ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScaleView.Zoom(10, 100);
                 ChartForTCPCon.ChartAreas[ChartForTCPCon.Series["Tcp connections count"].ChartArea].AxisX.ScaleView.Zoom(10, 100);
@@ -186,29 +189,24 @@ namespace SystemMonitor
                 ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScaleView.SmallScrollSize = 0;
                 ChartForTCPCon.ChartAreas[ChartForTCPCon.Series["Tcp connections count"].ChartArea].AxisX.ScaleView.SmallScrollSize = 0;
 
-                for (int k = 0; k < Chart.procX.Count; k++)
-                {
-                    ChartForSysRes.Series["CPU"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), Chart.procY[k]);
-                    ChartForSysRes.Series["Phisycal disc"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), Chart.diskY[k]);
-                    ChartForSysRes.Series["Memory"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), Chart.memY[k]);
-                }
+                ChartForSysRes.Series["CPU"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueCPUY);
+                ChartForSysRes.Series["Phisycal disc"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueDiscY);
+                ChartForSysRes.Series["Memory"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueMemY);
 
-                for (int k = 0; k < Chart.conX.Count; k++)
-                {
-                    ChartForTCPCon.Series["Tcp connections count"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), Chart.conY[k]);
-                    ChartForTCPCon.Series["Received bytes"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), Chart.conRexY[k]);
-                    ChartForTCPCon.Series["Sent bytes"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), Chart.conSentY[k]);
-                }
+                ChartForTCPCon.Series["Tcp connections count"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueConY);
+                ChartForTCPCon.Series["Received bytes"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueConRecY);
+                ChartForTCPCon.Series["Sent bytes"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueConSentY);
+
+                Charts.i++;
             }
             else
-                Chart.FillChart(valueCPUX, valueDiscX, valueMemX,
-                    valueConX, valueConRecX, valueConSentX, true);
+                Charts.i++;
         }
 
         private void TimerWrkProgram_Tick(object sender, EventArgs e)
         {
             LabelWrkTime.Text = WorkingTimer.TimeIntoLabel();            
-            LabelValueIteration.Text = $"{Chart.i}";
+            LabelValueIteration.Text = $"{Charts.i}";
         }
 
         private void BtnStopWrk_Click(object sender, EventArgs e)
@@ -325,7 +323,7 @@ namespace SystemMonitor
         {
             if (ifCondition)
             {
-                if (Chart.i % 1000 == 0 && Chart.i != 0)
+                if (Charts.i % 1000 == 0 && Charts.i != 0)
                 {
                     ChartForSysRes.Series[0].Points.Clear();
                     ChartForSysRes.Series[1].Points.Clear();

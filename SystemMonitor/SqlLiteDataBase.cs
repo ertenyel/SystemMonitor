@@ -165,7 +165,7 @@ namespace SystemMonitor
             try
             {
                 m_sqlCmd.CommandText = "INSERT INTO SystemResources ('timeSysRes','numberprocess','percproc','percdisc','percmemory') " +
-                    "values ('" + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss") + "','" + NumberOfProcess + "','" + percProc + "','" + percDisc + "','" + percMemory + "')";
+                    "values ('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + NumberOfProcess + "','" + percProc + "','" + percDisc + "','" + percMemory + "')";
 
                 m_sqlCmd.ExecuteNonQuery();
                 return "Successful data recording";
@@ -370,8 +370,8 @@ namespace SystemMonitor
 
             try
             {
-                m_sqlCmd.CommandText = "INSERT INTO Network ('timeNetwork', 'connectionsCount', 'receivedBytes', 'sentByte') values ('" + 
-                    DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss") + "','" + itemsCount + "','" + receivedBytes + "','" + sentByte + "')";
+                m_sqlCmd.CommandText = "INSERT INTO Network ('timeNetwork', 'connectionsCount', 'receivedBytes', 'sentByte') values ('" +
+                    DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + itemsCount + "','" + receivedBytes + "','" + sentByte + "')";
 
                 m_sqlCmd.ExecuteNonQuery();
                 return "Successful data recording";
