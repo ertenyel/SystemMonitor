@@ -120,6 +120,8 @@ namespace SystemMonitor
             this.numericForSysResEntr = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnSysRes = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -457,7 +459,7 @@ namespace SystemMonitor
             // 
             this.splitContainer3.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer3.Size = new System.Drawing.Size(421, 715);
-            this.splitContainer3.SplitterDistance = 413;
+            this.splitContainer3.SplitterDistance = 301;
             this.splitContainer3.TabIndex = 1;
             // 
             // chartForOutputHistory
@@ -489,12 +491,14 @@ namespace SystemMonitor
             this.chartForOutputHistory.Series.Add(series12);
             this.chartForOutputHistory.Series.Add(series13);
             this.chartForOutputHistory.Series.Add(series14);
-            this.chartForOutputHistory.Size = new System.Drawing.Size(417, 409);
+            this.chartForOutputHistory.Size = new System.Drawing.Size(417, 297);
             this.chartForOutputHistory.TabIndex = 0;
             this.chartForOutputHistory.Text = "chart1";
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.richTextBox1);
+            this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Controls.Add(this.groupBox5);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.label6);
@@ -510,7 +514,7 @@ namespace SystemMonitor
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(417, 294);
+            this.groupBox4.Size = new System.Drawing.Size(417, 406);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Parameters";
@@ -609,7 +613,7 @@ namespace SystemMonitor
             // 
             // DateTimeEnd
             // 
-            this.DateTimeEnd.CustomFormat = "yyyy-MM-dd HH:mm:ss.fff";
+            this.DateTimeEnd.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.DateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.DateTimeEnd.Location = new System.Drawing.Point(217, 185);
             this.DateTimeEnd.Name = "DateTimeEnd";
@@ -618,7 +622,7 @@ namespace SystemMonitor
             // 
             // beginDateTime
             // 
-            this.beginDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss.fff";
+            this.beginDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.beginDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.beginDateTime.Location = new System.Drawing.Point(6, 185);
             this.beginDateTime.Name = "beginDateTime";
@@ -648,7 +652,7 @@ namespace SystemMonitor
             // btnOutputHistory
             // 
             this.btnOutputHistory.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnOutputHistory.Location = new System.Drawing.Point(3, 259);
+            this.btnOutputHistory.Location = new System.Drawing.Point(3, 371);
             this.btnOutputHistory.Name = "btnOutputHistory";
             this.btnOutputHistory.Size = new System.Drawing.Size(411, 32);
             this.btnOutputHistory.TabIndex = 1;
@@ -955,6 +959,24 @@ namespace SystemMonitor
             this.BtnSysRes.UseVisualStyleBackColor = true;
             this.BtnSysRes.Click += new System.EventHandler(this.BtnSysRes_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(10, 89);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(134, 41);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(10, 250);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(401, 115);
+            this.richTextBox1.TabIndex = 14;
+            this.richTextBox1.Text = "";
+            // 
             // DataAnalysisForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1068,5 +1090,7 @@ namespace SystemMonitor
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

@@ -210,5 +210,21 @@ namespace SystemMonitor
                 numericForNetEntr.Enabled = true;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            ForecastingModel.MainMethodForecatingModel(beginDateTime.Value);            
+            richTextBox1.AppendText($"{ForecastingModel.sumVal}");           
+            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.avgVal}");            
+            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.doubleValSum}");            
+            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.dispersionX}");
+
+            for (int i = 0; i < ForecastingModel.ZXScore.Length; i++)
+                richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.ZXScore[i]}");
+        }
     }
 }
+
+
+//DateTime.Now.AddHours(-1).ToString("yyyy-MM-dd HH:mm:ss.fff")
