@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SystemMonitor
 {
     class ForecastingModel
     {
         public static int[][] NewStory;
-        public static int[][] MaximumSimilaritySampling;
+        public static int[][] MaybeMaxSimSamp;
+        public static int[][] MaxSimSampMin;
         public static double sumVal;
         public static double avgVal;
         public static double doubleValSum;
@@ -19,11 +16,13 @@ namespace SystemMonitor
         public static double[] ratio;
         public static double[] ZXScore;
         public static double[] ZYScore;
-        private static int ct = 0;
+        public static int ct = 0;
+        public static double minDistance;
+        public static double currentValKor;
 
         public static void MainMethodForecatingModel(DateTime sysdate)
         {
-            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, percproc from systemresources where timesysres between '{sysdate.AddHours(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{sysdate:yyyy-MM-dd HH:mm:ss.fff}'");
+            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, percproc from systemresources where timesysres between '{sysdate.AddMinutes(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{sysdate:yyyy-MM-dd HH:mm:ss.fff}'");
             NewStory = new int[table.Rows.Count][];
             for (int i = 0; i < NewStory.Length; i++)
             {
@@ -33,6 +32,7 @@ namespace SystemMonitor
             }
 
             ComputeParameters(NewStory);
+            ct = 0;
             ComputeFactor(NewStory);
         }
 
@@ -43,7 +43,7 @@ namespace SystemMonitor
             doubleValSum = 0;
 
             for (int j = 0; j < arr.Length; j++) sumVal += arr[j][1];
-            avgVal = sumVal/arr.Length;
+            avgVal = sumVal / arr.Length;
 
             for (int j = 0; j < arr.Length; j++) doubleValSum += arr[j][1] * arr[j][1];
 
@@ -65,38 +65,47 @@ namespace SystemMonitor
 
         private static void ComputeFactor(int[][] arr)
         {
+            
+            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, percproc from systemresources where idsysres < {NewStory[NewStory.Length - 1][0]}");
+            ratio = new double[table.Rows.Count - arr.Length];
 
-            //todo: Работает! надо проверить правильные ли значения
-            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, percproc from systemresources");
-            MaximumSimilaritySampling = new int[arr.Length][];
-            ratio = new double[arr.Length];
-
-            next:
+        next:
+            MaybeMaxSimSamp = new int[arr.Length][];
             for (int i = ct; i < table.Rows.Count; i++)
             {
-                if (i - ct < MaximumSimilaritySampling.Length)
+                if (i - ct < MaybeMaxSimSamp.Length)
                 {
-                    MaximumSimilaritySampling[i-ct] = new int[table.Columns.Count];
+                    MaybeMaxSimSamp[i - ct] = new int[table.Columns.Count];
                     for (int j = 0; j < table.Columns.Count; j++)
                     {
-                        MaximumSimilaritySampling[i - ct][j] = Convert.ToInt32(table.Rows[i][j]);
+                        MaybeMaxSimSamp[i - ct][j] = Convert.ToInt32(table.Rows[i][j]);
                     }
                 }
                 else
                     break;
             }
 
-            ComputeParameters(MaximumSimilaritySampling, true);
-
+            ComputeParameters(MaybeMaxSimSamp, true);
 
             for (int j = 0; j < ZXScore.Length; j++)
                 ratio[ct] += ZXScore[j] * ZYScore[j];
 
             ratio[ct] /= arr.Length;
-            ct++;
-            if (ct >= arr.Length - 1)
+
+            if (Math.Abs(1 - ratio[ct]) == minDistance)
                 return;
-            else if (ct < arr.Length - 1)
+
+            if (ct == 0 || Math.Abs(1 - ratio[ct]) < minDistance)
+            {
+                minDistance = Math.Abs(1 - ratio[ct]);
+                currentValKor = ratio[ct];
+                MaxSimSampMin = MaybeMaxSimSamp;
+            }
+
+            ct++;
+            if (ct >= table.Rows.Count - arr.Length)
+                return;
+            else if (ct < table.Rows.Count - arr.Length)
                 goto next;
         }
     }

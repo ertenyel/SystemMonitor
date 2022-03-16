@@ -90,6 +90,8 @@ namespace SystemMonitor
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.chartForOutputHistory = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -97,9 +99,7 @@ namespace SystemMonitor
             this.label6 = new System.Windows.Forms.Label();
             this.numericEnd = new System.Windows.Forms.NumericUpDown();
             this.numericBegin = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.DateTimeEnd = new System.Windows.Forms.DateTimePicker();
             this.beginDateTime = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBoxForParam = new System.Windows.Forms.ComboBox();
@@ -120,8 +120,6 @@ namespace SystemMonitor
             this.numericForSysResEntr = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnSysRes = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -504,9 +502,7 @@ namespace SystemMonitor
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.numericEnd);
             this.groupBox4.Controls.Add(this.numericBegin);
-            this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.DateTimeEnd);
             this.groupBox4.Controls.Add(this.beginDateTime);
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.comboBoxForParam);
@@ -518,6 +514,24 @@ namespace SystemMonitor
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Parameters";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(10, 250);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(401, 115);
+            this.richTextBox1.TabIndex = 14;
+            this.richTextBox1.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 146);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(195, 41);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Test forecasting model";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox5
             // 
@@ -593,38 +607,20 @@ namespace SystemMonitor
             this.numericBegin.Size = new System.Drawing.Size(120, 26);
             this.numericBegin.TabIndex = 8;
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(213, 162);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 20);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "End:";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 162);
+            this.label4.Location = new System.Drawing.Point(6, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(151, 20);
             this.label4.TabIndex = 6;
             this.label4.Text = "Period starting from:";
             // 
-            // DateTimeEnd
-            // 
-            this.DateTimeEnd.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.DateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DateTimeEnd.Location = new System.Drawing.Point(217, 185);
-            this.DateTimeEnd.Name = "DateTimeEnd";
-            this.DateTimeEnd.Size = new System.Drawing.Size(195, 26);
-            this.DateTimeEnd.TabIndex = 5;
-            // 
             // beginDateTime
             // 
             this.beginDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.beginDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.beginDateTime.Location = new System.Drawing.Point(6, 185);
+            this.beginDateTime.Location = new System.Drawing.Point(6, 114);
             this.beginDateTime.Name = "beginDateTime";
             this.beginDateTime.Size = new System.Drawing.Size(195, 26);
             this.beginDateTime.TabIndex = 4;
@@ -959,24 +955,6 @@ namespace SystemMonitor
             this.BtnSysRes.UseVisualStyleBackColor = true;
             this.BtnSysRes.Click += new System.EventHandler(this.BtnSysRes_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(10, 89);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 41);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(10, 250);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(401, 115);
-            this.richTextBox1.TabIndex = 14;
-            this.richTextBox1.Text = "";
-            // 
             // DataAnalysisForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1079,8 +1057,6 @@ namespace SystemMonitor
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBoxForParam;
         private System.Windows.Forms.DateTimePicker beginDateTime;
-        private System.Windows.Forms.DateTimePicker DateTimeEnd;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartForOutputHistory;
         private System.Windows.Forms.Label label7;

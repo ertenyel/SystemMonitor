@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.IO;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -212,16 +213,59 @@ namespace SystemMonitor
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+        {            
             richTextBox1.Clear();
             ForecastingModel.MainMethodForecatingModel(beginDateTime.Value);            
-            richTextBox1.AppendText($"{ForecastingModel.sumVal}");           
-            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.avgVal}");            
-            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.doubleValSum}");            
-            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.dispersionX}");
 
-            for (int i = 0; i < ForecastingModel.ZXScore.Length; i++)
-                richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.ZXScore[i]}");
+            for (int i = 0; i < ForecastingModel.NewStory.Length; i++)
+            {
+                for (int j = 1; j < ForecastingModel.NewStory[i].Length; j++)
+                    richTextBox1.AppendText($"{ForecastingModel.NewStory[i][1]}, ");
+            }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
+            for (int i = 0; i < ForecastingModel.MaybeMaxSimSamp.Length; i++)
+            {
+                for (int j = 0; j < ForecastingModel.MaybeMaxSimSamp[i].Length; j++)
+                    richTextBox1.AppendText($"{ForecastingModel.MaybeMaxSimSamp[i][j]}\t");                
+            }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
+            for (int i = 0; i < ForecastingModel.MaxSimSampMin.Length; i++)
+            {
+                for (int j = 1; j < ForecastingModel.MaxSimSampMin[i].Length; j++)
+                    richTextBox1.AppendText($"{ForecastingModel.MaxSimSampMin[i][1]}, ");
+            }
+
+            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.minDistance}");
+            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.currentValKor}");
+
+
+
+            /*
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
+            for (int i = 0; i < ForecastingModel.NewStory.Length; i++)
+            {
+                for (int j = 0; j < ForecastingModel.NewStory[i].Length; j++)
+                    richTextBox1.AppendText($"{ForecastingModel.NewStory[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
+            for (int i = 0; i < ForecastingModel.ratio.Length; i++)
+                richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.ratio[i]}");
+
+            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.ct}");
+            */
+
+            //for (int i = 0; i < ForecastingModel.ratio.Length; i++)
+            //  richTextBox1.AppendText($"{ForecastingModel.ratio[i]}");
         }
     }
 }
