@@ -167,8 +167,7 @@ namespace SystemMonitor
 
         private static double Distance(double[] tuple, double[] vector)
         {
-            // Квадрат евклидова расстояния
-            //todo: Эксперименты с метриками
+            // Квадрат евклидова расстояния            
             /*
             double sumSquaredDiffs = 0.0;
             for (int j = 0; j < tuple.Length; ++j)

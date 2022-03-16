@@ -5,9 +5,14 @@ namespace SystemMonitor
 {
     class ForecastingModel
     {
+
+
+        //todo: изучить принцип выбора длины прогнозирования и базовой выборки
+        // 
         public static int[][] NewStory;
         public static int[][] MaybeMaxSimSamp;
         public static int[][] MaxSimSampMin;
+        public static int[][] basicSelect;
         public static double sumVal;
         public static double avgVal;
         public static double doubleValSum;
@@ -22,17 +27,25 @@ namespace SystemMonitor
 
         public static void MainMethodForecatingModel(DateTime sysdate)
         {
-            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, percproc from systemresources where timesysres between '{sysdate.AddMinutes(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{sysdate:yyyy-MM-dd HH:mm:ss.fff}'");
-            NewStory = new int[table.Rows.Count][];
-            for (int i = 0; i < NewStory.Length; i++)
+            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, percproc from systemresources " +
+                $"where timesysres between '{sysdate.AddMinutes(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{sysdate:yyyy-MM-dd HH:mm:ss.fff}'");
+            try
             {
-                NewStory[i] = new int[table.Columns.Count];
-                for (int j = 0; j < NewStory[i].Length; j++)
-                    NewStory[i][j] = Convert.ToInt32(table.Rows[i][j]);
+                NewStory = new int[table.Rows.Count][];
+                for (int i = 0; i < NewStory.Length; i++)
+                {
+                    NewStory[i] = new int[table.Columns.Count];
+                    for (int j = 0; j < NewStory[i].Length; j++)
+                        NewStory[i][j] = Convert.ToInt32(table.Rows[i][j]);
+                }
             }
-
-            ComputeParameters(NewStory);
+            catch (Exception)
+            {
+                return;
+            }
+            
             ct = 0;
+            ComputeParameters(NewStory);
             ComputeFactor(NewStory);
         }
 
@@ -66,7 +79,8 @@ namespace SystemMonitor
         private static void ComputeFactor(int[][] arr)
         {
             
-            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, percproc from systemresources where idsysres < {NewStory[NewStory.Length - 1][0]}");
+            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, percproc " +
+                $"from systemresources where idsysres < {NewStory[NewStory.Length - 1][0]}");
             ratio = new double[table.Rows.Count - arr.Length];
 
         next:

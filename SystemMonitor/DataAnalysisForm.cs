@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -213,10 +214,16 @@ namespace SystemMonitor
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {            
-            richTextBox1.Clear();
-            ForecastingModel.MainMethodForecatingModel(beginDateTime.Value);            
+        {
+            Stopwatch stopwatch = new Stopwatch();
 
+            stopwatch.Start();
+            //richTextBox1.Clear();
+            ForecastingModel.MainMethodForecatingModel(beginDateTime.Value);
+            stopwatch.Stop();
+
+            label5.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
+            /*
             for (int i = 0; i < ForecastingModel.NewStory.Length; i++)
             {
                 for (int j = 1; j < ForecastingModel.NewStory[i].Length; j++)
@@ -242,7 +249,7 @@ namespace SystemMonitor
             }
 
             richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.minDistance}");
-            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.currentValKor}");
+            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.currentValKor}");*/
 
 
 
