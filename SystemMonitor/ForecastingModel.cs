@@ -5,14 +5,13 @@ namespace SystemMonitor
 {
     class ForecastingModel
     {
-
-
         //todo: изучить принцип выбора длины прогнозирования и базовой выборки
         // 
         public static int[][] NewStory;
         public static int[][] MaybeMaxSimSamp;
         public static int[][] MaxSimSampMin;
         public static int[][] basicSelect;
+        public static int[][] realVal;
         public static double sumVal;
         public static double avgVal;
         public static double doubleValSum;
@@ -25,9 +24,9 @@ namespace SystemMonitor
         public static double minDistance;
         public static double currentValKor;
 
-        public static void MainMethodForecatingModel(DateTime sysdate)
+        public static void MainMethodForecatingModel(DateTime sysdate, string characters)
         {
-            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, percproc from systemresources " +
+            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, {characters} from systemresources " +
                 $"where timesysres between '{sysdate.AddMinutes(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{sysdate:yyyy-MM-dd HH:mm:ss.fff}'");
             try
             {
@@ -47,6 +46,7 @@ namespace SystemMonitor
             ct = 0;
             ComputeParameters(NewStory);
             ComputeFactor(NewStory);
+            BasicSel(MaxSimSampMin, characters);
         }
 
         private static void ComputeParameters(int[][] arr, bool othTable = false)
@@ -91,9 +91,7 @@ namespace SystemMonitor
                 {
                     MaybeMaxSimSamp[i - ct] = new int[table.Columns.Count];
                     for (int j = 0; j < table.Columns.Count; j++)
-                    {
                         MaybeMaxSimSamp[i - ct][j] = Convert.ToInt32(table.Rows[i][j]);
-                    }
                 }
                 else
                     break;
@@ -121,6 +119,33 @@ namespace SystemMonitor
                 return;
             else if (ct < table.Rows.Count - arr.Length)
                 goto next;
+        }
+
+        private static void BasicSel(int[][] MaxSimSampMin, string characters)
+        {
+            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, {characters} from systemresources where idsysres " +
+                $"between {MaxSimSampMin[0][0]} and {MaxSimSampMin[MaxSimSampMin.Length - 1][0]+10}");
+            basicSelect = new int[table.Rows.Count][];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                basicSelect[i] = new int[table.Columns.Count];
+                for (int j = 0; j < table.Columns.Count; j++)
+                    basicSelect[i][j] = Convert.ToInt32(table.Rows[i][j]);
+            }
+            Forecast(NewStory, characters);
+        }
+
+        private static void Forecast(int[][] NewStory, string characters)
+        {
+            DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, {characters} from systemresources where idsysres " +
+                $"between {NewStory[0][0]} and {NewStory[NewStory.Length - 1][0] + 10}");
+            realVal = new int[table.Rows.Count][];
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                realVal[i] = new int[table.Columns.Count];
+                for (int j = 0; j < table.Columns.Count; j++)
+                    realVal[i][j] = Convert.ToInt32(table.Rows[i][j]);
+            }
         }
     }
 }

@@ -218,27 +218,58 @@ namespace SystemMonitor
             Stopwatch stopwatch = new Stopwatch();
 
             stopwatch.Start();
-            //richTextBox1.Clear();
-            ForecastingModel.MainMethodForecatingModel(beginDateTime.Value);
+            richTextBox1.Clear();
+            ForecastingModel.MainMethodForecatingModel(beginDateTime.Value, "percproc");
             stopwatch.Stop();
 
             label5.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
+
+            for (int i = 0; i < chartForOutputHistory.Series.Count; i++) chartForOutputHistory.Series[i].Points.Clear();
+
+            try
+            {
+                chartForOutputHistory.Series[0].Name = "Max select samp";
+                
+                for (int i = 0; i < ForecastingModel.basicSelect.Length; i++)
+                {
+                    for (int j = 1; j < ForecastingModel.basicSelect[i].Length; j++)
+                    {
+                        richTextBox1.AppendText($"{ForecastingModel.basicSelect[i][1]}, ");
+                        chartForOutputHistory.Series["Max select samp"].Points.AddXY(i, ForecastingModel.basicSelect[i][1]);
+                        if (ForecastingModel.MaxSimSampMin[ForecastingModel.MaxSimSampMin.Length - 1][0] == ForecastingModel.basicSelect[i][0])
+                        {
+                            chartForOutputHistory.Series[2].ChartType = SeriesChartType.Column;
+                            chartForOutputHistory.Series[2].Points.AddXY(i, 70);
+                        }
+                    }
+                }
+
+                richTextBox1.AppendText($"{Environment.NewLine}");
+
+                chartForOutputHistory.Series[1].Name = "Real values";
+
+                for (int i = 0; i < ForecastingModel.realVal.Length; i++)
+                {
+                    for (int j = 1; j < ForecastingModel.realVal[i].Length; j++)
+                    {
+                        richTextBox1.AppendText($"{ForecastingModel.realVal[i][1]}, ");
+                        chartForOutputHistory.Series["Real values"].Points.AddXY(i, ForecastingModel.realVal[i][1]);
+                    }                        
+                }
+
+                richTextBox1.AppendText($"{Environment.NewLine}");
+                richTextBox1.AppendText($"{ForecastingModel.currentValKor}");
+                
+                
+            }
+            catch (Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
+            
+
+
             /*
-            for (int i = 0; i < ForecastingModel.NewStory.Length; i++)
-            {
-                for (int j = 1; j < ForecastingModel.NewStory[i].Length; j++)
-                    richTextBox1.AppendText($"{ForecastingModel.NewStory[i][1]}, ");
-            }
-
-            richTextBox1.AppendText($"{Environment.NewLine}");
-            richTextBox1.AppendText($"{Environment.NewLine}");
-
-            for (int i = 0; i < ForecastingModel.MaybeMaxSimSamp.Length; i++)
-            {
-                for (int j = 0; j < ForecastingModel.MaybeMaxSimSamp[i].Length; j++)
-                    richTextBox1.AppendText($"{ForecastingModel.MaybeMaxSimSamp[i][j]}\t");                
-            }
-
             richTextBox1.AppendText($"{Environment.NewLine}");
             richTextBox1.AppendText($"{Environment.NewLine}");
 
