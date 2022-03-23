@@ -185,7 +185,7 @@ namespace SystemMonitor
             this.panel3.Controls.Add(this.panel6);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(449, 22);
-            this.panel3.MinimumSize = new System.Drawing.Size(425, 4);
+            this.panel3.MinimumSize = new System.Drawing.Size(350, 4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(466, 719);
             this.panel3.TabIndex = 4;
@@ -437,6 +437,7 @@ namespace SystemMonitor
             this.panel2.Controls.Add(this.splitContainer3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(923, 22);
+            this.panel2.MaximumSize = new System.Drawing.Size(539, 0);
             this.panel2.MinimumSize = new System.Drawing.Size(425, 4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(425, 719);
@@ -463,6 +464,12 @@ namespace SystemMonitor
             // 
             // chartForOutputHistory
             // 
+            chartArea3.AxisX.ScaleView.MinSize = 5D;
+            chartArea3.AxisX.ScaleView.Size = 30D;
+            chartArea3.AxisX.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea3.AxisX.ScaleView.SmallScrollMinSize = 5D;
+            chartArea3.AxisY.ScaleView.MinSize = 5D;
+            chartArea3.AxisY.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
             chartArea3.Name = "ChartArea1";
             this.chartForOutputHistory.ChartAreas.Add(chartArea3);
             this.chartForOutputHistory.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -682,7 +689,7 @@ namespace SystemMonitor
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 22);
-            this.panel1.MinimumSize = new System.Drawing.Size(425, 4);
+            this.panel1.MinimumSize = new System.Drawing.Size(350, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(438, 719);
             this.panel1.TabIndex = 0;

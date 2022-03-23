@@ -27,7 +27,7 @@ namespace SystemMonitor
         public static void MainMethodForecatingModel(DateTime sysdate, string characters)
         {
             DataTable table = SqlLiteDataBase.LetsQuery($"select idsysres, {characters} from systemresources " +
-                $"where timesysres between '{sysdate.AddMinutes(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{sysdate:yyyy-MM-dd HH:mm:ss.fff}'");
+                $"where timesysres between '{sysdate.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{sysdate:yyyy-MM-dd HH:mm:ss.fff}'");
             try
             {
                 NewStory = new int[table.Rows.Count][];
