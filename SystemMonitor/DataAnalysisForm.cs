@@ -10,6 +10,8 @@ namespace SystemMonitor
     public partial class DataAnalysisForm : Form
     {
         DataAnalysingClust dataAnalysing = new DataAnalysingClust();
+        private string id;
+        private string time;
 
         public DataAnalysisForm()
         {
@@ -219,7 +221,7 @@ namespace SystemMonitor
 
             stopwatch.Start();
             richTextBox1.Clear();
-            ForecastingModel.MainMethodForecatingModel(beginDateTime.Value, "percproc");
+            ForecastingModel.MainMethodForecatingModel(beginDateTime.Value, cbForSelCol.Text, time, comboBoxTableForModel.Text, id, 30);
             stopwatch.Stop();
 
             label5.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
@@ -228,13 +230,33 @@ namespace SystemMonitor
 
             try
             {
+                double errMae = 0;
+                double errMape = 0;
+
+                for (int i = 0; i < ForecastingModel.NewStory.Length; i++)
+                {
+                    for (int j = 1; j < ForecastingModel.NewStory[i].Length; j++)
+                        richTextBox1.AppendText($"{ForecastingModel.NewStory[i][1]}\t");
+                }
+
+                richTextBox1.AppendText($"{Environment.NewLine}");
+
+                for (int i = 0; i < ForecastingModel.MaxSimSampMin.Length; i++)
+                {
+                    for (int j = 1; j < ForecastingModel.MaxSimSampMin[i].Length; j++)
+                        richTextBox1.AppendText($"{ForecastingModel.MaxSimSampMin[i][1]}\t");
+                }
+
+                richTextBox1.AppendText($"{Environment.NewLine}");
                 chartForOutputHistory.Series[0].Name = "Max select samp";
-                
+                richTextBox1.AppendText($"Start index basic select: {ForecastingModel.basicSelect[0][0]}");
+                richTextBox1.AppendText($"{Environment.NewLine}");
                 for (int i = 0; i < ForecastingModel.basicSelect.Length; i++)
                 {
                     for (int j = 1; j < ForecastingModel.basicSelect[i].Length; j++)
                     {
-                        richTextBox1.AppendText($"{ForecastingModel.basicSelect[i][1]}, ");
+                        errMae += Math.Abs(ForecastingModel.basicSelect[i][1] - ForecastingModel.realVal[i][1]);
+                        //errMape += Math.Abs(ForecastingModel.basicSelect[i][1] - ForecastingModel.realVal[i][1])/(ForecastingModel.realVal[i][1]);                        
                         chartForOutputHistory.Series["Max select samp"].Points.AddXY(i, ForecastingModel.basicSelect[i][1]);
                         if (ForecastingModel.MaxSimSampMin[ForecastingModel.MaxSimSampMin.Length - 1][0] == ForecastingModel.basicSelect[i][0])
                         {
@@ -247,63 +269,48 @@ namespace SystemMonitor
                 richTextBox1.AppendText($"{Environment.NewLine}");
 
                 chartForOutputHistory.Series[1].Name = "Real values";
-
+                richTextBox1.AppendText($"Start index forecast: {ForecastingModel.realVal[0][0]}");
+                richTextBox1.AppendText($"{Environment.NewLine}");
                 for (int i = 0; i < ForecastingModel.realVal.Length; i++)
                 {
                     for (int j = 1; j < ForecastingModel.realVal[i].Length; j++)
-                    {
-                        richTextBox1.AppendText($"{ForecastingModel.realVal[i][1]}, ");
                         chartForOutputHistory.Series["Real values"].Points.AddXY(i, ForecastingModel.realVal[i][1]);
-                    }                        
                 }
-
                 richTextBox1.AppendText($"{Environment.NewLine}");
-                richTextBox1.AppendText($"{ForecastingModel.currentValKor}");
-                
-                
+                richTextBox1.AppendText($"Error MAE: {errMae/ForecastingModel.basicSelect.Length}");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+                richTextBox1.AppendText($"Error MAPE: {Math.Round(errMape / ForecastingModel.realVal.Length * 100)} %");                
+                richTextBox1.AppendText($"{Environment.NewLine}");
+                richTextBox1.AppendText($"Max likenes: {ForecastingModel.currentValKor}");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+                richTextBox1.AppendText($"DispersionX: {Math.Sqrt(ForecastingModel.dispersionX)}");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+                richTextBox1.AppendText($"DispersionY: {Math.Sqrt(ForecastingModel.dispersionY)}");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+                richTextBox1.AppendText($"SumSquare: {ForecastingModel.sumSquare}");
+                richTextBox1.AppendText($"{Environment.NewLine}");
             }
             catch (Exception x)
             {
                 MessageBox.Show(x.Message);
             }
-            
+        }
 
-
-            /*
-            richTextBox1.AppendText($"{Environment.NewLine}");
-            richTextBox1.AppendText($"{Environment.NewLine}");
-
-            for (int i = 0; i < ForecastingModel.MaxSimSampMin.Length; i++)
+        private void comboBoxTableForModel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbForSelCol.Items.Clear();
+            try
             {
-                for (int j = 1; j < ForecastingModel.MaxSimSampMin[i].Length; j++)
-                    richTextBox1.AppendText($"{ForecastingModel.MaxSimSampMin[i][1]}, ");
+                DataTable table = SqlLiteDataBase.LetsQuery($"pragma table_info({comboBoxTableForModel.Text})");
+                id = table.Rows[0][1].ToString();
+                time = table.Rows[1][1].ToString();
+                for (int i = 2; i < table.Rows.Count; i++)
+                    cbForSelCol.Items.Add(table.Rows[i][1]);
             }
-
-            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.minDistance}");
-            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.currentValKor}");*/
-
-
-
-            /*
-            richTextBox1.AppendText($"{Environment.NewLine}");
-
-            for (int i = 0; i < ForecastingModel.NewStory.Length; i++)
+            catch (Exception)
             {
-                for (int j = 0; j < ForecastingModel.NewStory[i].Length; j++)
-                    richTextBox1.AppendText($"{ForecastingModel.NewStory[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
+
             }
-
-            richTextBox1.AppendText($"{Environment.NewLine}");
-
-            for (int i = 0; i < ForecastingModel.ratio.Length; i++)
-                richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.ratio[i]}");
-
-            richTextBox1.AppendText($"{Environment.NewLine}{ForecastingModel.ct}");
-            */
-
-            //for (int i = 0; i < ForecastingModel.ratio.Length; i++)
-            //  richTextBox1.AppendText($"{ForecastingModel.ratio[i]}");
         }
     }
 }
