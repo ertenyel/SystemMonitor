@@ -11,95 +11,12 @@ namespace SystemMonitor
     {
         DataAnalysingClust dataAnalysing = new DataAnalysingClust();
         private string id;
+        private string count;
         private string time;
 
         public DataAnalysisForm()
         {
             InitializeComponent();
-        }
-
-        private void btnOutputHistory_Click(object sender, EventArgs e)
-        {
-            string table;
-            DataTable dataTable;
-
-            if (comboBoxForParam.SelectedIndex == 0)
-            {
-                table = "systemresources";
-                if (numericBegin.Value != 0 && numericEnd.Value != 0)
-                {
-                    dataTable = SqlLiteDataBase.LetsQuery($"select idsysres, numberprocess, percproc, percdisc, percmemory from {table} where idsysres between '{numericBegin.Value}' and '{numericEnd.Value}' order by idsysres");
-                    for (int i = 0; i < dataTable.Columns.Count; i++)
-                    {
-                        for (int j = 0; j < dataTable.Rows.Count; j++)
-                        {
-                            if (i != 0)
-                                Charts.FillChartForOutputHis(Convert.ToInt32(dataTable.Rows[j][0]), Convert.ToInt32(dataTable.Rows[j][i]));
-                        }
-
-                        for (int k = 0; k < Charts.outputHisX.Count; k++)
-                        {
-                            if (i == 1)
-                            {
-                                chartForOutputHistory.Series[i - 1].Name = "Process count";
-                                chartForOutputHistory.Series["Process count"].Points.AddXY(Charts.outputHisX[k], Charts.outputHisY[k]);
-                            }
-                            else if (i == 2)
-                            {
-                                chartForOutputHistory.Series[i - 1].Name = "% processor";
-                                chartForOutputHistory.Series["% processor"].Points.AddXY(Charts.outputHisX[k], Charts.outputHisY[k]);
-                            }
-                            else if (i == 3)
-                            {
-                                chartForOutputHistory.Series[i - 1].Name = "% disc";
-                                chartForOutputHistory.Series["% disc"].Points.AddXY(Charts.outputHisX[k], Charts.outputHisY[k]);
-                            }
-                            else if (i == 4)
-                            {
-                                chartForOutputHistory.Series[i - 1].Name = "% memory";
-                                chartForOutputHistory.Series["% memory"].Points.AddXY(Charts.outputHisX[k], Charts.outputHisY[k]);
-                            }
-                        }
-                        Charts.RefreshAxes();
-                    }
-                }
-            }
-            else if (comboBoxForParam.SelectedIndex == 1)
-            {
-                table = "network";
-                dataTable = SqlLiteDataBase.LetsQuery($"select idnetwork, connectionscount, receivedbytes, sentbyte from {table} where idnetwork between '{numericBegin.Value}' and '{numericEnd.Value}' order by idnetwork");
-                for (int i = 0; i < dataTable.Columns.Count; i++)
-                {
-                    for (int j = 0; j < dataTable.Rows.Count; j++)
-                    {
-                        if (i != 0)
-                            Charts.FillChartForOutputHis(Convert.ToInt32(dataTable.Rows[j][0]), Convert.ToInt32(dataTable.Rows[j][i]));
-                    }
-
-                    for (int k = 0; k < Charts.outputHisX.Count; k++)
-                    {
-                        if (i == 1)
-                        {
-                            chartForOutputHistory.Series[i - 1].Name = "Count connections";
-                            chartForOutputHistory.Series["Count connections"].Points.AddXY(Charts.outputHisX[k], Charts.outputHisY[k]);
-                        }
-                        else if (i == 2)
-                        {
-                            chartForOutputHistory.Series[i - 1].Name = "Received bytes";
-                            chartForOutputHistory.Series["Received bytes"].Points.AddXY(Charts.outputHisX[k], Charts.outputHisY[k]);
-                        }
-                        else if (i == 3)
-                        {
-                            chartForOutputHistory.Series[i - 1].Name = "Sent bytes";
-                            chartForOutputHistory.Series["Sent bytes"].Points.AddXY(Charts.outputHisX[k], Charts.outputHisY[k]);
-                        }
-                    }
-                    Charts.RefreshAxes();
-                }
-            }
-            else if (comboBoxForParam.SelectedIndex == -1)
-                MessageBox.Show("You need to select a table");
-
         }
 
         private void btnForNetClustAnalysis_Click(object sender, EventArgs e)
@@ -220,8 +137,25 @@ namespace SystemMonitor
             Stopwatch stopwatch = new Stopwatch();
 
             stopwatch.Start();
+
             richTextBox1.Clear();
-            ForecastingModel.MainMethodForecatingModel(beginDateTime.Value, cbForSelCol.Text, time, comboBoxTableForModel.Text, id, 30);
+            DataTable table = SqlLiteDataBase.LetsQuery($"pragma table_info({comboBoxTableForModel.Text})");
+            id = table.Rows[0][1].ToString();
+            time = table.Rows[1][1].ToString();
+            count = table.Rows[2][1].ToString();
+
+            DataTable tableSelect = SqlLiteDataBase.LetsQuery($"select {id}" +
+                $" from {comboBoxTableForModel.Text} where {time} between" +
+                $" '{beginDateTime.Value.AddDays(-1).AddHours(-1):yyyy-MM-dd HH:mm:ss.fff}' " +
+                $"and '{beginDateTime.Value.AddDays(-1).AddHours(1):yyyy-MM-dd HH:mm:ss.fff}'");
+
+            ForecastingModel.ratio = new double[tableSelect.Rows.Count];
+
+            for (int i = 3; i < table.Rows.Count; i++)
+            {
+                ForecastingModel.MainMethodForecatingModel(beginDateTime.Value, count, table.Rows[i][1].ToString(),
+                    time, comboBoxTableForModel.Text, id, table.Rows.Count-3, i,  15);
+            }                
             stopwatch.Stop();
 
             label5.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
@@ -233,22 +167,51 @@ namespace SystemMonitor
                 double errMae = 0;
                 double errMape = 0;
 
-                for (int i = 0; i < ForecastingModel.NewStory.Length; i++)
+                DataTable NewStory = SqlLiteDataBase.LetsQuery("select idsysres, percproc, percmemory, percdisc from systemresources " +
+                    $"where idsysres between {ForecastingModel.NewStory[0][0]} and {ForecastingModel.NewStory[ForecastingModel.NewStory.Length-1][0]}");
+
+                DataTable MaxSimSampMin = SqlLiteDataBase.LetsQuery("select idsysres, percproc, percmemory, percdisc from systemresources " +
+                    $"where idsysres between {ForecastingModel.MaxSimSampMin[0][0]} and {ForecastingModel.MaxSimSampMin[ForecastingModel.MaxSimSampMin.Length-1][0]}");
+
+
+                //todo: сделать вывод времени вместо идентификатора + группировка по минутам
+                //select strftime('%Y-%m-%d %H:%M', timesysres), avg(percproc) from systemresources where idsysres < 300
+                //group by strftime('%Y-%m-%d %H:%M', timesysres)
+
+
+                for (int i = 0; i < NewStory.Rows.Count; i++)
                 {
-                    for (int j = 1; j < ForecastingModel.NewStory[i].Length; j++)
-                        richTextBox1.AppendText($"{ForecastingModel.NewStory[i][1]}\t");
+                    for (int j = 0; j < NewStory.Columns.Count; j++)
+                    {
+                        for (int k = 0; k < chartForOutputHistory.Series.Count-4; k++)
+                        {
+                            chartForOutputHistory.Series[k].Points.AddXY(i, Convert.ToInt32(NewStory.Rows[i][k+1]));
+                        }
+                    }
+                    for (int j = 0; j < NewStory.Columns.Count; j++)
+                    {
+                        for (int k = 4; k < chartForOutputHistory.Series.Count - 4; k++)
+                        {
+                            chartForOutputHistory.Series[k].Points.AddXY(i, Convert.ToInt32(MaxSimSampMin.Rows[i][k + 1]));
+                        }
+                    }
                 }
+                //for (int i = 0; i < ForecastingModel.NewStory.Length; i++)
+                //{
+                //    for (int j = 1; j < ForecastingModel.NewStory[i].Length; j++)
+                //        richTextBox1.AppendText($"{ForecastingModel.NewStory[i][1]}\t");
+                //}
 
-                richTextBox1.AppendText($"{Environment.NewLine}");
+                //richTextBox1.AppendText($"{Environment.NewLine}");
 
-                for (int i = 0; i < ForecastingModel.MaxSimSampMin.Length; i++)
-                {
-                    for (int j = 1; j < ForecastingModel.MaxSimSampMin[i].Length; j++)
-                        richTextBox1.AppendText($"{ForecastingModel.MaxSimSampMin[i][1]}\t");
-                }
+                //for (int i = 0; i < ForecastingModel.MaxSimSampMin.Length; i++)
+                //{
+                //    for (int j = 1; j < ForecastingModel.MaxSimSampMin[i].Length; j++)
+                //        richTextBox1.AppendText($"{ForecastingModel.MaxSimSampMin[i][1]}\t");
+                //}
 
-                richTextBox1.AppendText($"{Environment.NewLine}");
-                chartForOutputHistory.Series[0].Name = "Max select samp";
+                //richTextBox1.AppendText($"{Environment.NewLine}");
+                /*chartForOutputHistory.Series[0].Name = "Max select samp";
                 richTextBox1.AppendText($"Start index basic select: {ForecastingModel.basicSelect[0][0]}");
                 richTextBox1.AppendText($"{Environment.NewLine}");
                 for (int i = 0; i < ForecastingModel.basicSelect.Length; i++)
@@ -275,11 +238,11 @@ namespace SystemMonitor
                 {
                     for (int j = 1; j < ForecastingModel.realVal[i].Length; j++)
                         chartForOutputHistory.Series["Real values"].Points.AddXY(i, ForecastingModel.realVal[i][1]);
-                }
-                richTextBox1.AppendText($"{Environment.NewLine}");
-                richTextBox1.AppendText($"Error MAE: {errMae/ForecastingModel.basicSelect.Length}");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-                richTextBox1.AppendText($"Error MAPE: {Math.Round(errMape / ForecastingModel.realVal.Length * 100)} %");                
+                }*/
+                //richTextBox1.AppendText($"{Environment.NewLine}");
+                //richTextBox1.AppendText($"Error MAE: {errMae/ForecastingModel.basicSelect.Length}");
+                //richTextBox1.AppendText($"{Environment.NewLine}");
+                //richTextBox1.AppendText($"Error MAPE: {Math.Round(errMape / ForecastingModel.realVal.Length * 100)} %");                
                 richTextBox1.AppendText($"{Environment.NewLine}");
                 richTextBox1.AppendText($"Max likenes: {ForecastingModel.currentValKor}");
                 richTextBox1.AppendText($"{Environment.NewLine}");
@@ -298,19 +261,7 @@ namespace SystemMonitor
 
         private void comboBoxTableForModel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbForSelCol.Items.Clear();
-            try
-            {
-                DataTable table = SqlLiteDataBase.LetsQuery($"pragma table_info({comboBoxTableForModel.Text})");
-                id = table.Rows[0][1].ToString();
-                time = table.Rows[1][1].ToString();
-                for (int i = 2; i < table.Rows.Count; i++)
-                    cbForSelCol.Items.Add(table.Rows[i][1]);
-            }
-            catch (Exception)
-            {
-
-            }
+            button1.Enabled = true;
         }
     }
 }
