@@ -135,128 +135,54 @@ namespace SystemMonitor
         private void button1_Click(object sender, EventArgs e)
         {
             Stopwatch stopwatch = new Stopwatch();
+            string columns = "";
+            string time = "";
 
             stopwatch.Start();
-
-            richTextBox1.Clear();
-            DataTable table = SqlLiteDataBase.LetsQuery($"pragma table_info({comboBoxTableForModel.Text})");
-            id = table.Rows[0][1].ToString();
-            time = table.Rows[1][1].ToString();
-            count = table.Rows[2][1].ToString();
-
-            DataTable tableSelect = SqlLiteDataBase.LetsQuery($"select {id}" +
-                $" from {comboBoxTableForModel.Text} where {time} between" +
-                $" '{beginDateTime.Value.AddDays(-1).AddHours(-1):yyyy-MM-dd HH:mm:ss.fff}' " +
-                $"and '{beginDateTime.Value.AddDays(-1).AddHours(1):yyyy-MM-dd HH:mm:ss.fff}'");
-
-            ForecastingModel.ratio = new double[tableSelect.Rows.Count];
-
-            for (int i = 3; i < table.Rows.Count; i++)
+            if (comboBoxTableForModel.Text == "Systemresources")
             {
-                ForecastingModel.MainMethodForecatingModel(beginDateTime.Value, count, table.Rows[i][1].ToString(),
-                    time, comboBoxTableForModel.Text, id, table.Rows.Count-3, i,  15);
-            }                
+                columns = "strftime('%Y-%m-%d %H:%M', timesysres), avg(percproc)/avg(numberprocess), avg(percdisc)/avg(numberprocess), avg(percmemory)/avg(numberprocess)";
+                time = "timesysres";
+            }
+            else if (comboBoxTableForModel.Text == "Network")
+            {
+                columns = "strftime('%Y-%m-%d %H:%M', timenetwork), avg(receivedbytes)/avg(connectionscount), avg(sentbyte)/avg(connectionscount)";
+                time = "timenetwork";
+            }
+
+            DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns}" +
+                $"from {comboBoxTableForModel.Text} where {time} between '{beginDateTime.Value.AddMinutes(-5):yyyy-MM-dd HH:mm:ss.fff}' and '{beginDateTime.Value:yyyy-MM-dd HH:mm:ss.fff}'" +
+                $"group by strftime('%Y-%m-%d %H:%M', {time})");
+
+
+            DataTable tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns}" +
+                $"from {comboBoxTableForModel.Text} where {time} between '{beginDateTime.Value.AddDays(-1).AddHours(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{beginDateTime.Value.AddDays(-1).AddHours(1):yyyy-MM-dd HH:mm:ss.fff}'" +
+                $"group by strftime('%Y-%m-%d %H:%M', {time})");
+
+            ForecastModelWithStruct.InitializeValues(tableNewStory, tableMaxSel);
+            richTextBox1.Clear();
+
+            for (int i = 0; i < Values.newStory.Length; i++)
+            {
+                richTextBox1.AppendText($"{Values.dateTimeNewStory[i]}\t");
+                for (int j = 0; j < Values.newStory[i].Length; j++)
+                    richTextBox1.AppendText($"{Values.newStory[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
+            for (int i = 0; i < Values.resultMaxSel.Length; i++)
+            {
+                richTextBox1.AppendText($"{Values.dateTimeResultMaxSel[i]}\t");
+                for (int j = 0; j < Values.resultMaxSel[i].Length; j++)
+                    richTextBox1.AppendText($"{Values.resultMaxSel[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
+
             stopwatch.Stop();
 
             label5.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
-            
-            for (int i = 0; i < chartForOutputHistory.Series.Count; i++) chartForOutputHistory.Series[i].Points.Clear();
-
-            try
-            {
-                double errMae = 0;
-                double errMape = 0;
-
-                DataTable NewStory = SqlLiteDataBase.LetsQuery("select idsysres, percproc, percmemory, percdisc from systemresources " +
-                    $"where idsysres between {ForecastingModel.NewStory[0][0]} and {ForecastingModel.NewStory[ForecastingModel.NewStory.Length-1][0]}");
-
-                DataTable MaxSimSampMin = SqlLiteDataBase.LetsQuery("select idsysres, percproc, percmemory, percdisc from systemresources " +
-                    $"where idsysres between {ForecastingModel.MaxSimSampMin[0][0]} and {ForecastingModel.MaxSimSampMin[ForecastingModel.MaxSimSampMin.Length-1][0]}");
-
-
-                //todo: сделать вывод времени вместо идентификатора + группировка по минутам
-                //select strftime('%Y-%m-%d %H:%M', timesysres), avg(percproc) from systemresources where idsysres < 300
-                //group by strftime('%Y-%m-%d %H:%M', timesysres)
-
-
-                for (int i = 0; i < NewStory.Rows.Count; i++)
-                {
-                    for (int j = 0; j < NewStory.Columns.Count; j++)
-                    {
-                        for (int k = 0; k < chartForOutputHistory.Series.Count-4; k++)
-                        {
-                            chartForOutputHistory.Series[k].Points.AddXY(i, Convert.ToInt32(NewStory.Rows[i][k+1]));
-                        }
-                    }
-                    for (int j = 0; j < NewStory.Columns.Count; j++)
-                    {
-                        for (int k = 4; k < chartForOutputHistory.Series.Count - 4; k++)
-                        {
-                            chartForOutputHistory.Series[k].Points.AddXY(i, Convert.ToInt32(MaxSimSampMin.Rows[i][k + 1]));
-                        }
-                    }
-                }
-                //for (int i = 0; i < ForecastingModel.NewStory.Length; i++)
-                //{
-                //    for (int j = 1; j < ForecastingModel.NewStory[i].Length; j++)
-                //        richTextBox1.AppendText($"{ForecastingModel.NewStory[i][1]}\t");
-                //}
-
-                //richTextBox1.AppendText($"{Environment.NewLine}");
-
-                //for (int i = 0; i < ForecastingModel.MaxSimSampMin.Length; i++)
-                //{
-                //    for (int j = 1; j < ForecastingModel.MaxSimSampMin[i].Length; j++)
-                //        richTextBox1.AppendText($"{ForecastingModel.MaxSimSampMin[i][1]}\t");
-                //}
-
-                //richTextBox1.AppendText($"{Environment.NewLine}");
-                /*chartForOutputHistory.Series[0].Name = "Max select samp";
-                richTextBox1.AppendText($"Start index basic select: {ForecastingModel.basicSelect[0][0]}");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-                for (int i = 0; i < ForecastingModel.basicSelect.Length; i++)
-                {
-                    for (int j = 1; j < ForecastingModel.basicSelect[i].Length; j++)
-                    {
-                        errMae += Math.Abs(ForecastingModel.basicSelect[i][1] - ForecastingModel.realVal[i][1]);
-                        //errMape += Math.Abs(ForecastingModel.basicSelect[i][1] - ForecastingModel.realVal[i][1])/(ForecastingModel.realVal[i][1]);                        
-                        chartForOutputHistory.Series["Max select samp"].Points.AddXY(i, ForecastingModel.basicSelect[i][1]);
-                        if (ForecastingModel.MaxSimSampMin[ForecastingModel.MaxSimSampMin.Length - 1][0] == ForecastingModel.basicSelect[i][0])
-                        {
-                            chartForOutputHistory.Series[2].ChartType = SeriesChartType.Column;
-                            chartForOutputHistory.Series[2].Points.AddXY(i, 70);
-                        }
-                    }
-                }
-
-                richTextBox1.AppendText($"{Environment.NewLine}");
-
-                chartForOutputHistory.Series[1].Name = "Real values";
-                richTextBox1.AppendText($"Start index forecast: {ForecastingModel.realVal[0][0]}");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-                for (int i = 0; i < ForecastingModel.realVal.Length; i++)
-                {
-                    for (int j = 1; j < ForecastingModel.realVal[i].Length; j++)
-                        chartForOutputHistory.Series["Real values"].Points.AddXY(i, ForecastingModel.realVal[i][1]);
-                }*/
-                //richTextBox1.AppendText($"{Environment.NewLine}");
-                //richTextBox1.AppendText($"Error MAE: {errMae/ForecastingModel.basicSelect.Length}");
-                //richTextBox1.AppendText($"{Environment.NewLine}");
-                //richTextBox1.AppendText($"Error MAPE: {Math.Round(errMape / ForecastingModel.realVal.Length * 100)} %");                
-                richTextBox1.AppendText($"{Environment.NewLine}");
-                richTextBox1.AppendText($"Max likenes: {ForecastingModel.currentValKor}");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-                richTextBox1.AppendText($"DispersionX: {Math.Sqrt(ForecastingModel.dispersionX)}");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-                richTextBox1.AppendText($"DispersionY: {Math.Sqrt(ForecastingModel.dispersionY)}");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-                richTextBox1.AppendText($"SumSquare: {ForecastingModel.sumSquare}");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-            }
-            catch (Exception x)
-            {
-                MessageBox.Show(x.Message);
-            }
         }
 
         private void comboBoxTableForModel_SelectedIndexChanged(object sender, EventArgs e)
@@ -268,3 +194,5 @@ namespace SystemMonitor
 
 
 //DateTime.Now.AddHours(-1).ToString("yyyy-MM-dd HH:mm:ss.fff")
+//            DataTable tableInfo = SqlLiteDataBase.LetsQuery($"pragma table_info({comboBoxTableForModel.Text})");
+//for (int i = 0; i < chartForOutputHistory.Series.Count; i++) chartForOutputHistory.Series[i].Points.Clear();
