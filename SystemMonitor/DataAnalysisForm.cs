@@ -10,9 +10,6 @@ namespace SystemMonitor
     public partial class DataAnalysisForm : Form
     {
         DataAnalysingClust dataAnalysing = new DataAnalysingClust();
-        private string id;
-        private string count;
-        private string time;
 
         public DataAnalysisForm()
         {
@@ -135,36 +132,12 @@ namespace SystemMonitor
         private void button1_Click(object sender, EventArgs e)
         {
             Stopwatch stopwatch = new Stopwatch();
-            string columns = "";
-            string time = "";
-
             stopwatch.Start();
-            if (comboBoxTableForModel.Text == "Systemresources")
-            {
-                columns = "strftime('%Y-%m-%d %H:%M', timesysres), avg(percproc)/avg(numberprocess), avg(percdisc)/avg(numberprocess), avg(percmemory)/avg(numberprocess)";
-                time = "timesysres";
-            }
-            else if (comboBoxTableForModel.Text == "Network")
-            {
-                columns = "strftime('%Y-%m-%d %H:%M', timenetwork), avg(receivedbytes)/avg(connectionscount), avg(sentbyte)/avg(connectionscount)";
-                time = "timenetwork";
-            }
-
-            DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {comboBoxTableForModel.Text} where {time} between '{beginDateTime.Value.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{beginDateTime.Value:yyyy-MM-dd HH:mm:ss.fff}'" +
-                $"group by strftime('%Y-%m-%d %H:%M', {time})");
-
-
-            DataTable tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {comboBoxTableForModel.Text} where {time} between '{beginDateTime.Value.AddDays(-1).AddHours(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{beginDateTime.Value.AddDays(-1).AddHours(1):yyyy-MM-dd HH:mm:ss.fff}'" +
-                $"group by strftime('%Y-%m-%d %H:%M', {time})");
-
-            ForecastModelWithStruct.InitializeValues(tableNewStory, tableMaxSel);
             richTextBox1.Clear();
 
-
-
-
+            ForecastModelWithStruct.InitializeValues(beginDateTime.Value, comboBoxTableForModel.Text);
+            
+            HoltsMethod.InitialiizeSelected(Values.newStory);
             for (int i = 0; i < Values.newStory.Length; i++)
             {
                 richTextBox1.AppendText($"{Values.dateTimeNewStory[i]}\t");
@@ -175,6 +148,17 @@ namespace SystemMonitor
 
             richTextBox1.AppendText($"{Environment.NewLine}");
 
+            for (int i = 0; i < HoltsMethod.forecast.Length; i++)
+            {
+                for (int j = 0; j < HoltsMethod.forecast[i].Length; j++)
+                    richTextBox1.AppendText($"{HoltsMethod.forecast[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
+            HoltsMethod.InitialiizeSelected(Values.resultMaxSel);
             for (int i = 0; i < Values.resultMaxSel.Length; i++)
             {
                 richTextBox1.AppendText($"{Values.dateTimeResultMaxSel[i]}\t");
@@ -182,6 +166,16 @@ namespace SystemMonitor
                     richTextBox1.AppendText($"{Values.resultMaxSel[i][j]}\t");
                 richTextBox1.AppendText($"{Environment.NewLine}");
             }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
+            for (int i = 0; i < HoltsMethod.forecast.Length; i++)
+            {
+                for (int j = 0; j < HoltsMethod.forecast[i].Length; j++)
+                    richTextBox1.AppendText($"{HoltsMethod.forecast[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
+
 
             richTextBox1.AppendText($"{Environment.NewLine}");
             richTextBox1.AppendText($"{ForecastModelWithStruct.maxFactor}");
