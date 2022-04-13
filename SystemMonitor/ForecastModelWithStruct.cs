@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SystemMonitor
-{
+{    
     struct Values
     {
         public static double[][] newStory;
@@ -25,11 +25,12 @@ namespace SystemMonitor
         private static double[][] ZMarksY;
         private static double[] tempFactor;
         private static double factor;
-        private static double maxFactor;
+        public static double maxFactor;
         private static int ct;
 
         public static void InitializeValues(DataTable tableNewStory, DataTable tableMaxSel)
         {
+            maxFactor = 0;
             Values.newStory = new double[tableNewStory.Rows.Count][];
             Values.dateTimeNewStory = new DateTime[tableNewStory.Rows.Count];
             for (int i = 0; i < tableNewStory.Rows.Count; i++)
@@ -68,14 +69,14 @@ namespace SystemMonitor
             double[] avgVal =  new double[inputArray[0].Length];
             double[] dispersion = new double[inputArray[0].Length];
 
-            for (int i = 0; i < inputArray[i].Length; i++)
+            for (int i = 0; i < inputArray[0].Length; i++)
             {                
                 for (int j = 0; j < inputArray.Length; j++)
                     avgVal[i] += inputArray[j][i];
                 avgVal[i] /= inputArray.Length;
             }
 
-            for (int i = 0; i < inputArray[i].Length; i++)
+            for (int i = 0; i < inputArray[0].Length; i++)
             {
                 for (int j = 0; j < inputArray.Length; j++)
                     dispersion[i] += (avgVal[i] - inputArray[j][i])*(avgVal[i] - inputArray[j][i]);
@@ -94,6 +95,7 @@ namespace SystemMonitor
             }
             else
             {
+                factor = 0;
                 ZMarksY = new double[inputArray.Length][];
                 for (int i = 0; i < inputArray.Length; i++)
                 {
@@ -103,11 +105,11 @@ namespace SystemMonitor
                 }
 
                 tempFactor = new double[inputArray[0].Length];
-                for (int i = 0; i < inputArray[i].Length; i++)
+                for (int i = 0; i < inputArray[0].Length; i++)
                 {
                     for (int j = 0; j < inputArray.Length; j++)
                         tempFactor[i] += ZMarksX[j][i] * ZMarksY[j][i];
-                    tempFactor[i] /= inputArray.Length - 1;
+                    tempFactor[i] /= (inputArray.Length - 1);
 
                     factor += tempFactor[i];
                 }

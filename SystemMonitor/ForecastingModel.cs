@@ -5,8 +5,6 @@ namespace SystemMonitor
 {
     class ForecastingModel
     {
-        //todo: изучить принцип выбора длины прогнозирования и базовой выборки
-        // 
         public static double[][] NewStory;
         public static double[][] MaybeMaxSimSamp;
         public static double[][] MaxSimSampMin;

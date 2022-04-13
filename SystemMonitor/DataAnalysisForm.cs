@@ -151,7 +151,7 @@ namespace SystemMonitor
             }
 
             DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {comboBoxTableForModel.Text} where {time} between '{beginDateTime.Value.AddMinutes(-5):yyyy-MM-dd HH:mm:ss.fff}' and '{beginDateTime.Value:yyyy-MM-dd HH:mm:ss.fff}'" +
+                $"from {comboBoxTableForModel.Text} where {time} between '{beginDateTime.Value.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{beginDateTime.Value:yyyy-MM-dd HH:mm:ss.fff}'" +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
 
@@ -161,6 +161,9 @@ namespace SystemMonitor
 
             ForecastModelWithStruct.InitializeValues(tableNewStory, tableMaxSel);
             richTextBox1.Clear();
+
+
+
 
             for (int i = 0; i < Values.newStory.Length; i++)
             {
@@ -179,6 +182,9 @@ namespace SystemMonitor
                     richTextBox1.AppendText($"{Values.resultMaxSel[i][j]}\t");
                 richTextBox1.AppendText($"{Environment.NewLine}");
             }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+            richTextBox1.AppendText($"{ForecastModelWithStruct.maxFactor}");
 
             stopwatch.Stop();
 
