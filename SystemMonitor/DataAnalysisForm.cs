@@ -136,11 +136,17 @@ namespace SystemMonitor
             richTextBox1.Clear();
 
             ForecastModelWithStruct.InitializeValues(beginDateTime.Value, comboBoxTableForModel.Text);
-            
-            HoltsMethod.InitialiizeSelected(Values.newStory);
+            ForecastAnalize.HoltsWintersMethod(Values.resultMaxSel, Values.newStory);
+            for (int i = 0; i < Values.resultMaxSel.Length; i++)
+            {
+                //richTextBox1.AppendText($"{Values.dateTimeResultMaxSel[i]}\t");
+                for (int j = 0; j < Values.resultMaxSel[i].Length; j++)
+                    richTextBox1.AppendText($"{Values.resultMaxSel[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
             for (int i = 0; i < Values.newStory.Length; i++)
             {
-                richTextBox1.AppendText($"{Values.dateTimeNewStory[i]}\t");
+                //richTextBox1.AppendText($"{Values.dateTimeNewStory[i]}\t");
                 for (int j = 0; j < Values.newStory[i].Length; j++)
                     richTextBox1.AppendText($"{Values.newStory[i][j]}\t");
                 richTextBox1.AppendText($"{Environment.NewLine}");
@@ -148,31 +154,10 @@ namespace SystemMonitor
 
             richTextBox1.AppendText($"{Environment.NewLine}");
 
-            for (int i = 0; i < HoltsMethod.forecast.Length; i++)
+            for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
             {
-                for (int j = 0; j < HoltsMethod.forecast[i].Length; j++)
-                    richTextBox1.AppendText($"{HoltsMethod.forecast[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-            }
-
-            richTextBox1.AppendText($"{Environment.NewLine}");
-            richTextBox1.AppendText($"{Environment.NewLine}");
-
-            HoltsMethod.InitialiizeSelected(Values.resultMaxSel);
-            for (int i = 0; i < Values.resultMaxSel.Length; i++)
-            {
-                richTextBox1.AppendText($"{Values.dateTimeResultMaxSel[i]}\t");
-                for (int j = 0; j < Values.resultMaxSel[i].Length; j++)
-                    richTextBox1.AppendText($"{Values.resultMaxSel[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-            }
-
-            richTextBox1.AppendText($"{Environment.NewLine}");
-
-            for (int i = 0; i < HoltsMethod.forecast.Length; i++)
-            {
-                for (int j = 0; j < HoltsMethod.forecast[i].Length; j++)
-                    richTextBox1.AppendText($"{HoltsMethod.forecast[i][j]}\t");
+                for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
+                    richTextBox1.AppendText($"{ForecastAnalize.forecast[i][j]}\t");
                 richTextBox1.AppendText($"{Environment.NewLine}");
             }
 

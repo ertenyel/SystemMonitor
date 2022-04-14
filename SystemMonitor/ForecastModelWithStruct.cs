@@ -12,6 +12,9 @@ namespace SystemMonitor
         public static double[][] maybeMaxSel;
         public static DateTime[] dateTimeMaybeMaxSel;
 
+        public static double[][] realVal;
+        public static DateTime[] dateTimeRealVal;
+
         public static double[][] resultMaxSel;
         public static DateTime[] dateTimeResultMaxSel;
     }
@@ -77,7 +80,6 @@ namespace SystemMonitor
                         Values.maxSel[i][j - 1] = Convert.ToDouble(tableMaxSel.Rows[i][j]);
                 }
             }
-
             ct = 0;
             ComputeParameters(Values.newStory, true);
             SearchMaxSel(Values.maxSel, Values.newStory.Length);            
