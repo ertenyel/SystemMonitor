@@ -21,7 +21,7 @@ namespace SystemMonitor
         public static double[][] resultMaxSel;
         public static DateTime[] dateTimeResultMaxSel;
     }
-    class ForecastModelWithStruct
+    class SearchingMaxSel
     {
         private static double[][] ZMarksX;
         private static double[][] ZMarksY;

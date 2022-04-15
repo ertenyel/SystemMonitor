@@ -201,7 +201,12 @@ namespace SystemMonitor
             //ForecastAnalize.HoltsWintersMethod(firstArr, secondArr, 0.35, 0.45);
 
 
-            ForecastModelWithStruct.InitializeValues(beginDateTime.Value, comboBoxTableForModel.Text);
+            //Окно сдвигаем назад на три значения и выбираем наилучшие показатели коэффициента
+
+
+
+
+            SearchingMaxSel.InitializeValues(beginDateTime.Value, comboBoxTableForModel.Text);
             ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length-1], 
                 Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], comboBoxTableForModel.Text);
             ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory); 

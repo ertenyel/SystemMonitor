@@ -112,7 +112,7 @@
       <DependentUpon>DataAnalysisForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ForecastingModel.cs" />
-    <Compile Include="ForecastModelWithStruct.cs" />
+    <Compile Include="SearchingMaxSel.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
