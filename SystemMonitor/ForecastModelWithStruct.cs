@@ -12,8 +12,11 @@ namespace SystemMonitor
         public static double[][] maybeMaxSel;
         public static DateTime[] dateTimeMaybeMaxSel;
 
-        public static double[][] realVal;
-        public static DateTime[] dateTimeRealVal;
+        public static double[][] testMaxSel;
+        public static DateTime[] dateTimeTestMaxSel;
+
+        public static double[][] testNewStory;
+        public static DateTime[] dateTimeTestNewStory;
 
         public static double[][] resultMaxSel;
         public static DateTime[] dateTimeResultMaxSel;
@@ -45,7 +48,7 @@ namespace SystemMonitor
             }
 
             DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {table} where {time} between '{value.AddHours(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}'" +
+                $"from {table} where {time} between '{value.AddMinutes(-12):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}'" +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
 

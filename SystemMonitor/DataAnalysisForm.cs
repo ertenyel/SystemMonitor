@@ -134,9 +134,89 @@ namespace SystemMonitor
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             richTextBox1.Clear();
+            /*
+            double[][] oldfirstArr = new double[12][];
+            double[][] oldsecondArr = new double[12][];
+
+            double[][] firstArr = new double[12][];
+            double[][] secondArr = new double[12][];
+
+            oldfirstArr[0] = new double[1] { 390 };
+            oldfirstArr[1] = new double[1] { 252 };
+            oldfirstArr[2] = new double[1] { 450 };
+            oldfirstArr[3] = new double[1] { 404 };
+            oldfirstArr[4] = new double[1] { 804 };
+            oldfirstArr[5] = new double[1] { 268 };
+            oldfirstArr[6] = new double[1] { 820 };
+            oldfirstArr[7] = new double[1] { 896 };
+            oldfirstArr[8] = new double[1] { 1008 };
+            oldfirstArr[9] = new double[1] { 820 };
+            oldfirstArr[10] = new double[1] { 664 };
+            oldfirstArr[11] = new double[1] { 616 };
+
+            oldsecondArr[0] = new double[1] { 842 };
+            oldsecondArr[1] = new double[1] { 1075 };
+            oldsecondArr[2] = new double[1] { 1010 };
+            oldsecondArr[3] = new double[1] { 856 };
+            oldsecondArr[4] = new double[1] { 1136 };
+            oldsecondArr[5] = new double[1] { 1028 };
+            oldsecondArr[6] = new double[1] { 1128 };
+            oldsecondArr[7] = new double[1] { 1120 };
+            oldsecondArr[8] = new double[1] { 940 };
+            oldsecondArr[9] = new double[1] { 800 };
+            oldsecondArr[10] = new double[1] { 752 };
+            oldsecondArr[11] = new double[1] { 1084 };
+
+
+            firstArr[0] = new double[1] { 404 };
+            firstArr[1] = new double[1] { 804 };
+            firstArr[2] = new double[1] { 268 };
+            firstArr[3] = new double[1] { 820 };
+            firstArr[4] = new double[1] { 896 };
+            firstArr[5] = new double[1] { 1008 };
+            firstArr[6] = new double[1] { 820 };
+            firstArr[7] = new double[1] { 664 };
+            firstArr[8] = new double[1] { 616 };
+            firstArr[9] = new double[1] { 996 };
+            firstArr[10] = new double[1] { 872 };
+            firstArr[11] = new double[1] { 1016 };
+
+            secondArr[0] = new double[1] { 856 };
+            secondArr[1] = new double[1] { 1136 };
+            secondArr[2] = new double[1] { 1028 };
+            secondArr[3] = new double[1] { 1128 };
+            secondArr[4] = new double[1] { 1120 };
+            secondArr[5] = new double[1] { 940 };
+            secondArr[6] = new double[1] { 800 };
+            secondArr[7] = new double[1] { 752 };
+            secondArr[8] = new double[1] { 1084 };
+            secondArr[9] = new double[1] { 948 };
+            secondArr[10] = new double[1] { 696 };
+            secondArr[11] = new double[1] { 1344 };
+            ForecastAnalize.ComputeParamteres(oldfirstArr, oldsecondArr, firstArr, secondArr);*/
+
+
+
+
+            //ForecastAnalize.HoltsWintersMethod(firstArr, secondArr, 0.35, 0.45);
+
 
             ForecastModelWithStruct.InitializeValues(beginDateTime.Value, comboBoxTableForModel.Text);
-            ForecastAnalize.HoltsWintersMethod(Values.resultMaxSel, Values.newStory);
+            ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length-1], 
+                Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], comboBoxTableForModel.Text);
+            ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory); 
+
+            for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
+            {
+                for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
+                    richTextBox1.AppendText($"{ForecastAnalize.forecast[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
+
+            /*ForecastModelWithStruct.InitializeValues(beginDateTime.Value, comboBoxTableForModel.Text);
+            
+            ForecastAnalize.ComputeParamteres(Values.resultMaxSel, Values.newStory);            
+
             for (int i = 0; i < Values.resultMaxSel.Length; i++)
             {
                 //richTextBox1.AppendText($"{Values.dateTimeResultMaxSel[i]}\t");
@@ -160,11 +240,13 @@ namespace SystemMonitor
                     richTextBox1.AppendText($"{ForecastAnalize.forecast[i][j]}\t");
                 richTextBox1.AppendText($"{Environment.NewLine}");
             }
-
-
+            
             richTextBox1.AppendText($"{Environment.NewLine}");
-            richTextBox1.AppendText($"{ForecastModelWithStruct.maxFactor}");
-
+            richTextBox1.AppendText($"Max factor: {ForecastModelWithStruct.maxFactor}");
+            richTextBox1.AppendText($"{Environment.NewLine}");
+            richTextBox1.AppendText($"factorNewBt: {ForecastAnalize.factorNewBt}");
+            richTextBox1.AppendText($"{Environment.NewLine}");
+            richTextBox1.AppendText($"factorNewCt: {ForecastAnalize.factorNewCt}");*/
             stopwatch.Stop();
 
             label5.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
