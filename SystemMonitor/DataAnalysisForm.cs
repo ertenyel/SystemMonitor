@@ -93,7 +93,9 @@ namespace SystemMonitor
             {
                 textBox.AppendText($"{Environment.NewLine} Cluster {i + 1}\t");
                 for (int j = 0; j < DataAnalysingClust.centroids[i].Length; j++)
+                {
                     textBox.AppendText($"\t{Convert.ToString(DataAnalysingClust.centroids[i][j])}");
+                }
             }
             int[] countValueClusters = new int[5];
             for (int i = 0; i < DataAnalysingClust.clustering.Length; i++)

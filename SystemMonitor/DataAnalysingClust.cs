@@ -81,7 +81,7 @@ namespace SystemMonitor
                 for (int j = 0; j < dataTable.Columns.Count; j++)
                 {
                     double val = Convert.ToDouble(dataTable.Rows[i][j]);
-                    rawData[i][j] = Math.Round((val - normalizeArr[j][0]) / (normalizeArr[j][1] - normalizeArr[j][0]) * 100);
+                    rawData[i][j] = Math.Round(((val - normalizeArr[j][0]) / (normalizeArr[j][1] - normalizeArr[j][0])) * 100);
                 }
             }
         }
