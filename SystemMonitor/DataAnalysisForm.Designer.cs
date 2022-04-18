@@ -86,8 +86,6 @@ namespace SystemMonitor
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.beginDateTime = new System.Windows.Forms.DateTimePicker();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -100,8 +98,6 @@ namespace SystemMonitor
             this.tbForNetData = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.btnForNewClustAnalysis = new System.Windows.Forms.Button();
-            this.numericForNetEntr = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -114,12 +110,12 @@ namespace SystemMonitor
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbForSysResData = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.numericForSysResEntr = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
             this.BtnSysRes = new System.Windows.Forms.Button();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.DtpForClust = new System.Windows.Forms.DateTimePicker();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -127,7 +123,6 @@ namespace SystemMonitor
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartForOutputHistory)).BeginInit();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -141,7 +136,6 @@ namespace SystemMonitor
             ((System.ComponentModel.ISupportInitialize)(this.chartForNetSenAnalysis)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericForNetEntr)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -156,7 +150,6 @@ namespace SystemMonitor
             ((System.ComponentModel.ISupportInitialize)(this.chartForDataAnalysisMem)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericForSysResEntr)).BeginInit();
             this.tabControl3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage7.SuspendLayout();
@@ -349,38 +342,16 @@ namespace SystemMonitor
             this.beginDateTime.Size = new System.Drawing.Size(195, 26);
             this.beginDateTime.TabIndex = 4;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.checkBox1);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(3, 3);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1337, 53);
-            this.groupBox5.TabIndex = 12;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "For data analysis";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 23);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 24);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Full data";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.panel7);
             this.panel3.Controls.Add(this.panel6);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(681, 56);
+            this.panel3.Location = new System.Drawing.Point(681, 3);
             this.panel3.MinimumSize = new System.Drawing.Size(350, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(659, 652);
+            this.panel3.Size = new System.Drawing.Size(659, 705);
             this.panel3.TabIndex = 4;
             // 
             // panel7
@@ -390,7 +361,7 @@ namespace SystemMonitor
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(655, 570);
+            this.panel7.Size = new System.Drawing.Size(655, 623);
             this.panel7.TabIndex = 5;
             // 
             // splitContainer2
@@ -409,8 +380,8 @@ namespace SystemMonitor
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer2.Size = new System.Drawing.Size(651, 566);
-            this.splitContainer2.SplitterDistance = 366;
+            this.splitContainer2.Size = new System.Drawing.Size(651, 619);
+            this.splitContainer2.SplitterDistance = 400;
             this.splitContainer2.TabIndex = 1;
             // 
             // tabControl2
@@ -421,7 +392,7 @@ namespace SystemMonitor
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(647, 362);
+            this.tabControl2.Size = new System.Drawing.Size(647, 396);
             this.tabControl2.TabIndex = 1;
             // 
             // tabPage3
@@ -430,7 +401,7 @@ namespace SystemMonitor
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(639, 329);
+            this.tabPage3.Size = new System.Drawing.Size(639, 363);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "Received Bytes";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -485,7 +456,7 @@ namespace SystemMonitor
             this.chartForNetRecClustAnalysis.Series.Add(series10);
             this.chartForNetRecClustAnalysis.Series.Add(series11);
             this.chartForNetRecClustAnalysis.Series.Add(series12);
-            this.chartForNetRecClustAnalysis.Size = new System.Drawing.Size(633, 323);
+            this.chartForNetRecClustAnalysis.Size = new System.Drawing.Size(633, 357);
             this.chartForNetRecClustAnalysis.TabIndex = 3;
             this.chartForNetRecClustAnalysis.Text = "chart1";
             // 
@@ -556,7 +527,7 @@ namespace SystemMonitor
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(647, 192);
+            this.groupBox3.Size = new System.Drawing.Size(647, 211);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Result";
@@ -569,17 +540,15 @@ namespace SystemMonitor
             this.tbForNetData.Name = "tbForNetData";
             this.tbForNetData.ReadOnly = true;
             this.tbForNetData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbForNetData.Size = new System.Drawing.Size(641, 167);
+            this.tbForNetData.Size = new System.Drawing.Size(641, 186);
             this.tbForNetData.TabIndex = 1;
             // 
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel6.Controls.Add(this.btnForNewClustAnalysis);
-            this.panel6.Controls.Add(this.numericForNetEntr);
-            this.panel6.Controls.Add(this.label2);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 570);
+            this.panel6.Location = new System.Drawing.Point(0, 623);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(655, 78);
             this.panel6.TabIndex = 4;
@@ -595,37 +564,16 @@ namespace SystemMonitor
             this.btnForNewClustAnalysis.UseVisualStyleBackColor = true;
             this.btnForNewClustAnalysis.Click += new System.EventHandler(this.btnForNetClustAnalysis_Click);
             // 
-            // numericForNetEntr
-            // 
-            this.numericForNetEntr.Location = new System.Drawing.Point(158, 13);
-            this.numericForNetEntr.Maximum = new decimal(new int[] {
-            50000,
-            0,
-            0,
-            0});
-            this.numericForNetEntr.Name = "numericForNetEntr";
-            this.numericForNetEntr.Size = new System.Drawing.Size(120, 26);
-            this.numericForNetEntr.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(139, 20);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Number of entries:";
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.splitContainer1);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(3, 56);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.MinimumSize = new System.Drawing.Size(350, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(678, 652);
+            this.panel1.Size = new System.Drawing.Size(678, 705);
             this.panel1.TabIndex = 0;
             // 
             // splitContainer1
@@ -644,8 +592,8 @@ namespace SystemMonitor
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(674, 570);
-            this.splitContainer1.SplitterDistance = 367;
+            this.splitContainer1.Size = new System.Drawing.Size(674, 623);
+            this.splitContainer1.SplitterDistance = 401;
             this.splitContainer1.TabIndex = 4;
             // 
             // tabControl1
@@ -657,7 +605,7 @@ namespace SystemMonitor
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(670, 363);
+            this.tabControl1.Size = new System.Drawing.Size(670, 397);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -667,7 +615,7 @@ namespace SystemMonitor
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(662, 330);
+            this.tabPage1.Size = new System.Drawing.Size(662, 364);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "% of CPU usage";
             // 
@@ -721,17 +669,17 @@ namespace SystemMonitor
             this.chartForDataAnalysisCpu.Series.Add(series20);
             this.chartForDataAnalysisCpu.Series.Add(series21);
             this.chartForDataAnalysisCpu.Series.Add(series22);
-            this.chartForDataAnalysisCpu.Size = new System.Drawing.Size(656, 324);
+            this.chartForDataAnalysisCpu.Size = new System.Drawing.Size(656, 358);
             this.chartForDataAnalysisCpu.TabIndex = 2;
             this.chartForDataAnalysisCpu.Text = "chart1";
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.chartForDataAnalysisDisc);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(662, 337);
+            this.tabPage2.Size = new System.Drawing.Size(662, 364);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Disk usage %";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -743,7 +691,6 @@ namespace SystemMonitor
             chartArea5.Area3DStyle.Rotation = 5;
             chartArea5.Area3DStyle.WallWidth = 0;
             chartArea5.AxisX.Title = "Disc usage";
-            chartArea5.AxisY.ScaleView.Size = 100D;
             chartArea5.AxisY.Title = "Number of processes";
             chartArea5.Name = "ChartArea1";
             this.chartForDataAnalysisDisc.ChartAreas.Add(chartArea5);
@@ -782,7 +729,7 @@ namespace SystemMonitor
             this.chartForDataAnalysisDisc.Series.Add(series25);
             this.chartForDataAnalysisDisc.Series.Add(series26);
             this.chartForDataAnalysisDisc.Series.Add(series27);
-            this.chartForDataAnalysisDisc.Size = new System.Drawing.Size(656, 331);
+            this.chartForDataAnalysisDisc.Size = new System.Drawing.Size(656, 358);
             this.chartForDataAnalysisDisc.TabIndex = 3;
             this.chartForDataAnalysisDisc.Text = "chart1";
             // 
@@ -853,7 +800,7 @@ namespace SystemMonitor
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(670, 195);
+            this.groupBox2.Size = new System.Drawing.Size(670, 214);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Result";
@@ -866,41 +813,20 @@ namespace SystemMonitor
             this.tbForSysResData.Name = "tbForSysResData";
             this.tbForSysResData.ReadOnly = true;
             this.tbForSysResData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbForSysResData.Size = new System.Drawing.Size(664, 170);
+            this.tbForSysResData.Size = new System.Drawing.Size(664, 189);
             this.tbForSysResData.TabIndex = 0;
             // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.numericForSysResEntr);
-            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.DtpForClust);
+            this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.BtnSysRes);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 570);
+            this.panel4.Location = new System.Drawing.Point(0, 623);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(674, 78);
             this.panel4.TabIndex = 3;
-            // 
-            // numericForSysResEntr
-            // 
-            this.numericForSysResEntr.Location = new System.Drawing.Point(158, 13);
-            this.numericForSysResEntr.Maximum = new decimal(new int[] {
-            50000,
-            0,
-            0,
-            0});
-            this.numericForSysResEntr.Name = "numericForSysResEntr";
-            this.numericForSysResEntr.Size = new System.Drawing.Size(120, 26);
-            this.numericForSysResEntr.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 20);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Number of entries:";
             // 
             // BtnSysRes
             // 
@@ -929,7 +855,6 @@ namespace SystemMonitor
             this.tabPage5.BackColor = System.Drawing.Color.Silver;
             this.tabPage5.Controls.Add(this.panel3);
             this.tabPage5.Controls.Add(this.panel1);
-            this.tabPage5.Controls.Add(this.groupBox5);
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -947,6 +872,24 @@ namespace SystemMonitor
             this.tabPage7.Size = new System.Drawing.Size(1343, 711);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "The maximum similarity model";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(489, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "label3";
+            // 
+            // DtpForClust
+            // 
+            this.DtpForClust.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.DtpForClust.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpForClust.Location = new System.Drawing.Point(7, 10);
+            this.DtpForClust.Name = "DtpForClust";
+            this.DtpForClust.Size = new System.Drawing.Size(195, 26);
+            this.DtpForClust.TabIndex = 5;
             // 
             // DataAnalysisForm
             // 
@@ -968,8 +911,6 @@ namespace SystemMonitor
             ((System.ComponentModel.ISupportInitialize)(this.chartForOutputHistory)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -984,8 +925,6 @@ namespace SystemMonitor
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericForNetEntr)).EndInit();
             this.panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -1002,7 +941,6 @@ namespace SystemMonitor
             this.groupBox2.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericForSysResEntr)).EndInit();
             this.tabControl3.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
@@ -1033,21 +971,15 @@ namespace SystemMonitor
         private System.Windows.Forms.DataVisualization.Charting.Chart chartForNetRecClustAnalysis;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartForNetSenAnalysis;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.NumericUpDown numericForSysResEntr;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.NumericUpDown numericForNetEntr;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox tbForSysResData;
         private System.Windows.Forms.TextBox tbForNetData;
         private System.Windows.Forms.DateTimePicker beginDateTime;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartForOutputHistory;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label5;
@@ -1058,5 +990,7 @@ namespace SystemMonitor
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBoxTableForModel;
         private System.Windows.Forms.ComboBox cbForSelCol;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker DtpForClust;
     }
 }

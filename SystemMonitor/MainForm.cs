@@ -61,8 +61,7 @@ namespace SystemMonitor
         private void TimerProcLoad_Tick(object sender, EventArgs e)
         {            
             SystemResourses();
-            ShowActiveTcpConnections();
-            SecurityLog();
+            ShowActiveTcpConnections();            
             ConditionOfInitiComp();
             SqlLiteDataBase.SqlAddSysRes(countProcess, (int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue));
             SqlLiteDataBase.SqlAddNetwork(itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue));
@@ -103,51 +102,6 @@ namespace SystemMonitor
             textBox1.Text = listBox2.Items.Count.ToString();
         }
 
-        //Security log
-        private void SecurityLog()
-        {
-            if (checkBox1.Checked)
-            {                
-                var evLog = new EventLog();
-                evLog.Log = "Security";
-                NumberOfAuditTB.Text = Convert.ToString(evLog.Entries.Count);
-
-                if (Charts.i == 0)
-                {
-                    for (int i = evLog.Entries.Count - 1; i > evLog.Entries.Count - 10; i--)
-                    {
-                        listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].UserName}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
-                        if (i - (evLog.Entries.Count - 10) == 1)
-                        {
-                            timeWritten = evLog.Entries[i].TimeWritten.ToString("dd.MM.yyyy HH:mm:ss");
-                            audit = evLog.Entries[i].EntryType.ToString();
-                        }
-                    }
-                    listBox6.Items.Add(SqlLiteDataBase.SqlAddSecurity(timeWritten, audit));
-                    listBox4.Items.Add("\n\t" + DateTime.Now + "\n");
-                    listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text);
-                }
-                else
-                {
-                    if (numberAuditValue != NumberOfAuditTB.Text)
-                    {
-                        for (int i = evLog.Entries.Count - 1; i > evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)); i--)
-                        {
-                            listBox4.Items.Add($"{evLog.Entries[i].TimeWritten}\t{evLog.Entries[i].Source}\t{evLog.Entries[i].UserName}\t{evLog.Entries[i].Index}\t{evLog.Entries[i].EntryType}");
-                            if ((i - evLog.Entries.Count - Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue))) == 1)
-                            {
-                                timeWritten = evLog.Entries[i].TimeWritten.ToString("dd.MM.yyyy HH:mm:ss");
-                                audit = evLog.Entries[i].EntryType.ToString();
-                            }
-                        }
-                        SqlLiteDataBase.SqlAddSecurity(timeWritten, audit);
-                        listBox4.Items.Add("\n\t" + DateTime.Now + "\n");
-                        listBox3.Items.Add(DateTime.Now + "\t" + NumberOfAuditTB.Text + "\tdifference: " + Math.Abs(evLog.Entries.Count - Convert.ToInt32(numberAuditValue)));
-                    }
-                }
-                numberAuditValue = Convert.ToString(evLog.Entries.Count);
-            }
-        }
         // TCP connections
         private void ShowActiveTcpConnections()
         {
@@ -253,37 +207,7 @@ namespace SystemMonitor
             else
                 listBox5.Items.Add("The data was not uploaded");
         }
-        private void ClearSysRes_Click(object sender, EventArgs e) => richTextBoxSysRes.Clear();
-
-        //Security history
-        private void CreateTableSecurity_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlCreateSecurity();
-        private void AddToTableSecurity_Click(object sender, EventArgs e)
-        {
-            if (SqlLiteDataBase.SqlReadAllSecurity() != null)
-            {
-                dataGridViewSecurity.Rows.Clear();
-
-                for (int i = 0; i < SqlLiteDataBase.SqlReadAllSecurity().Rows.Count; i++)
-                    dataGridViewSecurity.Rows.Add(SqlLiteDataBase.SqlReadAllSecurity().Rows[i].ItemArray);
-            }
-            else
-                listBox6.Items.Add("The data was not uploaded");
-        }
-        private void DeleteToTableSecurity_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlDeleteSecurity();
-        private void ClearTableSecurity_Click(object sender, EventArgs e) => dataGridViewSecurity.Rows.Clear();
-        private void GoBtnSecurity_Click(object sender, EventArgs e)
-        {
-            if (SqlLiteDataBase.LetsQuery(richTextBoxSecurity.Text) != null)
-            {
-                dataGridViewSecurity.Rows.Clear();
-
-                for (int i = 0; i < SqlLiteDataBase.LetsQuery(richTextBoxSecurity.Text).Rows.Count; i++)
-                    dataGridViewSecurity.Rows.Add(SqlLiteDataBase.LetsQuery(richTextBoxSecurity.Text).Rows[i].ItemArray);
-            }
-            else
-                listBox6.Items.Add("The data was not uploaded");
-        }
-        private void ClearSecurity_Click(object sender, EventArgs e) => richTextBoxSecurity.Clear();
+        private void ClearSysRes_Click(object sender, EventArgs e) => richTextBoxSysRes.Clear();                        
 
         //Network history
         private void CreateTableNetwork_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlCreateNetwork();

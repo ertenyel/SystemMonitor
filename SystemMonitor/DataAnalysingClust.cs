@@ -17,12 +17,11 @@ namespace SystemMonitor
         public static int[] clustering;
         public double[][] normalizeArr;
 
-        public void MainMethodOfAnalysis(int parameters, int entries, bool countEntry = false)
+        public void MainMethodOfAnalysis(int parameters, DateTime dateTime)
         {
             try
             {
-                if (countEntry) selectedTable(parameters, entries, true);
-                if (!countEntry) selectedTable(parameters, entries);
+                selectedTable(parameters, dateTime);
                 int numAttributes = attributes.Length;
                 numClusters = 5;
                 int maxCount = 40;
@@ -35,26 +34,29 @@ namespace SystemMonitor
             }
         }
 
-        private void selectedTable(int parameters, int entries, bool countEntry = false)
+        private void selectedTable(int parameters, DateTime dateTime)
         {
             DataTable dataTable = new DataTable();
 
-            if (countEntry)
+            if (parameters == 0)
             {
-                if (parameters == 0) dataTable = SqlLiteDataBase.LetsQuery($"select numberprocess, percproc, percdisc, percmemory from systemresources");
-                else if (parameters == 1) dataTable = SqlLiteDataBase.LetsQuery($"select connectionscount, receivedbytes, sentbyte from network where idnetwork");
-            }
-            else
+                dataTable = SqlLiteDataBase.LetsQuery($"select avg(percproc)/avg(numberprocess), avg(percdisc)/avg(numberprocess), avg(percmemory)/avg(numberprocess) " +
+                    $"from systemresources where timesysres between '{dateTime.AddDays(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{dateTime:yyyy-MM-dd HH:mm:ss.fff}' " +
+                    $"group by strftime('%Y-%m-%d %H:%M', timesysres) ");
+            }            
+            else if (parameters == 1)
             {
-                if (parameters == 0) dataTable = SqlLiteDataBase.LetsQuery($"select numberprocess, percproc, percdisc, percmemory from systemresources where idsysres < {entries}");
-                else if (parameters == 1) dataTable = SqlLiteDataBase.LetsQuery($"select connectionscount, receivedbytes, sentbyte from network where idnetwork < {entries}");
+                dataTable = SqlLiteDataBase.LetsQuery($"select avg(receivedbytes)/avg(connectionscount), avg(sentbyte)/avg(connectionscount) " +
+                    $"from network where timenetwork between '{dateTime.AddDays(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{dateTime:yyyy-MM-dd HH:mm:ss.fff}' " +
+                    $"group by strftime('%Y-%m-%d %H:%M', timenetwork) ");
             }
+
             Normalize(dataTable, parameters);
             attributes = new string[dataTable.Columns.Count];
             for (int i = 0; i < dataTable.Columns.Count; i++)
                 attributes[i] = dataTable.Columns[i].ColumnName;
             rawData = new double[dataTable.Rows.Count][];
-            fillToArray(dataTable, parameters);
+            fillToArray(dataTable);
         }
 
         private void Normalize(DataTable dataTable, int parameters)
@@ -71,38 +73,15 @@ namespace SystemMonitor
             }
         }
 
-        private void fillToArray(DataTable dataTable, int parameters)
+        private void fillToArray(DataTable dataTable)
         {
-            if (parameters == 0)
+            for (int i = 0; i < rawData.Length; i++)
             {
-                for (int i = 0; i < rawData.Length; i++)
+                rawData[i] = new double[dataTable.Columns.Count];
+                for (int j = 0; j < dataTable.Columns.Count; j++)
                 {
-                    rawData[i] = new double[dataTable.Columns.Count];
-                    for (int j = 0; j < dataTable.Columns.Count; j++)
-                    {
-                        if (j == 0)
-                        {
-                            double val = Convert.ToDouble(dataTable.Rows[i][j]);
-                            rawData[i][j] = Math.Round((val - normalizeArr[j][0]) / (normalizeArr[j][1] - normalizeArr[j][0]) * 100);
-                        }
-                        else
-                        {
-                            double val = Convert.ToDouble(dataTable.Rows[i][j]);
-                            rawData[i][j] = val;
-                        }
-                    }
-                }
-            }
-            else if (parameters == 1)
-            {
-                for (int i = 0; i < rawData.Length; i++)
-                {
-                    rawData[i] = new double[dataTable.Columns.Count];
-                    for (int j = 0; j < dataTable.Columns.Count; j++)
-                    {
-                        double val = Convert.ToDouble(dataTable.Rows[i][j]);
-                        rawData[i][j] = Math.Round((val - normalizeArr[j][0]) / (normalizeArr[j][1] - normalizeArr[j][0]) * 100);
-                    }
+                    double val = Convert.ToDouble(dataTable.Rows[i][j]);
+                    rawData[i][j] = Math.Round((val - normalizeArr[j][0]) / (normalizeArr[j][1] - normalizeArr[j][0]) * 100);
                 }
             }
         }
@@ -167,22 +146,6 @@ namespace SystemMonitor
 
         private static double Distance(double[] tuple, double[] vector)
         {
-            // Квадрат евклидова расстояния            
-            /*
-            double sumSquaredDiffs = 0.0;
-            for (int j = 0; j < tuple.Length; ++j)
-                sumSquaredDiffs += Math.Pow((tuple[j] - vector[j]), 2);
-            return sumSquaredDiffs; 
-            */
-            //Расстояние городсих кварталов
-            /*
-            double sumSquaredDiffs = 0.0;
-            for (int j = 0; j < tuple.Length; ++j)
-                sumSquaredDiffs += Math.Abs(tuple[j] - vector[j]);
-            return sumSquaredDiffs; */
-
-            //Евклидово расстояние 
-            
             double sumSquaredDiffs = 0.0;
             for (int j = 0; j < tuple.Length; ++j)
                 sumSquaredDiffs += Math.Pow((tuple[j] - vector[j]), 2);

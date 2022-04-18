@@ -48,7 +48,7 @@ namespace SystemMonitor
             }
 
             DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {table} where {time} between '{value.AddMinutes(-12):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}'" +
+                $"from {table} where {time} between '{value.AddHours(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}'" +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
 

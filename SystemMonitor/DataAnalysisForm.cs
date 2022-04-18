@@ -18,12 +18,22 @@ namespace SystemMonitor
 
         private void btnForNetClustAnalysis_Click(object sender, EventArgs e)
         {
-            MethodForDataAnalysis(1, tbForNetData, numericForNetEntr, chartForNetRecClustAnalysis, chartForNetSenAnalysis, null);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            //MethodForDataAnalysis(1, tbForNetData, numericForNetEntr, chartForNetRecClustAnalysis, chartForNetSenAnalysis, null);
+            //dataAnalysing.MainMethodOfAnalysis(1, 0, true);
+            stopwatch.Stop();
+            label3.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
         }
 
         private void BtnSysRes_Click(object sender, EventArgs e)
         {
-            MethodForDataAnalysis(0, tbForSysResData, numericForSysResEntr, chartForDataAnalysisCpu, chartForDataAnalysisDisc, chartForDataAnalysisMem);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            MethodForDataAnalysis(0, DtpForClust.Value, tbForSysResData, chartForDataAnalysisCpu, chartForDataAnalysisDisc, chartForDataAnalysisMem);
+            dataAnalysing.MainMethodOfAnalysis(0, DtpForClust.Value);
+            stopwatch.Stop();
+            label3.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
         }
 
         private void ShowClustering(double[][] rawData, int numClusters, int[] clustering, int parameters)
@@ -58,7 +68,7 @@ namespace SystemMonitor
             }
         }
 
-        private void MethodForDataAnalysis(int parameters, TextBox textBox, NumericUpDown numeric, Chart chart1, Chart chart2, Chart chart3 = null)
+        private void MethodForDataAnalysis(int parameters, DateTime dateTime, TextBox textBox, Chart chart1, Chart chart2, Chart chart3 = null)
         {
             textBox.Clear();
             if (chart3 != null)
@@ -73,12 +83,7 @@ namespace SystemMonitor
                 for (int i = 0; i < chart2.Series.Count; i++) chart2.Series[i].Points.Clear();
             }
 
-            if (checkBox1.Checked) dataAnalysing.MainMethodOfAnalysis(parameters, 0, true);
-            if (!checkBox1.Checked)
-            {
-                if (numeric.Value > 0) dataAnalysing.MainMethodOfAnalysis(parameters, (int)numeric.Value);
-                else dataAnalysing.MainMethodOfAnalysis(parameters, 100);
-            }
+            dataAnalysing.MainMethodOfAnalysis(parameters, dateTime);
 
             textBox.AppendText(" Outlier:\t");
             for (int i = 0; i < dataAnalysing.outlier.Length; i++)
@@ -113,20 +118,6 @@ namespace SystemMonitor
             }
 
             ShowClustering(DataAnalysingClust.rawData, DataAnalysingClust.numClusters, DataAnalysingClust.clustering, parameters);
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                numericForSysResEntr.Enabled = false;
-                numericForNetEntr.Enabled = false;
-            }
-            else
-            {
-                numericForSysResEntr.Enabled = true;
-                numericForNetEntr.Enabled = true;
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -280,8 +271,3 @@ namespace SystemMonitor
         }
     }
 }
-
-
-//DateTime.Now.AddHours(-1).ToString("yyyy-MM-dd HH:mm:ss.fff")
-//            DataTable tableInfo = SqlLiteDataBase.LetsQuery($"pragma table_info({comboBoxTableForModel.Text})");
-//for (int i = 0; i < chartForOutputHistory.Series.Count; i++) chartForOutputHistory.Series[i].Points.Clear();
