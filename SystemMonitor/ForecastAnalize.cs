@@ -78,68 +78,42 @@ namespace SystemMonitor
             }
 
             DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {table} where {time} between '{startMaxSel.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{endMaxSel.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}'" +
+                $"from {table} where {time} between '{startNewStory.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{endNewStory.AddMinutes(-2):yyyy-MM-dd HH:mm:ss.fff}'" +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
 
             DataTable tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {table} where {time} between '{startNewStory.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{endNewStory.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}'" +
+                $"from {table} where {time} between '{startMaxSel.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{endMaxSel.AddMinutes(-2):yyyy-MM-dd HH:mm:ss.fff}'" +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
             Values.testNewStory = new double[tableNewStory.Rows.Count][];
+            Values.dateTimeTestNewStory = new DateTime[tableNewStory.Rows.Count];
             for (int i = 0; i < tableNewStory.Rows.Count; i++)
             {
                 Values.testNewStory[i] = new double[tableNewStory.Columns.Count - 1];
                 for (int j = 0; j < tableNewStory.Columns.Count; j++)
                 {
-                    if (j != 0)
-                        Values.testNewStory[i][j - 1] = Convert.ToDouble(tableNewStory.Rows[i][j]);
+                    if (j != 0) Values.testNewStory[i][j - 1] = Convert.ToDouble(tableNewStory.Rows[i][j]);
+                    else Values.dateTimeTestNewStory[i] = Convert.ToDateTime(tableNewStory.Rows[i][j]);
                 }
             }
 
-            Values.testMaxSel = new double[tableMaxSel.Rows.Count][];            
+            Values.testMaxSel = new double[tableMaxSel.Rows.Count][];
+            Values.dateTimeTestMaxSel = new DateTime[tableMaxSel.Rows.Count];
             for (int i = 0; i < tableMaxSel.Rows.Count; i++)
             {
                 Values.testMaxSel[i] = new double[tableMaxSel.Columns.Count - 1];
                 for (int j = 0; j < tableMaxSel.Columns.Count; j++)
                 {
-                    if (j != 0)
-                        Values.testMaxSel[i][j - 1] = Convert.ToDouble(tableMaxSel.Rows[i][j]);
+                    if (j != 0) Values.testMaxSel[i][j - 1] = Convert.ToDouble(tableMaxSel.Rows[i][j]);
+                    else Values.dateTimeTestMaxSel[i] = Convert.ToDateTime(tableMaxSel.Rows[i][j]);
                 }
-            }
+            }            
         }
 
         public static void ComputeParamteres(double[][] tempMaxSelSamp, double[][] tempNewStory, double[][] MaxSelSamp, double[][] NewStory)
         {
             // Расчет прогноза по выборке 57 из 60 и 3 значения из них сравнить с прогнозными, выбрать оценку и рассчитать все 60 значений
-
-            /*double[][] tempMaxSelSamp = new double[MaxSelSamp.Length-3][];
-            double[][] tempNewStory = new double[NewStory.Length - 3][];
-            double[][] realVal = new double[3][];
-
-            for (int i = 0; i < MaxSelSamp.Length; i++)
-            {
-                if (i < tempMaxSelSamp.Length)
-                {
-                    tempMaxSelSamp[i] = new double[MaxSelSamp[i].Length];
-                    tempNewStory[i] = new double[NewStory[i].Length];
-                    for (int j = 0; j < tempMaxSelSamp[i].Length; j++)
-                    {
-                        tempMaxSelSamp[i][j] = MaxSelSamp[i][j];
-                        tempNewStory[i][j] = NewStory[i][j];
-                    }
-                }
-                else
-                {
-                    realVal[i - tempMaxSelSamp.Length] = new double[MaxSelSamp[i].Length];
-                    for (int j = 0; j < MaxSelSamp[i].Length; j++)
-                    {
-                        realVal[i - tempMaxSelSamp.Length][j] = NewStory[i][j];
-                    }
-                }
-            }
-            */
-
             double[][] realVal = new double[3][];
             for (int i = 0; i < realVal.Length; i++)
             {
@@ -150,6 +124,7 @@ namespace SystemMonitor
 
             while (factorBt <= 0.99)
             {
+                factorCt = 0.01;
                 while (factorCt <= 0.99)
                 {
                     HoltsWintersMethod(tempMaxSelSamp, tempNewStory, factorBt, factorCt);
@@ -157,7 +132,6 @@ namespace SystemMonitor
                     factorCt += 0.01;                    
                     cnt++;
                 }
-                factorCt = 0.01;
                 factorBt += 0.01;                
             }
 

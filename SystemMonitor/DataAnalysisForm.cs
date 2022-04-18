@@ -209,29 +209,12 @@ namespace SystemMonitor
             SearchingMaxSel.InitializeValues(beginDateTime.Value, comboBoxTableForModel.Text);
             ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length-1], 
                 Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], comboBoxTableForModel.Text);
-            ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory); 
+            ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory);
 
-            for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
-            {
-                for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
-                    richTextBox1.AppendText($"{ForecastAnalize.forecast[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-            }
-
-            /*ForecastModelWithStruct.InitializeValues(beginDateTime.Value, comboBoxTableForModel.Text);
-            
-            ForecastAnalize.ComputeParamteres(Values.resultMaxSel, Values.newStory);            
-
-            for (int i = 0; i < Values.resultMaxSel.Length; i++)
-            {
-                //richTextBox1.AppendText($"{Values.dateTimeResultMaxSel[i]}\t");
-                for (int j = 0; j < Values.resultMaxSel[i].Length; j++)
-                    richTextBox1.AppendText($"{Values.resultMaxSel[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-            }
             for (int i = 0; i < Values.newStory.Length; i++)
             {
-                //richTextBox1.AppendText($"{Values.dateTimeNewStory[i]}\t");
+                richTextBox1.AppendText($"{Values.dateTimeNewStory[i]}\t");
+
                 for (int j = 0; j < Values.newStory[i].Length; j++)
                     richTextBox1.AppendText($"{Values.newStory[i][j]}\t");
                 richTextBox1.AppendText($"{Environment.NewLine}");
@@ -239,20 +222,54 @@ namespace SystemMonitor
 
             richTextBox1.AppendText($"{Environment.NewLine}");
 
+            for (int i = 0; i < Values.testNewStory.Length; i++)
+            {
+                richTextBox1.AppendText($"{Values.dateTimeTestNewStory[i]}\t");
+
+                for (int j = 0; j < Values.testNewStory[i].Length; j++)
+                    richTextBox1.AppendText($"{Values.testNewStory[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
+            for (int i = 0; i < Values.resultMaxSel.Length; i++)
+            {
+
+                richTextBox1.AppendText($"{Values.dateTimeResultMaxSel[i]}\t");
+
+                for (int j = 0; j < Values.resultMaxSel[i].Length; j++)
+                    richTextBox1.AppendText($"{Values.resultMaxSel[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
+            for (int i = 0; i < Values.testMaxSel.Length; i++)
+            {
+                richTextBox1.AppendText($"{Values.dateTimeTestMaxSel[i]}\t");
+
+                for (int j = 0; j < Values.testMaxSel[i].Length; j++)
+                    richTextBox1.AppendText($"{Values.testMaxSel[i][j]}\t");
+                richTextBox1.AppendText($"{Environment.NewLine}");
+            }
+
+            richTextBox1.AppendText($"{Environment.NewLine}");
+
             for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
             {
                 for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
                     richTextBox1.AppendText($"{ForecastAnalize.forecast[i][j]}\t");
                 richTextBox1.AppendText($"{Environment.NewLine}");
             }
-            
+
             richTextBox1.AppendText($"{Environment.NewLine}");
-            richTextBox1.AppendText($"Max factor: {ForecastModelWithStruct.maxFactor}");
+            richTextBox1.AppendText($"Max factor: {SearchingMaxSel.maxFactor}");
             richTextBox1.AppendText($"{Environment.NewLine}");
             richTextBox1.AppendText($"factorNewBt: {ForecastAnalize.factorNewBt}");
             richTextBox1.AppendText($"{Environment.NewLine}");
-            richTextBox1.AppendText($"factorNewCt: {ForecastAnalize.factorNewCt}");*/
-            stopwatch.Stop();
+            richTextBox1.AppendText($"factorNewCt: {ForecastAnalize.factorNewCt}"); 
+             stopwatch.Stop();
 
             label5.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
         }
