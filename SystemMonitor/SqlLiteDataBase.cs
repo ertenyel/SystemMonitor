@@ -1,11 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SystemMonitor
@@ -60,10 +56,7 @@ namespace SystemMonitor
                 if (dTable.Rows.Count > 0)
                     return dTable;
                 else
-                {
-                    MessageBox.Show("The database is empty or an incorrect query has been entered");
                     return null;
-                }
             }
             catch (SQLiteException ex)
             {
@@ -85,7 +78,7 @@ namespace SystemMonitor
             {
                 m_dbConn = new SQLiteConnection("Data Source=" + dbFileName + ";Version=3;");
                 m_dbConn.Open();
-                m_sqlCmd.Connection = m_dbConn;                
+                m_sqlCmd.Connection = m_dbConn;
                 m_sqlCmd.CommandText = "CREATE TABLE IF NOT EXISTS SystemResources (idSysRes INTEGER PRIMARY KEY AUTOINCREMENT, timeSysRes TEXT, " +
                     "numberprocess INTEGER, percproc INTEGER, percdisc INTEGER, percmemory INTEGER)";
                 m_sqlCmd.ExecuteNonQuery();

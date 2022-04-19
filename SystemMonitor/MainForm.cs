@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
@@ -59,7 +60,7 @@ namespace SystemMonitor
         }
 
         private void TimerProcLoad_Tick(object sender, EventArgs e)
-        {            
+        {
             SystemResourses();
             ShowActiveTcpConnections();            
             ConditionOfInitiComp();
@@ -180,65 +181,33 @@ namespace SystemMonitor
         private void ConnectToSqlData_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlConnect();
 
         //SysRes history
-        private void CreateTableSysRes_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlCreateSysRes();
-        private void AddToTableSysRes_Click(object sender, EventArgs e)
+        private void CreateTableSysRes_Click(object sender, EventArgs e)
         {
-            if (SqlLiteDataBase.SqlReadAllSysRes() != null)
-            {
-                dataGridSysRes.Rows.Clear();
-
-                for (int i = 0; i < SqlLiteDataBase.SqlReadAllSysRes().Rows.Count; i++)
-                  dataGridSysRes.Rows.Add(SqlLiteDataBase.SqlReadAllSysRes().Rows[i].ItemArray);
-            }
-            else
-                listBox5.Items.Add("The data was not uploaded");
+            StatConLbl.Text = SqlLiteDataBase.SqlCreateSysRes();
+            StatConLbl.Text = SqlLiteDataBase.SqlCreateNetwork();
         }
-        private void DeleteTableSysRes_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlDeleteSysRes();
-        private void ClearTableDataSysRes_Click(object sender, EventArgs e) => dataGridSysRes.Rows.Clear();
+
+        private void DeleteTableSysRes_Click(object sender, EventArgs e)
+        {
+            StatConLbl.Text = SqlLiteDataBase.SqlDeleteSysRes();
+            StatConLbl.Text = SqlLiteDataBase.SqlDeleteNetwork();
+        }
+        private void ClearTableDataSysRes_Click(object sender, EventArgs e) => MainDataGrid.Rows.Clear();
         private void GoBtnSysRes_Click(object sender, EventArgs e)
         {
             if (SqlLiteDataBase.LetsQuery(richTextBoxSysRes.Text) != null)
             {
-                dataGridSysRes.Rows.Clear();
-
-                for (int i = 0; i < SqlLiteDataBase.LetsQuery(richTextBoxSysRes.Text).Rows.Count; i++)
-                    dataGridSysRes.Rows.Add(SqlLiteDataBase.LetsQuery(richTextBoxSysRes.Text).Rows[i].ItemArray);
+                MainDataGrid.Rows.Clear();
+                MainDataGrid.Columns.Clear();
+                DataTable query = SqlLiteDataBase.LetsQuery(richTextBoxSysRes.Text);
+                for (int i = 0; i < query.Columns.Count; i++)
+                    MainDataGrid.Columns.Add(query.Columns[i].ColumnName, query.Columns[i].ColumnName);
+                for (int i = 0; i < query.Rows.Count; i++)
+                    MainDataGrid.Rows.Add(query.Rows[i].ItemArray);
             }
             else
-                listBox5.Items.Add("The data was not uploaded");
-        }
-        private void ClearSysRes_Click(object sender, EventArgs e) => richTextBoxSysRes.Clear();                        
-
-        //Network history
-        private void CreateTableNetwork_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlCreateNetwork();
-        private void AddToTableNetwork_Click(object sender, EventArgs e)
-        {
-            if (SqlLiteDataBase.SqlReadAllNetwork() != null)
-            {
-                dataGridNetwork.Rows.Clear();
-
-                for (int i = 0; i < SqlLiteDataBase.SqlReadAllNetwork().Rows.Count; i++)
-                    dataGridNetwork.Rows.Add(SqlLiteDataBase.SqlReadAllNetwork().Rows[i].ItemArray);
-            }
-            else
-                listBox7.Items.Add("The data was not uploaded");
-        }
-        private void DeleteTableNetwork_Click(object sender, EventArgs e) => StatConLbl.Text = SqlLiteDataBase.SqlDeleteNetwork();
-        private void ClearTableNetwork_Click(object sender, EventArgs e) => dataGridNetwork.Rows.Clear();
-        private void GoBtnNetwork_Click(object sender, EventArgs e)
-        {
-            if (SqlLiteDataBase.LetsQuery(richTextBoxNetwork.Text) != null)
-            {
-                dataGridNetwork.Rows.Clear();
-
-                for (int i = 0; i < SqlLiteDataBase.LetsQuery(richTextBoxNetwork.Text).Rows.Count; i++)
-                    dataGridNetwork.Rows.Add(SqlLiteDataBase.LetsQuery(richTextBoxNetwork.Text).Rows[i].ItemArray);
-            }
-            else
-                listBox7.Items.Add("The data was not uploaded");
-        }
-        private void ClearNetwork_Click(object sender, EventArgs e) => richTextBoxNetwork.Clear();
-
+                MessageBox.Show("The data was not uploaded");
+        }                 
         //button clear charts
         private void ClearCharts_Click(object sender, EventArgs e) => clearChartsMethod(false);
 
@@ -287,6 +256,77 @@ namespace SystemMonitor
         {
             var dataAnalysisForm = new DataAnalysisForm();
             dataAnalysisForm.Show();
+        }
+
+        private void ForecastAnalysisTimer_Tick(object sender, EventArgs e)
+        {
+            //Изменить параметры прогнозированных графиков
+            ForecastAnalysisTimer.Stop();
+            if (Charts.i > 800)
+            {
+                SearchingMaxSel.InitializeValues(DateTime.Now, "systemresources");
+                ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
+                    Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], "systemresources");
+                ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory);
+                ChartForSysRes.Series.Add("% load processor forecast");
+                ChartForSysRes.Series["% load processor forecast"].BorderWidth = 3;
+                ChartForSysRes.Series["% load processor forecast"].BorderDashStyle = ChartDashStyle.Dash;
+                ChartForSysRes.Series.Add("% Physical disc forecast");
+                ChartForSysRes.Series["% Physical disc forecast"].BorderWidth = 3;
+                ChartForSysRes.Series["% Physical disc forecast"].BorderDashStyle = ChartDashStyle.Dash;
+                ChartForSysRes.Series.Add("% memory forecast");
+                ChartForSysRes.Series["% memory forecast"].BorderWidth = 3;
+                ChartForSysRes.Series["% memory forecast"].BorderDashStyle = ChartDashStyle.Dash;
+                for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
+                {
+                    for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
+                    {
+                        if (j == 0)
+                        {
+                            ChartForSysRes.Series["% load processor forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                AddMinutes(+i), ForecastAnalize.forecast[i][j]* Convert.ToDouble(countProcess));
+                        }
+                        else if (j == 1)
+                        {
+                            ChartForSysRes.Series["% Physical disc forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                        }
+                        else if (j == 2)
+                        {
+                            ChartForSysRes.Series["% memory forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                        }
+                    }
+                }
+
+                SearchingMaxSel.InitializeValues(DateTime.Now, "network");
+                ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
+                    Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], "network");
+                ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory);
+                ChartForTCPCon.Series.Add("Received bytes forecast");
+                ChartForTCPCon.Series["Received bytes forecast"].BorderWidth = 3;
+                ChartForTCPCon.Series["Received bytes forecast"].BorderDashStyle = ChartDashStyle.Dash;
+                ChartForTCPCon.Series.Add("Sent bytes forecast");
+                ChartForTCPCon.Series["Sent bytes forecast"].BorderWidth = 3;
+                ChartForTCPCon.Series["Sent bytes forecast"].BorderDashStyle = ChartDashStyle.Dash;
+                for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
+                {
+                    for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
+                    {
+                        if (j == 0)
+                        {
+                            ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                        }
+                        else if (j == 1)
+                        {
+                            ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                        }
+                    }
+                }
+            }
+            ForecastAnalysisTimer.Start();
         }
     }
 }

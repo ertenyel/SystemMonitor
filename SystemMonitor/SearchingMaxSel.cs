@@ -35,26 +35,40 @@ namespace SystemMonitor
             maxFactor = 0;
             string columns = "";
             string time = "";
+            int days = 0;
 
-            if (table == "Systemresources")
+            if (table == "systemresources")
             {
                 columns = "strftime('%Y-%m-%d %H:%M', timesysres), avg(percproc)/avg(numberprocess), avg(percdisc)/avg(numberprocess), avg(percmemory)/avg(numberprocess)";
                 time = "timesysres";
             }
-            else if (table == "Network")
+            else if (table == "network")
             {
                 columns = "strftime('%Y-%m-%d %H:%M', timenetwork), avg(receivedbytes)/avg(connectionscount), avg(sentbyte)/avg(connectionscount)";
                 time = "timenetwork";
             }
 
-            DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {table} where {time} between '{value.AddHours(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}'" +
+            DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns} " +
+                $"from {table} where {time} between '{value.AddMinutes(-12):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}' " +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
-
-            DataTable tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {table} where {time} between '{value.AddDays(-1).AddHours(-2):yyyy-MM-dd HH:mm:ss.fff}' and '{value.AddDays(-1).AddHours(2):yyyy-MM-dd HH:mm:ss.fff}'" +
-                $"group by strftime('%Y-%m-%d %H:%M', {time})");
+            DataTable tableMaxSel;
+            for (int i = 1; i < 30; i++)
+            {
+                tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +
+                      $"from {table} where {time} between '{value.AddDays(-i).AddHours(-2):yyyy-MM-dd HH:mm:ss.fff}' and '{value.AddDays(-i).AddHours(2):yyyy-MM-dd HH:mm:ss.fff}' " +
+                      $"group by strftime('%Y-%m-%d %H:%M', {time})");
+                if (tableMaxSel != null && tableMaxSel.Rows.Count > 120)
+                {
+                    days = i;
+                    break;
+                }
+                else if (i == 29)
+                    return;
+            }
+            tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +
+                      $"from {table} where {time} between '{value.AddDays(-days).AddHours(-2):yyyy-MM-dd HH:mm:ss.fff}' and '{value.AddDays(-days).AddHours(2):yyyy-MM-dd HH:mm:ss.fff}' " +
+                      $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
             Values.newStory = new double[tableNewStory.Rows.Count][];
             Values.dateTimeNewStory = new DateTime[tableNewStory.Rows.Count];

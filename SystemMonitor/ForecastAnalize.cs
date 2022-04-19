@@ -66,24 +66,24 @@ namespace SystemMonitor
             string columns = "";
             string time = "";
 
-            if (table == "Systemresources")
+            if (table == "systemresources")
             {
                 columns = "strftime('%Y-%m-%d %H:%M', timesysres), avg(percproc)/avg(numberprocess), avg(percdisc)/avg(numberprocess), avg(percmemory)/avg(numberprocess)";
                 time = "timesysres";
             }
-            else if (table == "Network")
+            else if (table == "network")
             {
                 columns = "strftime('%Y-%m-%d %H:%M', timenetwork), avg(receivedbytes)/avg(connectionscount), avg(sentbyte)/avg(connectionscount)";
                 time = "timenetwork";
             }
 
-            DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {table} where {time} between '{startNewStory.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{endNewStory.AddMinutes(-2):yyyy-MM-dd HH:mm:ss.fff}'" +
+            DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns} " +
+                $"from {table} where {time} between '{startNewStory.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{endNewStory.AddMinutes(-2):yyyy-MM-dd HH:mm:ss.fff}' " +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
 
-            DataTable tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns}" +
-                $"from {table} where {time} between '{startMaxSel.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{endMaxSel.AddMinutes(-2):yyyy-MM-dd HH:mm:ss.fff}'" +
+            DataTable tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +
+                $"from {table} where {time} between '{startMaxSel.AddMinutes(-3):yyyy-MM-dd HH:mm:ss.fff}' and '{endMaxSel.AddMinutes(-2):yyyy-MM-dd HH:mm:ss.fff}' " +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
             Values.testNewStory = new double[tableNewStory.Rows.Count][];
