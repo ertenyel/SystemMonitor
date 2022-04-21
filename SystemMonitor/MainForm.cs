@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -262,70 +263,69 @@ namespace SystemMonitor
         {
             //Изменить параметры прогнозированных графиков
             ForecastAnalysisTimer.Stop();
-            if (Charts.i > 800)
+            using (StreamWriter streamWriter = new StreamWriter("C:\\test.txt"))
             {
-                SearchingMaxSel.InitializeValues(DateTime.Now, "systemresources");
-                ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
-                    Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], "systemresources");
-                ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory);
-                ChartForSysRes.Series.Add("% load processor forecast");
-                ChartForSysRes.Series["% load processor forecast"].BorderWidth = 3;
-                ChartForSysRes.Series["% load processor forecast"].BorderDashStyle = ChartDashStyle.Dash;
-                ChartForSysRes.Series.Add("% Physical disc forecast");
-                ChartForSysRes.Series["% Physical disc forecast"].BorderWidth = 3;
-                ChartForSysRes.Series["% Physical disc forecast"].BorderDashStyle = ChartDashStyle.Dash;
-                ChartForSysRes.Series.Add("% memory forecast");
-                ChartForSysRes.Series["% memory forecast"].BorderWidth = 3;
-                ChartForSysRes.Series["% memory forecast"].BorderDashStyle = ChartDashStyle.Dash;
-                for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
+                if (Charts.i > 800)
                 {
-                    for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
-                    {
-                        if (j == 0)
-                        {
-                            ChartForSysRes.Series["% load processor forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                AddMinutes(+i), ForecastAnalize.forecast[i][j]* Convert.ToDouble(countProcess));
-                        }
-                        else if (j == 1)
-                        {
-                            ChartForSysRes.Series["% Physical disc forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
-                        }
-                        else if (j == 2)
-                        {
-                            ChartForSysRes.Series["% memory forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
-                        }
-                    }
-                }
+                    SearchingMaxSel.InitializeValues(DateTime.Now, "systemresources");
+                    ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
+                        Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], "systemresources");
+                    ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory);
 
-                SearchingMaxSel.InitializeValues(DateTime.Now, "network");
-                ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
-                    Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], "network");
-                ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory);
-                ChartForTCPCon.Series.Add("Received bytes forecast");
-                ChartForTCPCon.Series["Received bytes forecast"].BorderWidth = 3;
-                ChartForTCPCon.Series["Received bytes forecast"].BorderDashStyle = ChartDashStyle.Dash;
-                ChartForTCPCon.Series.Add("Sent bytes forecast");
-                ChartForTCPCon.Series["Sent bytes forecast"].BorderWidth = 3;
-                ChartForTCPCon.Series["Sent bytes forecast"].BorderDashStyle = ChartDashStyle.Dash;
-                for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
-                {
-                    for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
+                    for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
                     {
-                        if (j == 0)
+                        streamWriter.Write(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].AddMinutes(+i) + "\t");
+                        for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
                         {
-                            ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                            streamWriter.Write(Convert.ToString(ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess)) + "\t");
+                            if (j == 0)
+                            {
+                                ChartForSysRes.Series["% load processor forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                            }
+                            else if (j == 1)
+                            {
+                                ChartForSysRes.Series["% Physical disc forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                            }
+                            else if (j == 2)
+                            {
+                                ChartForSysRes.Series["% memory forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                            }
                         }
-                        else if (j == 1)
+                        streamWriter.WriteLine("");
+                    }
+
+                    streamWriter.WriteLine("");
+                    streamWriter.WriteLine("");
+
+                    SearchingMaxSel.InitializeValues(DateTime.Now, "network");
+                    ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
+                        Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], "network");
+                    ForecastAnalize.ComputeParamteres(Values.testMaxSel, Values.testNewStory, Values.resultMaxSel, Values.newStory);
+                    for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
+                    {
+                        streamWriter.Write(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].AddMinutes(+i) + "\t");
+                        for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
                         {
-                            ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                            streamWriter.Write(Convert.ToString(ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount)) + "\t");
+                            if (j == 0)
+                            {
+                                ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount));
+                            }
+                            else if (j == 1)
+                            {
+                                ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount));
+                            }
                         }
+                        streamWriter.WriteLine("");
                     }
                 }
             }
+            
             ForecastAnalysisTimer.Start();
         }
     }
