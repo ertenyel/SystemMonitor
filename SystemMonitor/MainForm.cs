@@ -23,12 +23,13 @@ namespace SystemMonitor
         public static int itemsCount = 0;
         public bool btnWrkBool = true;
         private static int countProcess;
+        private static int cnt = 0;
 
         public MainForm()
         {
             InitializeComponent();
         }
-
+                       //изменит свойство графика и прогноз на сетевом интерфейсе бывает отрицательный
         private void MainForm_Load(object sender, EventArgs e)
         {
             StatConLbl.Text =  SqlLiteDataBase.SqlCreateSysRes();
@@ -61,12 +62,13 @@ namespace SystemMonitor
         }
 
         private void TimerProcLoad_Tick(object sender, EventArgs e)
-        {
+        {            
             SystemResourses();
             ShowActiveTcpConnections();            
             ConditionOfInitiComp();
             SqlLiteDataBase.SqlAddSysRes(countProcess, (int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue));
             SqlLiteDataBase.SqlAddNetwork(itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue));
+            ForecastingAnalysingMethod();
             clearChartsMethod(true);
         }
         //System resources
@@ -135,23 +137,13 @@ namespace SystemMonitor
         {
             if (!count)
             {
-                ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScaleView.Zoom(10, 100);
-                ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScaleView.Zoom(10, 100);
-                ChartForTCPCon.ChartAreas[ChartForTCPCon.Series["Tcp connections count"].ChartArea].AxisX.ScaleView.Zoom(10, 100);
+                ChartForSysRes.Series["CPU"].Points.AddXY(Charts.i, valueCPUY);//(DateTime.Now.ToString("HH:mm:ss"), valueCPUY);
+                ChartForSysRes.Series["Phisycal disc"].Points.AddXY(Charts.i, valueDiscY);//(DateTime.Now.ToString("HH:mm:ss"), valueDiscY);
+                ChartForSysRes.Series["Memory"].Points.AddXY(Charts.i, valueMemY);//(DateTime.Now.ToString("HH:mm:ss"), valueMemY);
 
-                ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScrollBar.ButtonStyle = ScrollBarButtonStyles.SmallScroll;
-                ChartForTCPCon.ChartAreas[ChartForTCPCon.Series["Tcp connections count"].ChartArea].AxisX.ScrollBar.ButtonStyle = ScrollBarButtonStyles.SmallScroll;
-
-                ChartForSysRes.ChartAreas[ChartForSysRes.Series["CPU"].ChartArea].AxisX.ScaleView.SmallScrollSize = 0;
-                ChartForTCPCon.ChartAreas[ChartForTCPCon.Series["Tcp connections count"].ChartArea].AxisX.ScaleView.SmallScrollSize = 0;
-
-                ChartForSysRes.Series["CPU"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueCPUY);
-                ChartForSysRes.Series["Phisycal disc"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueDiscY);
-                ChartForSysRes.Series["Memory"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueMemY);
-
-                ChartForTCPCon.Series["Tcp connections count"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueConY);
-                ChartForTCPCon.Series["Received bytes"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueConRecY);
-                ChartForTCPCon.Series["Sent bytes"].Points.AddXY(DateTime.Now.ToString("HH:mm:ss"), valueConSentY);
+                ChartForTCPCon.Series["Tcp connections count"].Points.AddXY(Charts.i, valueConY);//(DateTime.Now.ToString("HH:mm:ss"), valueConY);
+                ChartForTCPCon.Series["Received bytes"].Points.AddXY(Charts.i, valueConRecY);//(DateTime.Now.ToString("HH:mm:ss"), valueConRecY);
+                ChartForTCPCon.Series["Sent bytes"].Points.AddXY(Charts.i, valueConSentY);//(DateTime.Now.ToString("HH:mm:ss"), valueConSentY);
 
                 Charts.i++;
             }
@@ -219,22 +211,14 @@ namespace SystemMonitor
             {
                 if (Charts.i % 1000 == 0 && Charts.i != 0)
                 {
-                    ChartForSysRes.Series[0].Points.Clear();
-                    ChartForSysRes.Series[1].Points.Clear();
-                    ChartForSysRes.Series[2].Points.Clear();
-                    ChartForTCPCon.Series[0].Points.Clear();
-                    ChartForTCPCon.Series[1].Points.Clear();
-                    ChartForTCPCon.Series[2].Points.Clear();
+                    for (int i = 0; i < ChartForSysRes.Series.Count; i++) ChartForSysRes.Series[i].Points.Clear();
+                    for (int i = 0; i < ChartForTCPCon.Series.Count; i++) ChartForTCPCon.Series[i].Points.Clear();
                 }
             }
             else
             {
-                ChartForSysRes.Series[0].Points.Clear();
-                ChartForSysRes.Series[1].Points.Clear();
-                ChartForSysRes.Series[2].Points.Clear();
-                ChartForTCPCon.Series[0].Points.Clear();
-                ChartForTCPCon.Series[1].Points.Clear();
-                ChartForTCPCon.Series[2].Points.Clear();
+                for (int i = 0; i < ChartForSysRes.Series.Count; i++) ChartForSysRes.Series[i].Points.Clear();
+                for (int i = 0; i < ChartForTCPCon.Series.Count; i++) ChartForTCPCon.Series[i].Points.Clear();
             }
         }
 
@@ -259,13 +243,16 @@ namespace SystemMonitor
             dataAnalysisForm.Show();
         }
 
-        private void ForecastAnalysisTimer_Tick(object sender, EventArgs e)
+        private void ForecastingAnalysingMethod()
         {
             //Изменить параметры прогнозированных графиков
-            ForecastAnalysisTimer.Stop();
-            using (StreamWriter streamWriter = new StreamWriter("C:\\test.txt"))
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            cnt++;
+            if (Charts.i > 800 && cnt == 181)
             {
-                if (Charts.i > 800)
+                using (StreamWriter streamWriter = new StreamWriter("C:\\test.txt"))
                 {
                     SearchingMaxSel.InitializeValues(DateTime.Now, "systemresources");
                     ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
@@ -278,20 +265,29 @@ namespace SystemMonitor
                         for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
                         {
                             streamWriter.Write(Convert.ToString(ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess)) + "\t");
+                            if (i == 0)
+                            {
+                                ChartForSysRes.Series["% load processor forecast"].Points.AddXY(Charts.i, (int)Math.Round(procesLoadValue));// (DateTime.Now.ToString("HH:mm:ss"), (int)Math.Round(procesLoadValue));
+                                ChartForSysRes.Series["% Physical disc forecast"].Points.AddXY(Charts.i, (int)Math.Round(physicalDiscValue));// (DateTime.Now.ToString("HH:mm:ss"), (int)Math.Round(physicalDiscValue));
+                                ChartForSysRes.Series["% memory forecast"].Points.AddXY(Charts.i, (int)Math.Round(memoryValue));//(DateTime.Now.ToString("HH:mm:ss"), (int)Math.Round(memoryValue));
+                            }
                             if (j == 0)
                             {
-                                ChartForSysRes.Series["% load processor forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                                ChartForSysRes.Series["% load processor forecast"].Points.AddXY(Charts.i + (60 * (i + 1)), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                                //(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                //AddMinutes(+i).ToString("HH:mm:ss"), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
                             }
                             else if (j == 1)
                             {
-                                ChartForSysRes.Series["% Physical disc forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                                ChartForSysRes.Series["% Physical disc forecast"].Points.AddXY(Charts.i + (60 * (i + 1)), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                                //(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                //AddMinutes(+i).ToString("HH:mm:ss"), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
                             }
                             else if (j == 2)
                             {
-                                ChartForSysRes.Series["% memory forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                                ChartForSysRes.Series["% memory forecast"].Points.AddXY(Charts.i + (60 * (i + 1)), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
+                                //(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                //AddMinutes(+i).ToString("HH:mm:ss"), ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess));
                             }
                         }
                         streamWriter.WriteLine("");
@@ -310,23 +306,32 @@ namespace SystemMonitor
                         for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
                         {
                             streamWriter.Write(Convert.ToString(ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount)) + "\t");
+                            if (i == 0)              //поменять занчения и проверитьб
+                            {
+                                ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(Charts.i, (int)Math.Round(recSegmentsValue));//(DateTime.Now.ToString("HH:mm:ss"), (int)Math.Round(recSegmentsValue));
+                                ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(Charts.i, (int)Math.Round(sentSegmentsValue));//(DateTime.Now.ToString("HH:mm:ss"), (int)Math.Round(sentSegmentsValue));
+                            }
                             if (j == 0)
                             {
-                                ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount));
+                                ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(Charts.i + (60 * (i + 1)), ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount));
+                                //(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                //AddMinutes(+i).ToString("HH:mm:ss"), ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount));
                             }
                             else if (j == 1)
                             {
-                                ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
-                                    AddMinutes(+i), ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount));
+                                ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(Charts.i + (60 * (i + 1)), ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount));
+                                //(Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1].
+                                //AddMinutes(+i).ToString("HH:mm:ss"), ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount));
                             }
                         }
                         streamWriter.WriteLine("");
                     }
                 }
+                cnt = 0;
             }
-            
-            ForecastAnalysisTimer.Start();
+            if (cnt == 181) cnt = 0;
+            stopwatch.Stop();
+            ForecastingTime.Text = "Forecasting time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";            
         }
     }
 }
