@@ -111,9 +111,10 @@ namespace SystemMonitor
             }            
         }
 
-        public static void ComputeParamteres(double[][] tempMaxSelSamp, double[][] tempNewStory, double[][] MaxSelSamp, double[][] NewStory)
+        public static bool ComputeParamteres(double[][] tempMaxSelSamp, double[][] tempNewStory, double[][] MaxSelSamp, double[][] NewStory)
         {
             // Расчет прогноза по выборке 57 из 60 и 3 значения из них сравнить с прогнозными, выбрать оценку и рассчитать все 60 значений
+            if (MaxSelSamp.Length != NewStory.Length || tempMaxSelSamp.Length != tempNewStory.Length) return false;
             double[][] realVal = new double[3][];
             for (int i = 0; i < realVal.Length; i++)
             {
@@ -135,7 +136,8 @@ namespace SystemMonitor
                 factorBt += 0.01;                
             }
 
-            HoltsWintersMethod(MaxSelSamp, NewStory, factorNewBt, factorNewCt);            
+            HoltsWintersMethod(MaxSelSamp, NewStory, factorNewBt, factorNewCt);
+            return true;
         }
 
         private static void ComputeRmse(double[][] realVal)

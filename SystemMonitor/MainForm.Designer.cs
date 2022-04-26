@@ -114,6 +114,7 @@ namespace SystemMonitor
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ForecastingTime = new System.Windows.Forms.Label();
+            this.CounterLB = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Processor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Disk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Memory)).BeginInit();
@@ -507,6 +508,7 @@ namespace SystemMonitor
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.CounterLB);
             this.groupBox1.Controls.Add(this.ForecastingTime);
             this.groupBox1.Controls.Add(this.CountProcesses);
             this.groupBox1.Controls.Add(this.NumberOfProcTB);
@@ -927,6 +929,15 @@ namespace SystemMonitor
             this.ForecastingTime.TabIndex = 9;
             this.ForecastingTime.Text = "ForecastingTime";
             // 
+            // CounterLB
+            // 
+            this.CounterLB.AutoSize = true;
+            this.CounterLB.Location = new System.Drawing.Point(884, 37);
+            this.CounterLB.Name = "CounterLB";
+            this.CounterLB.Size = new System.Drawing.Size(164, 16);
+            this.CounterLB.TabIndex = 10;
+            this.CounterLB.Text = "DataAnalysing counter";
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1057,6 +1068,7 @@ namespace SystemMonitor
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label ForecastingTime;
+        private System.Windows.Forms.Label CounterLB;
     }
 }
 
