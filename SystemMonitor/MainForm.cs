@@ -91,19 +91,15 @@ namespace SystemMonitor
         // TCP connections
         private void ShowActiveTcpConnections()
         {
-            TcpConnectionInformation[] connections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
-            string[] newTcpConnections = new string[connections.Length];
+            TcpConnectionInformation[] connections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();            
             itemsCount = connections.Length;
-            for (int i = 0; i < connections.Length; i++)
-                foreach (var item in connections)
-                    newTcpConnections[i] = $"{item.LocalEndPoint} <==> {item.RemoteEndPoint} \t {item.State}";
 
             recSegmentsValue = BytesReceived.NextValue();
             sentSegmentsValue = SentBytes.NextValue();
 
             LabelItemsCount.Text = "Connections count: " + itemsCount;
-            ReceivedBytesLabel.Text = "Received bytes: " + recSegmentsValue + " bytes/sec";
-            BytesSentLabel.Text = "Sent bytes: " + sentSegmentsValue + " bytes/sec";
+            ReceivedBytesLabel.Text = "Received bytes: " +  Math.Round(recSegmentsValue, 3) + " bytes/sec";
+            BytesSentLabel.Text = "Sent bytes: " + Math.Round(sentSegmentsValue, 3) + " bytes/sec";
         }
 
         public void InitializeParameters(int valueCPUY, int valueDiscY, int valueMemY, int valueConY, int valueConRecY, int valueConSentY, bool count = false)
@@ -182,32 +178,24 @@ namespace SystemMonitor
         {
             if (ifCondition)
             {
-                if (Charts.i > 100)
+                if (Charts.i > 200)
                 {
                     for (int i = 0; i < ChartForSysRes.Series.Count; i++)
                     {
-                        if (ChartForSysRes.Series[i].Points.Count > 6)
+                        if (ChartForSysRes.Series[i].Points.Count != 0)
                             ChartForSysRes.Series[i].Points.RemoveAt(0);
                     }
                     for (int i = 0; i < ChartForTCPCon.Series.Count; i++)
                     {
-                        if (ChartForTCPCon.Series[i].Points.Count > 6)
+                        if (ChartForTCPCon.Series[i].Points.Count != 0)
                             ChartForTCPCon.Series[i].Points.RemoveAt(0);
                     }
                 }             
             }
             else
             {
-                for (int i = 0; i < ChartForSysRes.Series.Count; i++)
-                {
-                    if (ChartForSysRes.Series[i].Points.Count > 6)
-                        ChartForSysRes.Series[i].Points.Clear();
-                }
-                for (int i = 0; i < ChartForTCPCon.Series.Count; i++)
-                {
-                    if (ChartForTCPCon.Series[i].Points.Count > 6)
-                        ChartForTCPCon.Series[i].Points.Clear();
-                }
+                for (int i = 0; i < ChartForSysRes.Series.Count; i++) ChartForSysRes.Series[i].Points.Clear();
+                for (int i = 0; i < ChartForTCPCon.Series.Count; i++) ChartForTCPCon.Series[i].Points.Clear();
             }
         }
 
