@@ -30,6 +30,7 @@ namespace SystemMonitor
             InitializeComponent();
         }
                        //изменит свойство графика и прогноз на сетевом интерфейсе бывает отрицательный
+                       //удалить не нужные элементы на форме. Решить проблему с очисткой и отрисовкой прогноза на графике
         private void MainForm_Load(object sender, EventArgs e)
         {
             StatConLbl.Text =  SqlLiteDataBase.SqlCreateSysRes();
@@ -80,32 +81,11 @@ namespace SystemMonitor
             procesLoadValue = Processor.NextValue();            
             physicalDiscValue = 100 - Math.Round(Disk.NextValue());
             memoryValue = Memory.NextValue();
-
             if (physicalDiscValue < 0) physicalDiscValue = 0;
-            CountProcesses.Text = $"Number of processes";
-            NumberOfProcTB.Text = $"{countProcess}";
+            CountProcesses.Text = $"Number of processes: {countProcess}";            
             ProcessLoadLabel.Text = "Processor load " + (int)Math.Round(procesLoadValue) + " %";
             LabelPhysicalDisk.Text = "Phisycal disk load " + (int)Math.Round(physicalDiscValue) + " %";
             LabelMemoryLoad.Text = "Memory load " + (int)Math.Round(memoryValue) + " %";
-
-            ProcesLoadTB.Text = Convert.ToString(procesLoadValue);
-            PhysicalDiscTB.Text = Convert.ToString(physicalDiscValue);
-            MemoryTB.Text = Convert.ToString(memoryValue);
-
-            if (CaptureBtnSysRes.Checked == true)
-                return;
-            else
-            {
-                foreach (var item in Process.GetProcesses())
-                {
-                    string processName = $"Id: {item.Id}\t\tName: {item.ProcessName}";
-                    if (listBox2.Items.Count-1 > countProcess)
-                        listBox2.Items.Clear();
-                    if (!listBox2.Items.Contains(processName))
-                        listBox2.Items.Add(processName);
-                }
-            }
-            textBox1.Text = listBox2.Items.Count.ToString();
         }
 
         // TCP connections
@@ -124,15 +104,6 @@ namespace SystemMonitor
             LabelItemsCount.Text = "Connections count: " + itemsCount;
             ReceivedBytesLabel.Text = "Received bytes: " + recSegmentsValue + " bytes/sec";
             BytesSentLabel.Text = "Sent bytes: " + sentSegmentsValue + " bytes/sec";
-
-            if (CaptureBtnNetwork.Checked == true)
-                return;
-            else
-            {                
-                foreach (var item in newTcpConnections)
-                    if (!listBox1.Items.Contains(item))
-                        listBox1.Items.Add(item);
-            }
         }
 
         public void InitializeParameters(int valueCPUY, int valueDiscY, int valueMemY, int valueConY, int valueConRecY, int valueConSentY, bool count = false)
