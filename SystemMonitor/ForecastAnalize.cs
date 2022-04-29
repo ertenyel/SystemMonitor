@@ -111,7 +111,7 @@ namespace SystemMonitor
             }            
         }
 
-        public static bool ComputeParamteres(double[][] tempMaxSelSamp, double[][] tempNewStory, double[][] MaxSelSamp, double[][] NewStory)
+        public static bool ComputeParamteres(ref double[][] tempMaxSelSamp, ref double[][] tempNewStory, ref double[][] MaxSelSamp, ref double[][] NewStory)
         {
             // Расчет прогноза по выборке 57 из 60 и 3 значения из них сравнить с прогнозными, выбрать оценку и рассчитать все 60 значений
             if (MaxSelSamp.Length != NewStory.Length || tempMaxSelSamp.Length != tempNewStory.Length) return false;

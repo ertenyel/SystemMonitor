@@ -103,7 +103,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Charts.cs" />
     <Compile Include="DataAnalysingClust.cs" />
     <Compile Include="DataAnalysisForm.cs">
       <SubType>Form</SubType>
