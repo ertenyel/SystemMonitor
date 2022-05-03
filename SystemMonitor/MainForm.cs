@@ -5,7 +5,6 @@ using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SystemMonitor
 {
@@ -31,21 +30,21 @@ namespace SystemMonitor
         {
             InitializeComponent();
         }
-        
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            StatConLbl.Text =  SqlLiteDataBase.SqlCreateSysRes();
+            StatConLbl.Text = SqlLiteDataBase.SqlCreateSysRes();
             StatConLbl.Text = SqlLiteDataBase.SqlCreateSecurity();
             StatConLbl.Text = SqlLiteDataBase.SqlCreateNetwork();
         }
 
         private void MainStartBtn_Click(object sender, EventArgs e)
         {
-            if (!btnMainStartBool)     
+            if (!btnMainStartBool)
             {
                 MainStartBtn.Text = "Stop monitoring";
                 BtnStopWrk.Enabled = true;
-                btnMainStartBool = true;    
+                btnMainStartBool = true;
                 MainTimerProgram.Enabled = true;
                 TimerWrkProgram.Enabled = true;
                 MainTimerProgram.Start();
@@ -73,18 +72,18 @@ namespace SystemMonitor
             else InitializeParameters(ref procesLoadValue, ref physicalDiscValue, ref memoryValue, ref recSegmentsValue, ref sentSegmentsValue, true);
             SqlLiteDataBase.SqlAddSysRes(countProcess, procesLoadValue, physicalDiscValue, memoryValue);
             SqlLiteDataBase.SqlAddNetwork(itemsCount, recSegmentsValue, sentSegmentsValue);
-            ForecastingAnalysingMethod();            
+            ForecastingAnalysingMethod();
             MainTimerProgram.Start();
         }
         //System resources
         private void SystemResourses()
         {
             countProcess = Process.GetProcesses().Length;
-            procesLoadValue = (int)Math.Round(Processor.NextValue());            
+            procesLoadValue = (int)Math.Round(Processor.NextValue());
             physicalDiscValue = (int)(100 - Math.Round(Disk.NextValue()));
             memoryValue = (int)Math.Round(Memory.NextValue());
             if (physicalDiscValue < 0) physicalDiscValue = 0;
-            CountProcesses.Text = $"Number of processes: {countProcess}";            
+            CountProcesses.Text = $"Number of processes: {countProcess}";
             ProcessLoadLabel.Text = "Processor load " + procesLoadValue + " %";
             LabelPhysicalDisk.Text = "Phisycal disk load " + physicalDiscValue + " %";
             LabelMemoryLoad.Text = "Memory load " + memoryValue + " %";
@@ -99,7 +98,7 @@ namespace SystemMonitor
             sentSegmentsValue = (int)Math.Round(SentBytes.NextValue());
 
             LabelItemsCount.Text = "Connections count: " + itemsCount;
-            ReceivedBytesLabel.Text = "Rec bytes: " +  recSegmentsValue + " bytes/sec";
+            ReceivedBytesLabel.Text = "Rec bytes: " + recSegmentsValue + " bytes/sec";
             BytesSentLabel.Text = "Sent bytes: " + sentSegmentsValue + " bytes/sec";
         }
 
@@ -110,10 +109,10 @@ namespace SystemMonitor
                 ChartForSysRes.Series["CPU"].Points.AddXY(programIteration, valueCPUY);
                 ChartForSysRes.Series["Phisycal disc"].Points.AddXY(programIteration, valueDiscY);
                 ChartForSysRes.Series["Memory"].Points.AddXY(programIteration, valueMemY);
-                
+
                 ChartForTCPCon.Series["Received bytes"].Points.AddXY(programIteration, valueConRecY);
-                ChartForTCPCon.Series["Sent bytes"].Points.AddXY(programIteration, valueConSentY);   
-            }                            
+                ChartForTCPCon.Series["Sent bytes"].Points.AddXY(programIteration, valueConSentY);
+            }
 
             programIteration++;
         }
@@ -167,7 +166,7 @@ namespace SystemMonitor
             }
             else
                 MessageBox.Show("The data was not uploaded");
-        }                 
+        }
         //button clear charts
         private void ClearCharts_Click(object sender, EventArgs e) => clearChartsMethod(false);
 
@@ -176,8 +175,8 @@ namespace SystemMonitor
         {
             if (ifCondition)
             {
-                 if (programIteration > 500)
-                 {
+                if (programIteration > 500)
+                {
                     for (int i = 0; i < ChartForSysRes.Series.Count; i++)
                     {
                         if (ChartForSysRes.Series[i].Points.Count > 10)
@@ -195,7 +194,7 @@ namespace SystemMonitor
                 for (int i = 0; i < ChartForSysRes.Series.Count; i++) ChartForSysRes.Series[i].Points.Clear();
                 for (int i = 0; i < ChartForTCPCon.Series.Count; i++) ChartForTCPCon.Series[i].Points.Clear();
             }
-        }        
+        }
 
         private void OpenAnalysisBtn_Click(object sender, EventArgs e)
         {
@@ -227,7 +226,7 @@ namespace SystemMonitor
                     {
                         double forecastVal;
                         for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
-                        {                            
+                        {
                             for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
                             {
                                 if (i == 0 && j == 0)
@@ -254,16 +253,16 @@ namespace SystemMonitor
                                     if (forecastVal > 0) ChartForSysRes.Series["Memory forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
                                     if (forecastVal < 0) ChartForSysRes.Series["Memory forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
                                 }
-                            }                            
+                            }
                         }
 
                         SearchingMaxSel.InitializeValues(DateTime.Now, "network");
                         ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
                             Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], "network");
-                        ForecastAnalize.ComputeParamteres( ref Values.testMaxSel, ref Values.testNewStory, ref Values.resultMaxSel, ref Values.newStory);
+                        ForecastAnalize.ComputeParamteres(ref Values.testMaxSel, ref Values.testNewStory, ref Values.resultMaxSel, ref Values.newStory);
 
                         for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
-                        {                            
+                        {
                             for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
                             {
                                 if (i == 0 && j == 0)              //поменять занчения и проверитьб
@@ -283,14 +282,14 @@ namespace SystemMonitor
                                     if (forecastVal > 0) ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
                                     if (forecastVal < 0) ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
                                 }
-                            }                            
+                            }
                         }
                     }
                     stopwatch.Stop();
                     ForecastingTime.Text = "Forecasting time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
                 }
             }
-            CounterLB.Text = "DataAnalysing counter: " + cnt;                    
+            CounterLB.Text = "DataAnalysing counter: " + cnt;
         }
 
         private void trackBarPosChartSR_Scroll(object sender, EventArgs e)
@@ -304,8 +303,8 @@ namespace SystemMonitor
         }
 
         private void richTextBoxSysRes_TextChanged(object sender, EventArgs e)
-        {            
-            string query = richTextBoxSysRes.Text;            
+        {
+            string query = richTextBoxSysRes.Text;
             int startPos;
             int wordLength;
             int cursorPos;

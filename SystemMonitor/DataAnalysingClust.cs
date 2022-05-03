@@ -6,7 +6,7 @@ namespace SystemMonitor
 {
     class DataAnalysingClust
     {
-        public static int ct;                
+        public static int ct;
         private string[] attributes;
         public static double[][] rawData;
         public static int numClusters;
@@ -41,7 +41,7 @@ namespace SystemMonitor
                 dataTable = SqlLiteDataBase.LetsQuery($"select avg(percproc)/avg(numberprocess), avg(percdisc)/avg(numberprocess), avg(percmemory)/avg(numberprocess) " +
                     $"from systemresources where timesysres between '{dateTime.AddDays(-1):yyyy-MM-dd HH:mm:ss.fff}' and '{dateTime:yyyy-MM-dd HH:mm:ss.fff}' " +
                     $"group by strftime('%Y-%m-%d %H:%M', timesysres) ");
-            }            
+            }
             else if (parameters == 1)
             {
                 dataTable = SqlLiteDataBase.LetsQuery($"select avg(receivedbytes)/avg(connectionscount), avg(sentbyte)/avg(connectionscount) " +

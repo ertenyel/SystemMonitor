@@ -54,12 +54,14 @@ namespace SystemMonitor
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.ChartForTCPCon = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.trackBarPosChartNet = new System.Windows.Forms.TrackBar();
             this.BytesSentLabel = new System.Windows.Forms.Label();
             this.ReceivedBytesLabel = new System.Windows.Forms.Label();
             this.LabelItemsCount = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.trackBarPosChartSR = new System.Windows.Forms.TrackBar();
             this.CounterLB = new System.Windows.Forms.Label();
             this.ForecastingTime = new System.Windows.Forms.Label();
             this.CountProcesses = new System.Windows.Forms.Label();
@@ -71,11 +73,11 @@ namespace SystemMonitor
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.ClearTableDataSysRes = new System.Windows.Forms.Button();
-            this.DeleteTableSysRes = new System.Windows.Forms.Button();
             this.CreateTableSysRes = new System.Windows.Forms.Button();
             this.GoBtnSysRes = new System.Windows.Forms.Button();
+            this.DeleteTableSysRes = new System.Windows.Forms.Button();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.richTextBoxSysRes = new System.Windows.Forms.RichTextBox();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
             this.MainDataGrid = new System.Windows.Forms.DataGridView();
@@ -101,8 +103,6 @@ namespace SystemMonitor
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.trackBarPosChartSR = new System.Windows.Forms.TrackBar();
-            this.trackBarPosChartNet = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.Processor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Disk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Memory)).BeginInit();
@@ -111,12 +111,14 @@ namespace SystemMonitor
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartForTCPCon)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartNet)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartSR)).BeginInit();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartForSysRes)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -131,8 +133,6 @@ namespace SystemMonitor
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartSR)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartNet)).BeginInit();
             this.SuspendLayout();
             // 
             // Processor
@@ -171,14 +171,17 @@ namespace SystemMonitor
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.ChartForTCPCon);
+            this.groupBox5.Controls.Add(this.LabelItemsCount);
+            this.groupBox5.Controls.Add(this.trackBarPosChartNet);
+            this.groupBox5.Controls.Add(this.ReceivedBytesLabel);
+            this.groupBox5.Controls.Add(this.BytesSentLabel);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox5.Location = new System.Drawing.Point(0, 0);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1019, 310);
+            this.groupBox5.Size = new System.Drawing.Size(257, 312);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Network adapter";
+            this.groupBox5.Text = "Data";
             // 
             // ChartForTCPCon
             // 
@@ -236,28 +239,37 @@ namespace SystemMonitor
             this.ChartForTCPCon.Series.Add(series32);
             this.ChartForTCPCon.Series.Add(series33);
             this.ChartForTCPCon.Series.Add(series34);
-            this.ChartForTCPCon.Size = new System.Drawing.Size(1013, 289);
+            this.ChartForTCPCon.Size = new System.Drawing.Size(1011, 291);
             this.ChartForTCPCon.TabIndex = 6;
             this.ChartForTCPCon.Text = "chart3";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.trackBarPosChartNet);
-            this.groupBox4.Controls.Add(this.BytesSentLabel);
-            this.groupBox4.Controls.Add(this.ReceivedBytesLabel);
-            this.groupBox4.Controls.Add(this.LabelItemsCount);
+            this.groupBox4.Controls.Add(this.ChartForTCPCon);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(1019, 0);
+            this.groupBox4.Location = new System.Drawing.Point(257, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(253, 310);
+            this.groupBox4.Size = new System.Drawing.Size(1017, 312);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Data";
+            this.groupBox4.Text = "Network adapter";
+            // 
+            // trackBarPosChartNet
+            // 
+            this.trackBarPosChartNet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBarPosChartNet.Location = new System.Drawing.Point(6, 261);
+            this.trackBarPosChartNet.Maximum = 500;
+            this.trackBarPosChartNet.Minimum = 10;
+            this.trackBarPosChartNet.Name = "trackBarPosChartNet";
+            this.trackBarPosChartNet.Size = new System.Drawing.Size(238, 45);
+            this.trackBarPosChartNet.TabIndex = 12;
+            this.trackBarPosChartNet.Value = 10;
+            this.trackBarPosChartNet.Scroll += new System.EventHandler(this.trackBarPosChartNet_Scroll);
             // 
             // BytesSentLabel
             // 
             this.BytesSentLabel.AutoSize = true;
-            this.BytesSentLabel.Location = new System.Drawing.Point(6, 89);
+            this.BytesSentLabel.Location = new System.Drawing.Point(8, 53);
             this.BytesSentLabel.Name = "BytesSentLabel";
             this.BytesSentLabel.Size = new System.Drawing.Size(81, 16);
             this.BytesSentLabel.TabIndex = 3;
@@ -266,7 +278,7 @@ namespace SystemMonitor
             // ReceivedBytesLabel
             // 
             this.ReceivedBytesLabel.AutoSize = true;
-            this.ReceivedBytesLabel.Location = new System.Drawing.Point(6, 60);
+            this.ReceivedBytesLabel.Location = new System.Drawing.Point(8, 37);
             this.ReceivedBytesLabel.Name = "ReceivedBytesLabel";
             this.ReceivedBytesLabel.Size = new System.Drawing.Size(117, 16);
             this.ReceivedBytesLabel.TabIndex = 2;
@@ -275,7 +287,7 @@ namespace SystemMonitor
             // LabelItemsCount
             // 
             this.LabelItemsCount.AutoSize = true;
-            this.LabelItemsCount.Location = new System.Drawing.Point(6, 30);
+            this.LabelItemsCount.Location = new System.Drawing.Point(8, 21);
             this.LabelItemsCount.Name = "LabelItemsCount";
             this.LabelItemsCount.Size = new System.Drawing.Size(123, 16);
             this.LabelItemsCount.TabIndex = 1;
@@ -283,7 +295,7 @@ namespace SystemMonitor
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.Silver;
+            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
             this.tabPage1.Controls.Add(this.splitContainer3);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
@@ -295,7 +307,8 @@ namespace SystemMonitor
             // 
             // splitContainer3
             // 
-            this.splitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer3.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.Location = new System.Drawing.Point(3, 3);
             this.splitContainer3.Name = "splitContainer3";
@@ -303,6 +316,7 @@ namespace SystemMonitor
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer3.Panel1.Controls.Add(this.groupBox1);
             this.splitContainer3.Panel1.Controls.Add(this.groupBox6);
             // 
@@ -316,25 +330,31 @@ namespace SystemMonitor
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.trackBarPosChartSR);
-            this.groupBox1.Controls.Add(this.CounterLB);
-            this.groupBox1.Controls.Add(this.ForecastingTime);
-            this.groupBox1.Controls.Add(this.CountProcesses);
-            this.groupBox1.Controls.Add(this.LabelMemoryLoad);
-            this.groupBox1.Controls.Add(this.LabelPhysicalDisk);
-            this.groupBox1.Controls.Add(this.ProcessLoadLabel);
+            this.groupBox1.Controls.Add(this.ChartForSysRes);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(1019, 0);
+            this.groupBox1.Location = new System.Drawing.Point(257, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(253, 310);
+            this.groupBox1.Size = new System.Drawing.Size(1017, 312);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Data ";
+            this.groupBox1.Text = "System parameters";
+            // 
+            // trackBarPosChartSR
+            // 
+            this.trackBarPosChartSR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBarPosChartSR.Location = new System.Drawing.Point(6, 264);
+            this.trackBarPosChartSR.Maximum = 500;
+            this.trackBarPosChartSR.Minimum = 10;
+            this.trackBarPosChartSR.Name = "trackBarPosChartSR";
+            this.trackBarPosChartSR.Size = new System.Drawing.Size(238, 45);
+            this.trackBarPosChartSR.TabIndex = 11;
+            this.trackBarPosChartSR.Value = 10;
+            this.trackBarPosChartSR.Scroll += new System.EventHandler(this.trackBarPosChartSR_Scroll);
             // 
             // CounterLB
             // 
             this.CounterLB.AutoSize = true;
-            this.CounterLB.Location = new System.Drawing.Point(9, 141);
+            this.CounterLB.Location = new System.Drawing.Point(8, 82);
             this.CounterLB.Name = "CounterLB";
             this.CounterLB.Size = new System.Drawing.Size(164, 16);
             this.CounterLB.TabIndex = 10;
@@ -343,7 +363,7 @@ namespace SystemMonitor
             // ForecastingTime
             // 
             this.ForecastingTime.AutoSize = true;
-            this.ForecastingTime.Location = new System.Drawing.Point(9, 171);
+            this.ForecastingTime.Location = new System.Drawing.Point(8, 98);
             this.ForecastingTime.Name = "ForecastingTime";
             this.ForecastingTime.Size = new System.Drawing.Size(125, 16);
             this.ForecastingTime.TabIndex = 9;
@@ -352,7 +372,7 @@ namespace SystemMonitor
             // CountProcesses
             // 
             this.CountProcesses.AutoSize = true;
-            this.CountProcesses.Location = new System.Drawing.Point(9, 30);
+            this.CountProcesses.Location = new System.Drawing.Point(8, 18);
             this.CountProcesses.Name = "CountProcesses";
             this.CountProcesses.Size = new System.Drawing.Size(125, 16);
             this.CountProcesses.TabIndex = 1;
@@ -361,7 +381,7 @@ namespace SystemMonitor
             // LabelMemoryLoad
             // 
             this.LabelMemoryLoad.AutoSize = true;
-            this.LabelMemoryLoad.Location = new System.Drawing.Point(9, 112);
+            this.LabelMemoryLoad.Location = new System.Drawing.Point(8, 66);
             this.LabelMemoryLoad.Name = "LabelMemoryLoad";
             this.LabelMemoryLoad.Size = new System.Drawing.Size(63, 16);
             this.LabelMemoryLoad.TabIndex = 5;
@@ -370,7 +390,7 @@ namespace SystemMonitor
             // LabelPhysicalDisk
             // 
             this.LabelPhysicalDisk.AutoSize = true;
-            this.LabelPhysicalDisk.Location = new System.Drawing.Point(9, 87);
+            this.LabelPhysicalDisk.Location = new System.Drawing.Point(8, 50);
             this.LabelPhysicalDisk.Name = "LabelPhysicalDisk";
             this.LabelPhysicalDisk.Size = new System.Drawing.Size(100, 16);
             this.LabelPhysicalDisk.TabIndex = 3;
@@ -379,7 +399,7 @@ namespace SystemMonitor
             // ProcessLoadLabel
             // 
             this.ProcessLoadLabel.AutoSize = true;
-            this.ProcessLoadLabel.Location = new System.Drawing.Point(9, 59);
+            this.ProcessLoadLabel.Location = new System.Drawing.Point(8, 34);
             this.ProcessLoadLabel.Name = "ProcessLoadLabel";
             this.ProcessLoadLabel.Size = new System.Drawing.Size(79, 16);
             this.ProcessLoadLabel.TabIndex = 1;
@@ -387,14 +407,20 @@ namespace SystemMonitor
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.ChartForSysRes);
+            this.groupBox6.Controls.Add(this.CountProcesses);
+            this.groupBox6.Controls.Add(this.trackBarPosChartSR);
+            this.groupBox6.Controls.Add(this.ProcessLoadLabel);
+            this.groupBox6.Controls.Add(this.CounterLB);
+            this.groupBox6.Controls.Add(this.LabelPhysicalDisk);
+            this.groupBox6.Controls.Add(this.ForecastingTime);
+            this.groupBox6.Controls.Add(this.LabelMemoryLoad);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox6.Location = new System.Drawing.Point(0, 0);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1019, 310);
+            this.groupBox6.Size = new System.Drawing.Size(257, 312);
             this.groupBox6.TabIndex = 3;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "System parameters";
+            this.groupBox6.Text = "Data";
             // 
             // ChartForSysRes
             // 
@@ -461,7 +487,7 @@ namespace SystemMonitor
             this.ChartForSysRes.Series.Add(series38);
             this.ChartForSysRes.Series.Add(series39);
             this.ChartForSysRes.Series.Add(series40);
-            this.ChartForSysRes.Size = new System.Drawing.Size(1013, 289);
+            this.ChartForSysRes.Size = new System.Drawing.Size(1011, 291);
             this.ChartForSysRes.TabIndex = 2;
             this.ChartForSysRes.Text = "chart1";
             // 
@@ -481,7 +507,7 @@ namespace SystemMonitor
             // 
             // tabPage4
             // 
-            this.tabPage4.BackColor = System.Drawing.Color.Silver;
+            this.tabPage4.BackColor = System.Drawing.Color.Transparent;
             this.tabPage4.Controls.Add(this.splitContainer2);
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
@@ -513,19 +539,6 @@ namespace SystemMonitor
             this.splitContainer2.SplitterDistance = 449;
             this.splitContainer2.TabIndex = 13;
             // 
-            // groupBox20
-            // 
-            this.groupBox20.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox20.Controls.Add(this.richTextBoxSysRes);
-            this.groupBox20.Location = new System.Drawing.Point(0, 0);
-            this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(1272, 408);
-            this.groupBox20.TabIndex = 12;
-            this.groupBox20.TabStop = false;
-            this.groupBox20.Text = "Filtering by request";
-            // 
             // ClearTableDataSysRes
             // 
             this.ClearTableDataSysRes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -536,17 +549,6 @@ namespace SystemMonitor
             this.ClearTableDataSysRes.Text = "Clear table";
             this.ClearTableDataSysRes.UseVisualStyleBackColor = true;
             this.ClearTableDataSysRes.Click += new System.EventHandler(this.ClearTableDataSysRes_Click);
-            // 
-            // DeleteTableSysRes
-            // 
-            this.DeleteTableSysRes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteTableSysRes.Location = new System.Drawing.Point(786, 414);
-            this.DeleteTableSysRes.Name = "DeleteTableSysRes";
-            this.DeleteTableSysRes.Size = new System.Drawing.Size(157, 28);
-            this.DeleteTableSysRes.TabIndex = 8;
-            this.DeleteTableSysRes.Text = "Delete table";
-            this.DeleteTableSysRes.UseVisualStyleBackColor = true;
-            this.DeleteTableSysRes.Click += new System.EventHandler(this.DeleteTableSysRes_Click);
             // 
             // CreateTableSysRes
             // 
@@ -569,6 +571,30 @@ namespace SystemMonitor
             this.GoBtnSysRes.Text = "Go";
             this.GoBtnSysRes.UseVisualStyleBackColor = true;
             this.GoBtnSysRes.Click += new System.EventHandler(this.GoBtnSysRes_Click);
+            // 
+            // DeleteTableSysRes
+            // 
+            this.DeleteTableSysRes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeleteTableSysRes.Location = new System.Drawing.Point(786, 414);
+            this.DeleteTableSysRes.Name = "DeleteTableSysRes";
+            this.DeleteTableSysRes.Size = new System.Drawing.Size(157, 28);
+            this.DeleteTableSysRes.TabIndex = 8;
+            this.DeleteTableSysRes.Text = "Delete table";
+            this.DeleteTableSysRes.UseVisualStyleBackColor = true;
+            this.DeleteTableSysRes.Click += new System.EventHandler(this.DeleteTableSysRes_Click);
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox20.Controls.Add(this.richTextBoxSysRes);
+            this.groupBox20.Location = new System.Drawing.Point(0, 0);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(1272, 408);
+            this.groupBox20.TabIndex = 12;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "Filtering by request";
             // 
             // richTextBoxSysRes
             // 
@@ -611,7 +637,7 @@ namespace SystemMonitor
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.toolStrip1.BackColor = System.Drawing.Color.Gainsboro;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MainStartBtn,
@@ -790,34 +816,10 @@ namespace SystemMonitor
             this.panel2.Size = new System.Drawing.Size(1294, 671);
             this.panel2.TabIndex = 8;
             // 
-            // trackBarPosChartSR
-            // 
-            this.trackBarPosChartSR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarPosChartSR.Location = new System.Drawing.Point(9, 259);
-            this.trackBarPosChartSR.Maximum = 500;
-            this.trackBarPosChartSR.Minimum = 10;
-            this.trackBarPosChartSR.Name = "trackBarPosChartSR";
-            this.trackBarPosChartSR.Size = new System.Drawing.Size(238, 45);
-            this.trackBarPosChartSR.TabIndex = 11;
-            this.trackBarPosChartSR.Value = 10;
-            this.trackBarPosChartSR.Scroll += new System.EventHandler(this.trackBarPosChartSR_Scroll);
-            // 
-            // trackBarPosChartNet
-            // 
-            this.trackBarPosChartNet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarPosChartNet.Location = new System.Drawing.Point(9, 259);
-            this.trackBarPosChartNet.Maximum = 500;
-            this.trackBarPosChartNet.Minimum = 10;
-            this.trackBarPosChartNet.Name = "trackBarPosChartNet";
-            this.trackBarPosChartNet.Size = new System.Drawing.Size(238, 45);
-            this.trackBarPosChartNet.TabIndex = 12;
-            this.trackBarPosChartNet.Value = 10;
-            this.trackBarPosChartNet.Scroll += new System.EventHandler(this.trackBarPosChartNet_Scroll);
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.Silver;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1294, 710);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -835,17 +837,19 @@ namespace SystemMonitor
             ((System.ComponentModel.ISupportInitialize)(this.BytesReceived)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SentBytes)).EndInit();
             this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartForTCPCon)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartNet)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartSR)).EndInit();
             this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartForSysRes)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
@@ -861,8 +865,6 @@ namespace SystemMonitor
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartSR)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartNet)).EndInit();
             this.ResumeLayout(false);
 
         }
