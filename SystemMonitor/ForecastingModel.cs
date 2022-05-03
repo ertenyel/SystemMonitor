@@ -12,8 +12,7 @@ namespace SystemMonitor
         public static int[][] realVal;
         public static double sumVal;
         public static double avgVal;
-        public static double sumSquare;
-        public static double doubleValSum;
+        public static double sumSquare;        
         public static double dispersionX;
         public static double dispersionY;
         public static double[] ratio;

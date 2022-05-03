@@ -6,9 +6,7 @@ namespace SystemMonitor
 {
     class DataAnalysingClust
     {
-        public static int ct;
-        public double x;
-        public double y;
+        public static int ct;                
         private string[] attributes;
         public static double[][] rawData;
         public static int numClusters;

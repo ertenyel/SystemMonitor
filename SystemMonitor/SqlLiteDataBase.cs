@@ -9,8 +9,7 @@ namespace SystemMonitor
     class SqlLiteDataBase
     {
         //variables
-        private static string dbFileName = "sample.sqlite";
-        private static string ds;
+        private static string dbFileName = "sample.sqlite";        
         private static SQLiteConnection m_dbConn;
         private static SQLiteCommand m_sqlCmd;
 
