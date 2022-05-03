@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
@@ -317,6 +318,28 @@ namespace SystemMonitor
         private void trackBarPosChartNet_Scroll(object sender, EventArgs e)
         {
             ChartForTCPCon.ChartAreas[0].AxisX.ScaleView.Size = trackBarPosChartNet.Value;
+        }
+
+        private void richTextBoxSysRes_TextChanged(object sender, EventArgs e)
+        {
+            string query = richTextBoxSysRes.Text;            
+            int startPos = 0;
+            int wordLength = 0;
+            int cursorPos;
+            foreach (var item in File.ReadAllLines("sqlkeyWords.txt"))
+            {
+                if (query.Contains(item))
+                {
+                    richTextBoxSysRes.ForeColor = Color.Black;
+                    cursorPos = richTextBoxSysRes.SelectionStart;
+                    startPos = query.IndexOf(item);
+                    wordLength = item.Length;
+                    richTextBoxSysRes.Select(startPos, wordLength);
+                    richTextBoxSysRes.SelectionColor = Color.Green;
+                    richTextBoxSysRes.SelectionStart = cursorPos;
+                    richTextBoxSysRes.SelectionColor = Color.Black;
+                }
+            }            
         }
     }
 }

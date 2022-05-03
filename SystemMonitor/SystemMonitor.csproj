@@ -121,6 +121,7 @@
     <Compile Include="ForecastAnalize.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlLanguage.cs" />
     <Compile Include="SqlLiteDataBase.cs" />
     <Compile Include="WorkingTimer.cs" />
     <EmbeddedResource Include="DataAnalysisForm.resx">
