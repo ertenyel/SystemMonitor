@@ -85,9 +85,6 @@ namespace SystemMonitor
         private static void ComputeFactor(double[][] arr, string count,  string column, int columnCount,
             string outtable, string id, string seltime, DateTime sysdate, int countIteration)
         {
-            //DataTable table = SqlLiteDataBase.LetsQuery($"select {id}, {column} " +
-            //  $"from {outtable} where {id} < {NewStory[NewStory.Length - 1][0]}");
-
             DataTable table = SqlLiteDataBase.LetsQuery($"select {id}, {column}*1.0/{count} " +
                 $"from {outtable} where {seltime} between '{sysdate.AddDays(-1).AddHours(-1):yyyy-MM-dd HH:mm:ss.fff}' " +
                 $"and '{sysdate.AddDays(-1).AddHours(1):yyyy-MM-dd HH:mm:ss.fff}'");            

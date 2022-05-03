@@ -14,11 +14,11 @@ namespace SystemMonitor
         public static string timeWritten;
         public static string audit;
         public string numberAuditValue;
-        public double recSegmentsValue;
-        public double sentSegmentsValue;
-        public double procesLoadValue;
-        public double physicalDiscValue;
-        public double memoryValue;
+        public int recSegmentsValue;
+        public int sentSegmentsValue;
+        public int procesLoadValue;
+        public int physicalDiscValue;
+        public int memoryValue;
         public static bool btnMainStartBool = false;
         public static int waitForCounterProc;
         public static int itemsCount = 0;
@@ -68,10 +68,11 @@ namespace SystemMonitor
             MainTimerProgram.Stop();
             LabelValueIteration.Text = $"{programIteration}";
             SystemResourses();
-            ShowActiveTcpConnections();            
-            ConditionOfInitiComp();
-            SqlLiteDataBase.SqlAddSysRes(countProcess, (int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue));
-            SqlLiteDataBase.SqlAddNetwork(itemsCount, (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue));
+            ShowActiveTcpConnections();
+            if (btnWrkBool) InitializeParameters(ref procesLoadValue, ref physicalDiscValue, ref memoryValue, ref recSegmentsValue, ref sentSegmentsValue);
+            else InitializeParameters(ref procesLoadValue, ref physicalDiscValue, ref memoryValue, ref recSegmentsValue, ref sentSegmentsValue, true);
+            SqlLiteDataBase.SqlAddSysRes(countProcess, procesLoadValue, physicalDiscValue, memoryValue);
+            SqlLiteDataBase.SqlAddNetwork(itemsCount, recSegmentsValue, sentSegmentsValue);
             ForecastingAnalysingMethod();            
             MainTimerProgram.Start();
         }
@@ -79,31 +80,30 @@ namespace SystemMonitor
         private void SystemResourses()
         {
             countProcess = Process.GetProcesses().Length;
-            procesLoadValue = Processor.NextValue();            
-            physicalDiscValue = 100 - Math.Round(Disk.NextValue());
-            memoryValue = Memory.NextValue();
+            procesLoadValue = (int)Math.Round(Processor.NextValue());            
+            physicalDiscValue = (int)(100 - Math.Round(Disk.NextValue()));
+            memoryValue = (int)Math.Round(Memory.NextValue());
             if (physicalDiscValue < 0) physicalDiscValue = 0;
             CountProcesses.Text = $"Number of processes: {countProcess}";            
-            ProcessLoadLabel.Text = "Processor load " + (int)Math.Round(procesLoadValue) + " %";
-            LabelPhysicalDisk.Text = "Phisycal disk load " + (int)Math.Round(physicalDiscValue) + " %";
-            LabelMemoryLoad.Text = "Memory load " + (int)Math.Round(memoryValue) + " %";
+            ProcessLoadLabel.Text = "Processor load " + procesLoadValue + " %";
+            LabelPhysicalDisk.Text = "Phisycal disk load " + physicalDiscValue + " %";
+            LabelMemoryLoad.Text = "Memory load " + memoryValue + " %";
         }
 
         // TCP connections
         private void ShowActiveTcpConnections()
         {
-            TcpConnectionInformation[] connections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();            
+            TcpConnectionInformation[] connections = IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections();
             itemsCount = connections.Length;
-
-            recSegmentsValue = BytesReceived.NextValue();
-            sentSegmentsValue = SentBytes.NextValue();
+            recSegmentsValue = (int)Math.Round(BytesReceived.NextValue());
+            sentSegmentsValue = (int)Math.Round(SentBytes.NextValue());
 
             LabelItemsCount.Text = "Connections count: " + itemsCount;
-            ReceivedBytesLabel.Text = "Rec bytes: " +  Math.Round(recSegmentsValue, 3) + " bytes/sec";
-            BytesSentLabel.Text = "Sent bytes: " + Math.Round(sentSegmentsValue, 3) + " bytes/sec";
+            ReceivedBytesLabel.Text = "Rec bytes: " +  recSegmentsValue + " bytes/sec";
+            BytesSentLabel.Text = "Sent bytes: " + sentSegmentsValue + " bytes/sec";
         }
 
-        public void InitializeParameters(int valueCPUY, int valueDiscY, int valueMemY, int valueConRecY, int valueConSentY, bool count = false)
+        public void InitializeParameters(ref int valueCPUY, ref int valueDiscY, ref int valueMemY, ref int valueConRecY, ref int valueConSentY, bool count = false)
         {
             if (!count)
             {
@@ -112,12 +112,10 @@ namespace SystemMonitor
                 ChartForSysRes.Series["Memory"].Points.AddXY(programIteration, valueMemY);
                 
                 ChartForTCPCon.Series["Received bytes"].Points.AddXY(programIteration, valueConRecY);
-                ChartForTCPCon.Series["Sent bytes"].Points.AddXY(programIteration, valueConSentY);
+                ChartForTCPCon.Series["Sent bytes"].Points.AddXY(programIteration, valueConSentY);   
+            }                            
 
-                programIteration++;
-            }
-            else
-                programIteration++;
+            programIteration++;
         }
 
         private void TimerWrkProgram_Tick(object sender, EventArgs e)
@@ -202,16 +200,7 @@ namespace SystemMonitor
         //methods initialize component
         private void ConditionOfInitiComp()
         {
-            if (btnWrkBool)
-            {
-                InitializeParameters((int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue), 
-                    (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue));
-            }
-            else
-            {
-                InitializeParameters((int)Math.Round(procesLoadValue), (int)Math.Round(physicalDiscValue), (int)Math.Round(memoryValue), 
-                    (int)Math.Round(recSegmentsValue), (int)Math.Round(sentSegmentsValue), true);
-            }
+            
         }
 
         private void OpenAnalysisBtn_Click(object sender, EventArgs e)
@@ -249,9 +238,9 @@ namespace SystemMonitor
                             {
                                 if (i == 0 && j == 0)
                                 {
-                                    ChartForSysRes.Series["CPU forecast"].Points.AddXY(programIteration, (int)Math.Round(procesLoadValue));
-                                    ChartForSysRes.Series["Physical disc forecast"].Points.AddXY(programIteration, (int)Math.Round(physicalDiscValue));
-                                    ChartForSysRes.Series["Memory forecast"].Points.AddXY(programIteration, (int)Math.Round(memoryValue));
+                                    ChartForSysRes.Series["CPU forecast"].Points.AddXY(programIteration, procesLoadValue);
+                                    ChartForSysRes.Series["Physical disc forecast"].Points.AddXY(programIteration, physicalDiscValue);
+                                    ChartForSysRes.Series["Memory forecast"].Points.AddXY(programIteration, memoryValue);
                                 }
                                 if (j == 0)
                                 {
@@ -285,8 +274,8 @@ namespace SystemMonitor
                             {
                                 if (i == 0 && j == 0)              //поменять занчения и проверитьб
                                 {
-                                    ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(programIteration, (int)Math.Round(recSegmentsValue));
-                                    ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(programIteration, (int)Math.Round(sentSegmentsValue));
+                                    ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(programIteration, recSegmentsValue);
+                                    ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(programIteration, sentSegmentsValue);
                                 }
                                 if (j == 0)
                                 {
@@ -321,25 +310,26 @@ namespace SystemMonitor
         }
 
         private void richTextBoxSysRes_TextChanged(object sender, EventArgs e)
-        {
+        {            
             string query = richTextBoxSysRes.Text;            
-            int startPos = 0;
-            int wordLength = 0;
+            int startPos;
+            int wordLength;
             int cursorPos;
             foreach (var item in File.ReadAllLines("sqlkeyWords.txt"))
             {
-                if (query.Contains(item))
+                if (query.ToLower().Contains(" " + item.ToLower() + " ") || (query.ToLower().Contains(item.ToLower() + " ") && query.ToLower().IndexOf(item.ToLower() + " ") == 0))
                 {
                     richTextBoxSysRes.ForeColor = Color.Black;
                     cursorPos = richTextBoxSysRes.SelectionStart;
-                    startPos = query.IndexOf(item);
+                    startPos = query.ToLower().IndexOf(item.ToLower());
                     wordLength = item.Length;
                     richTextBoxSysRes.Select(startPos, wordLength);
                     richTextBoxSysRes.SelectionColor = Color.Green;
                     richTextBoxSysRes.SelectionStart = cursorPos;
+                    richTextBoxSysRes.DeselectAll();
                     richTextBoxSysRes.SelectionColor = Color.Black;
                 }
-            }            
+            }
         }
     }
 }
