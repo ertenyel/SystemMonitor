@@ -195,13 +195,7 @@ namespace SystemMonitor
                 for (int i = 0; i < ChartForSysRes.Series.Count; i++) ChartForSysRes.Series[i].Points.Clear();
                 for (int i = 0; i < ChartForTCPCon.Series.Count; i++) ChartForTCPCon.Series[i].Points.Clear();
             }
-        }
-
-        //methods initialize component
-        private void ConditionOfInitiComp()
-        {
-            
-        }
+        }        
 
         private void OpenAnalysisBtn_Click(object sender, EventArgs e)
         {

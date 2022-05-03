@@ -110,7 +110,6 @@
     <Compile Include="DataAnalysisForm.Designer.cs">
       <DependentUpon>DataAnalysisForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ForecastingModel.cs" />
     <Compile Include="SearchingMaxSel.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
