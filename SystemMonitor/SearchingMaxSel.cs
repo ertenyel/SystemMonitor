@@ -20,6 +20,8 @@ namespace SystemMonitor
 
         public static double[][] resultMaxSel;
         public static DateTime[] dateTimeResultMaxSel;
+
+        public static double[] dispersion;
     }
     class SearchingMaxSel
     {
@@ -30,6 +32,32 @@ namespace SystemMonitor
         public static double maxFactor;
         private static int ct;
 
+        public static void ComputeInterval(DateTime value, string table)
+        {
+            string columns = "";
+            string time = "";
+            if (table == "systemresources")
+            {
+                columns = " avg(percproc)/avg(numberprocess), avg(percdisc)/avg(numberprocess), avg(percmemory)/avg(numberprocess) ";
+                time = "timesysres";
+            }
+            else if (table == "network")
+            {
+                columns = " avg(receivedbytes)/avg(connectionscount), avg(sentbyte)/avg(connectionscount) ";
+                time = "timenetwork";
+            }
+            DataTable forecastMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +
+                $"from {table} where {time} between '{value:yyyy-MM-dd HH:mm:ss.fff}' and '{value.AddMinutes(3):yyyy-MM-dd HH:mm:ss.fff}' ");
+
+            double[][] forecastMaxSelArr = new double[forecastMaxSel.Rows.Count][];
+            for (int i = 0; i < forecastMaxSel.Rows.Count; i++)
+            {
+                forecastMaxSelArr[i] = new double[forecastMaxSel.Columns.Count];
+                for (int j = 0; j < forecastMaxSel.Columns.Count; j++)
+                    forecastMaxSelArr[i][j] = Convert.ToDouble(forecastMaxSel.Rows[i][j]);
+            }
+            ComputeParameters(forecastMaxSelArr, "sko");
+        }
         public static void InitializeValues(DateTime value , string table)
         {
             maxFactor = 0;
@@ -98,10 +126,10 @@ namespace SystemMonitor
                 }
             }
             ct = 0;
-            ComputeParameters(Values.newStory, true);
+            ComputeParameters(Values.newStory, "x");
             SearchMaxSel(Values.maxSel, Values.newStory.Length);            
         }
-        private static void ComputeParameters(double[][] inputArray, bool XorY = false)
+        private static void ComputeParameters(double[][] inputArray, string xOrYorSKO)
         {
             double[] avgVal = new double[inputArray[0].Length];
             double[] dispersion = new double[inputArray[0].Length];
@@ -120,7 +148,10 @@ namespace SystemMonitor
                 dispersion[i] = Math.Sqrt(dispersion[i] / (inputArray.Length - 1));
             }
 
-            if (XorY)
+            if (xOrYorSKO == "sko")
+                Values.dispersion = dispersion;
+
+            if (xOrYorSKO == "x")
             {
                 ZMarksX = new double[inputArray.Length][];
                 for (int i = 0; i < inputArray.Length; i++)
@@ -130,7 +161,7 @@ namespace SystemMonitor
                         ZMarksX[i][j] = (inputArray[i][j] - avgVal[j]) / dispersion[j];
                 }
             }
-            else
+            else if(xOrYorSKO == "y")
             {
                 factor = 0;
                 ZMarksY = new double[inputArray.Length][];
@@ -155,7 +186,7 @@ namespace SystemMonitor
                 {
                     maxFactor = factor;
                     Values.resultMaxSel = Values.maybeMaxSel;
-                    Values.dateTimeResultMaxSel = Values.dateTimeMaybeMaxSel;
+                    Values.dateTimeResultMaxSel = Values.dateTimeMaybeMaxSel;                    
                 }
                 ct++;
                 if (ct == Values.maxSel.Length - Values.newStory.Length - 1) return;
@@ -174,7 +205,7 @@ namespace SystemMonitor
                 for (int j = 0; j < inputArray[i].Length; j++)
                     Values.maybeMaxSel[i][j] = inputArray[i + ct][j];
             }
-            ComputeParameters(Values.maybeMaxSel);
+            ComputeParameters(Values.maybeMaxSel, "y");
         }
     }
 }

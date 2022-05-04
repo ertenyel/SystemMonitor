@@ -236,6 +236,7 @@ namespace SystemMonitor
                     SearchingMaxSel.InitializeValues(DateTime.Now, "systemresources");
                     ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
                         Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], "systemresources");
+                    SearchingMaxSel.ComputeInterval(Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1], "systemresources");
                     if (ForecastAnalize.ComputeParamteres(ref Values.testMaxSel, ref Values.testNewStory, ref Values.resultMaxSel, ref Values.newStory))
                     {
                         double forecastVal;
@@ -273,13 +274,14 @@ namespace SystemMonitor
                         SearchingMaxSel.InitializeValues(DateTime.Now, "network");
                         ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
                             Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], "network");
+                        SearchingMaxSel.ComputeInterval(Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1], "network");
                         ForecastAnalize.ComputeParamteres(ref Values.testMaxSel, ref Values.testNewStory, ref Values.resultMaxSel, ref Values.newStory);
 
                         for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
                         {
                             for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
                             {
-                                if (i == 0 && j == 0)              //поменять занчения и проверитьб
+                                if (i == 0 && j == 0)          
                                 {
                                     ChartForRec.Series["Forecast"].Points.AddXY(programIteration, recSegmentsValue);
                                     ChartForSent.Series["Forecast"].Points.AddXY(programIteration, sentSegmentsValue);
