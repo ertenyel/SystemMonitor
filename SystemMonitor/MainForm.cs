@@ -35,7 +35,7 @@ namespace SystemMonitor
         {
             StatConLbl.Text = SqlLiteDataBase.SqlCreateSysRes();
             StatConLbl.Text = SqlLiteDataBase.SqlCreateSecurity();
-            StatConLbl.Text = SqlLiteDataBase.SqlCreateNetwork();
+            StatConLbl.Text = "Connection status: " + SqlLiteDataBase.SqlCreateNetwork();
         }
 
         private void MainStartBtn_Click(object sender, EventArgs e)
@@ -65,7 +65,7 @@ namespace SystemMonitor
         private void TimerProcLoad_Tick(object sender, EventArgs e)
         {
             MainTimerProgram.Stop();
-            LabelValueIteration.Text = $"{programIteration}";
+            LabelValueIteration.Text = $"Iteration: {programIteration}";
             SystemResourses();
             ShowActiveTcpConnections();
             if (btnWrkBool) InitializeParameters(ref procesLoadValue, ref physicalDiscValue, ref memoryValue, ref recSegmentsValue, ref sentSegmentsValue);
@@ -83,10 +83,6 @@ namespace SystemMonitor
             physicalDiscValue = (int)(100 - Math.Round(Disk.NextValue()));
             memoryValue = (int)Math.Round(Memory.NextValue());
             if (physicalDiscValue < 0) physicalDiscValue = 0;
-            CountProcesses.Text = $"Number of processes: {countProcess}";
-            ProcessLoadLabel.Text = "Processor load " + procesLoadValue + " %";
-            LabelPhysicalDisk.Text = "Phisycal disk load " + physicalDiscValue + " %";
-            LabelMemoryLoad.Text = "Memory load " + memoryValue + " %";
         }
 
         // TCP connections
@@ -96,24 +92,24 @@ namespace SystemMonitor
             itemsCount = connections.Length;
             recSegmentsValue = (int)Math.Round(BytesReceived.NextValue());
             sentSegmentsValue = (int)Math.Round(SentBytes.NextValue());
-
-            LabelItemsCount.Text = "Connections count: " + itemsCount;
-            ReceivedBytesLabel.Text = "Rec bytes: " + recSegmentsValue + " bytes/sec";
-            BytesSentLabel.Text = "Sent bytes: " + sentSegmentsValue + " bytes/sec";
         }
 
         public void InitializeParameters(ref int valueCPUY, ref int valueDiscY, ref int valueMemY, ref int valueConRecY, ref int valueConSentY, bool count = false)
         {
             if (!count)
             {
-                ChartForSysRes.Series["CPU"].Points.AddXY(programIteration, valueCPUY);
-                ChartForSysRes.Series["Phisycal disc"].Points.AddXY(programIteration, valueDiscY);
-                ChartForSysRes.Series["Memory"].Points.AddXY(programIteration, valueMemY);
+                ChartCPU.Series["CPU"].Points.AddXY(programIteration, valueCPUY);
+                ChartDisc.Series["Phisycal disc"].Points.AddXY(programIteration, valueDiscY);
+                ChartMemory.Series["Memory"].Points.AddXY(programIteration, valueMemY);
+                ChartForRec.Series["Received bytes"].Points.AddXY(programIteration, valueConRecY);
+                ChartForSent.Series["Sent bytes"].Points.AddXY(programIteration, valueConSentY);
 
-                ChartForTCPCon.Series["Received bytes"].Points.AddXY(programIteration, valueConRecY);
-                ChartForTCPCon.Series["Sent bytes"].Points.AddXY(programIteration, valueConSentY);
+                ChartCPU.ChartAreas[0].AxisX.ScaleView.Position = programIteration - 99;
+                ChartDisc.ChartAreas[0].AxisX.ScaleView.Position = programIteration - 99;
+                ChartMemory.ChartAreas[0].AxisX.ScaleView.Position = programIteration - 99;
+                ChartForRec.ChartAreas[0].AxisX.ScaleView.Position = programIteration - 99;
+                ChartForSent.ChartAreas[0].AxisX.ScaleView.Position = programIteration - 99;
             }
-
             programIteration++;
         }
 
@@ -176,23 +172,41 @@ namespace SystemMonitor
             if (ifCondition)
             {
                 if (programIteration > 500)
-                {
-                    for (int i = 0; i < ChartForSysRes.Series.Count; i++)
+                {                    
+                    for (int i = 0; i < ChartCPU.Series.Count; i++)
                     {
-                        if (ChartForSysRes.Series[i].Points.Count > 10)
-                            ChartForSysRes.Series[i].Points.RemoveAt(0);
+                        if (ChartCPU.Series[i].Points.Count > 10)
+                            ChartCPU.Series[i].Points.RemoveAt(0);
                     }
-                    for (int i = 0; i < ChartForTCPCon.Series.Count; i++)
+                    for (int i = 0; i < ChartDisc.Series.Count; i++)
                     {
-                        if (ChartForTCPCon.Series[i].Points.Count > 10)
-                            ChartForTCPCon.Series[i].Points.RemoveAt(0);
+                        if (ChartDisc.Series[i].Points.Count > 10)
+                            ChartDisc.Series[i].Points.RemoveAt(0);
+                    }
+                    for (int i = 0; i < ChartMemory.Series.Count; i++)
+                    {
+                        if (ChartMemory.Series[i].Points.Count > 10)
+                            ChartMemory.Series[i].Points.RemoveAt(0);
+                    }
+                    for (int i = 0; i < ChartForRec.Series.Count; i++)
+                    {
+                        if (ChartForRec.Series[i].Points.Count > 10)
+                            ChartForRec.Series[i].Points.RemoveAt(0);
+                    }
+                    for (int i = 0; i < ChartForSent.Series.Count; i++)
+                    {
+                        if (ChartForSent.Series[i].Points.Count > 10)
+                            ChartForSent.Series[i].Points.RemoveAt(0);
                     }
                 }
             }
             else
             {
-                for (int i = 0; i < ChartForSysRes.Series.Count; i++) ChartForSysRes.Series[i].Points.Clear();
-                for (int i = 0; i < ChartForTCPCon.Series.Count; i++) ChartForTCPCon.Series[i].Points.Clear();
+                for (int i = 0; i < ChartCPU.Series.Count; i++) ChartCPU.Series[i].Points.Clear();
+                for (int i = 0; i < ChartDisc.Series.Count; i++) ChartCPU.Series[i].Points.Clear();
+                for (int i = 0; i < ChartMemory.Series.Count; i++) ChartCPU.Series[i].Points.Clear();
+                for (int i = 0; i < ChartForRec.Series.Count; i++) ChartForRec.Series[i].Points.Clear();
+                for (int i = 0; i < ChartForSent.Series.Count; i++) ChartForRec.Series[i].Points.Clear();
             }
         }
 
@@ -213,11 +227,11 @@ namespace SystemMonitor
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();
 
-                    ChartForSysRes.Series["CPU forecast"].Points.Clear();
-                    ChartForSysRes.Series["Physical disc forecast"].Points.Clear();
-                    ChartForSysRes.Series["Memory forecast"].Points.Clear();
-                    ChartForTCPCon.Series["Received bytes forecast"].Points.Clear();
-                    ChartForTCPCon.Series["Sent bytes forecast"].Points.Clear();
+                    ChartCPU.Series["Forecast"].Points.Clear();
+                    ChartDisc.Series["Forecast"].Points.Clear();
+                    ChartMemory.Series["Forecast"].Points.Clear();
+                    ChartForRec.Series["Forecast"].Points.Clear();
+                    ChartForSent.Series["Forecast"].Points.Clear();
 
                     SearchingMaxSel.InitializeValues(DateTime.Now, "systemresources");
                     ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],
@@ -231,27 +245,27 @@ namespace SystemMonitor
                             {
                                 if (i == 0 && j == 0)
                                 {
-                                    ChartForSysRes.Series["CPU forecast"].Points.AddXY(programIteration, procesLoadValue);
-                                    ChartForSysRes.Series["Physical disc forecast"].Points.AddXY(programIteration, physicalDiscValue);
-                                    ChartForSysRes.Series["Memory forecast"].Points.AddXY(programIteration, memoryValue);
+                                    ChartCPU.Series["Forecast"].Points.AddXY(programIteration, procesLoadValue);
+                                    ChartDisc.Series["Forecast"].Points.AddXY(programIteration, physicalDiscValue);
+                                    ChartMemory.Series["Forecast"].Points.AddXY(programIteration, memoryValue);
                                 }
                                 if (j == 0)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess);
-                                    if (forecastVal > 0) ChartForSysRes.Series["CPU forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartForSysRes.Series["CPU forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0) ChartCPU.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                    if (forecastVal < 0) ChartCPU.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
                                 }
                                 else if (j == 1)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess);
-                                    if (forecastVal > 0) ChartForSysRes.Series["Physical disc forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartForSysRes.Series["Physical disc forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0) ChartDisc.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                    if (forecastVal < 0) ChartDisc.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
                                 }
                                 else if (j == 2)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess);
-                                    if (forecastVal > 0) ChartForSysRes.Series["Memory forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartForSysRes.Series["Memory forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0) ChartMemory.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                    if (forecastVal < 0) ChartMemory.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
                                 }
                             }
                         }
@@ -267,20 +281,20 @@ namespace SystemMonitor
                             {
                                 if (i == 0 && j == 0)              //поменять занчения и проверитьб
                                 {
-                                    ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(programIteration, recSegmentsValue);
-                                    ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(programIteration, sentSegmentsValue);
+                                    ChartForRec.Series["Forecast"].Points.AddXY(programIteration, recSegmentsValue);
+                                    ChartForSent.Series["Forecast"].Points.AddXY(programIteration, sentSegmentsValue);
                                 }
                                 if (j == 0)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount);
-                                    if (forecastVal > 0) ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartForTCPCon.Series["Received bytes forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0) ChartForRec.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                    if (forecastVal < 0) ChartForRec.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
                                 }
                                 else if (j == 1)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount);
-                                    if (forecastVal > 0) ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartForTCPCon.Series["Sent bytes forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0) ChartForSent.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                    if (forecastVal < 0) ChartForSent.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
                                 }
                             }
                         }
@@ -289,19 +303,8 @@ namespace SystemMonitor
                     ForecastingTime.Text = "Forecasting time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
                 }
             }
-            CounterLB.Text = "DataAnalysing counter: " + cnt;
+            ForecastingLabel.Text = "Forecast period: " + cnt;
         }
-
-        private void trackBarPosChartSR_Scroll(object sender, EventArgs e)
-        {
-            ChartForSysRes.ChartAreas[0].AxisX.ScaleView.Size = trackBarPosChartSR.Value;
-        }
-
-        private void trackBarPosChartNet_Scroll(object sender, EventArgs e)
-        {
-            ChartForTCPCon.ChartAreas[0].AxisX.ScaleView.Size = trackBarPosChartNet.Value;
-        }
-
         private void richTextBoxSysRes_TextChanged(object sender, EventArgs e)
         {
             string query = richTextBoxSysRes.Text;
@@ -323,6 +326,31 @@ namespace SystemMonitor
                     richTextBoxSysRes.SelectionColor = Color.Black;
                 }
             }
+        }
+
+        private void TrBarCPU_Scroll(object sender, EventArgs e)
+        {
+            ChartCPU.ChartAreas[0].AxisX.ScaleView.Size = TrBarCPU.Value;
+        }
+
+        private void TrBarDisc_Scroll(object sender, EventArgs e)
+        {
+            ChartDisc.ChartAreas[0].AxisX.ScaleView.Size = TrBarDisc.Value;
+        }
+
+        private void TrBarMem_Scroll(object sender, EventArgs e)
+        {
+            ChartMemory.ChartAreas[0].AxisX.ScaleView.Size = TrBarMem.Value;
+        }
+
+        private void trackBarPosChartNet_Scroll(object sender, EventArgs e)
+        {
+            ChartForRec.ChartAreas[0].AxisX.ScaleView.Size = trackBarPosChartNet.Value;
+        }
+
+        private void TrBarSent_Scroll(object sender, EventArgs e)
+        {
+            ChartForSent.ChartAreas[0].AxisX.ScaleView.Size = TrBarSent.Value;
         }
     }
 }

@@ -30,20 +30,26 @@ namespace SystemMonitor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series37 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series38 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series39 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series40 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Processor = new System.Diagnostics.PerformanceCounter();
             this.MainTimerProgram = new System.Windows.Forms.Timer(this.components);
@@ -51,25 +57,25 @@ namespace SystemMonitor
             this.Memory = new System.Diagnostics.PerformanceCounter();
             this.BytesReceived = new System.Diagnostics.PerformanceCounter();
             this.SentBytes = new System.Diagnostics.PerformanceCounter();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.ChartForTCPCon = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.ChartForRec = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.trackBarPosChartNet = new System.Windows.Forms.TrackBar();
-            this.BytesSentLabel = new System.Windows.Forms.Label();
-            this.ReceivedBytesLabel = new System.Windows.Forms.Label();
-            this.LabelItemsCount = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.TrBarMem = new System.Windows.Forms.TrackBar();
+            this.ChartMemory = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.TrBarDisc = new System.Windows.Forms.TrackBar();
+            this.ChartDisc = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ChartCPU = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.TrBarCPU = new System.Windows.Forms.TrackBar();
             this.trackBarPosChartSR = new System.Windows.Forms.TrackBar();
-            this.CounterLB = new System.Windows.Forms.Label();
-            this.ForecastingTime = new System.Windows.Forms.Label();
-            this.CountProcesses = new System.Windows.Forms.Label();
-            this.LabelMemoryLoad = new System.Windows.Forms.Label();
-            this.LabelPhysicalDisk = new System.Windows.Forms.Label();
-            this.ProcessLoadLabel = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.ChartForSysRes = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.TrBarSent = new System.Windows.Forms.TrackBar();
+            this.ChartForSent = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -91,11 +97,12 @@ namespace SystemMonitor
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.ConnectToSqlData = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.StatConLbl = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.ForecastingLabel = new System.Windows.Forms.ToolStripLabel();
             this.LabelValueIteration = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.ForecastingTime = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.LabelWrkTime = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -108,8 +115,7 @@ namespace SystemMonitor
             ((System.ComponentModel.ISupportInitialize)(this.Memory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BytesReceived)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SentBytes)).BeginInit();
-            this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartForTCPCon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartForRec)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartNet)).BeginInit();
             this.tabPage1.SuspendLayout();
@@ -117,10 +123,20 @@ namespace SystemMonitor
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBarMem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartMemory)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBarDisc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartDisc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartCPU)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBarCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartSR)).BeginInit();
-            this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartForSysRes)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBarSent)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartForSent)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -169,129 +185,73 @@ namespace SystemMonitor
             this.SentBytes.CounterName = "Bytes Sent/sec";
             this.SentBytes.InstanceName = "Realtek PCIe GBE Family Controller";
             // 
-            // groupBox5
+            // ChartForRec
             // 
-            this.groupBox5.Controls.Add(this.LabelItemsCount);
-            this.groupBox5.Controls.Add(this.trackBarPosChartNet);
-            this.groupBox5.Controls.Add(this.ReceivedBytesLabel);
-            this.groupBox5.Controls.Add(this.BytesSentLabel);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox5.Location = new System.Drawing.Point(0, 0);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(257, 312);
-            this.groupBox5.TabIndex = 8;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Data";
-            // 
-            // ChartForTCPCon
-            // 
-            this.ChartForTCPCon.BackColor = System.Drawing.SystemColors.Control;
-            chartArea7.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea7.AxisX.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea7.AxisX.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
-            chartArea7.AxisX.ScaleView.Size = 100D;
-            chartArea7.AxisX.ScaleView.Zoomable = false;
-            chartArea7.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
-            chartArea7.AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
-            chartArea7.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea7.AxisY.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea7.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
-            chartArea7.AxisY.ScrollBar.BackColor = System.Drawing.Color.DarkGray;
-            chartArea7.BackColor = System.Drawing.Color.Transparent;
-            chartArea7.Name = "ChartArea1";
-            this.ChartForTCPCon.ChartAreas.Add(chartArea7);
-            this.ChartForTCPCon.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend7.Name = "Legend1";
-            this.ChartForTCPCon.Legends.Add(legend7);
-            this.ChartForTCPCon.Location = new System.Drawing.Point(3, 18);
-            this.ChartForTCPCon.Name = "ChartForTCPCon";
-            this.ChartForTCPCon.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
-            series31.BorderWidth = 2;
-            series31.ChartArea = "ChartArea1";
-            series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series31.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            series31.LabelBackColor = System.Drawing.Color.White;
-            series31.LabelBorderWidth = 3;
-            series31.Legend = "Legend1";
-            series31.Name = "Received bytes";
-            series32.BorderWidth = 2;
-            series32.ChartArea = "ChartArea1";
-            series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series32.Color = System.Drawing.Color.Teal;
-            series32.LabelBorderWidth = 3;
-            series32.Legend = "Legend1";
-            series32.Name = "Sent bytes";
-            series33.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            series33.BorderWidth = 2;
-            series33.ChartArea = "ChartArea1";
-            series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series33.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            series33.Legend = "Legend1";
-            series33.Name = "Received bytes forecast";
-            series34.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            series34.BorderWidth = 2;
-            series34.ChartArea = "ChartArea1";
-            series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series34.Color = System.Drawing.Color.Teal;
-            series34.Legend = "Legend1";
-            series34.Name = "Sent bytes forecast";
-            this.ChartForTCPCon.Series.Add(series31);
-            this.ChartForTCPCon.Series.Add(series32);
-            this.ChartForTCPCon.Series.Add(series33);
-            this.ChartForTCPCon.Series.Add(series34);
-            this.ChartForTCPCon.Size = new System.Drawing.Size(1011, 291);
-            this.ChartForTCPCon.TabIndex = 6;
-            this.ChartForTCPCon.Text = "chart3";
+            this.ChartForRec.BackColor = System.Drawing.SystemColors.Control;
+            chartArea1.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea1.AxisX.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea1.AxisX.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea1.AxisX.ScaleView.Size = 100D;
+            chartArea1.AxisX.ScaleView.Zoomable = false;
+            chartArea1.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
+            chartArea1.AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
+            chartArea1.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea1.AxisY.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea1.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea1.AxisY.ScrollBar.BackColor = System.Drawing.Color.DarkGray;
+            chartArea1.BackColor = System.Drawing.Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            this.ChartForRec.ChartAreas.Add(chartArea1);
+            this.ChartForRec.Dock = System.Windows.Forms.DockStyle.Top;
+            legend1.Name = "Legend1";
+            this.ChartForRec.Legends.Add(legend1);
+            this.ChartForRec.Location = new System.Drawing.Point(3, 18);
+            this.ChartForRec.Name = "ChartForRec";
+            this.ChartForRec.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
+            series1.BorderWidth = 2;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            series1.LabelBackColor = System.Drawing.Color.White;
+            series1.LabelBorderWidth = 3;
+            series1.Legend = "Legend1";
+            series1.Name = "Received bytes";
+            series2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            series2.BorderWidth = 2;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            series2.Legend = "Legend1";
+            series2.Name = "Forecast";
+            this.ChartForRec.Series.Add(series1);
+            this.ChartForRec.Series.Add(series2);
+            this.ChartForRec.Size = new System.Drawing.Size(620, 240);
+            this.ChartForRec.TabIndex = 6;
+            this.ChartForRec.Text = "chart3";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.ChartForTCPCon);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(257, 0);
+            this.groupBox4.Controls.Add(this.trackBarPosChartNet);
+            this.groupBox4.Controls.Add(this.ChartForRec);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1017, 312);
+            this.groupBox4.Size = new System.Drawing.Size(626, 312);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Network adapter";
+            this.groupBox4.Text = "Received bytes";
             // 
             // trackBarPosChartNet
             // 
-            this.trackBarPosChartNet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarPosChartNet.Location = new System.Drawing.Point(6, 261);
+            this.trackBarPosChartNet.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.trackBarPosChartNet.Location = new System.Drawing.Point(3, 264);
             this.trackBarPosChartNet.Maximum = 500;
             this.trackBarPosChartNet.Minimum = 10;
             this.trackBarPosChartNet.Name = "trackBarPosChartNet";
-            this.trackBarPosChartNet.Size = new System.Drawing.Size(238, 45);
+            this.trackBarPosChartNet.Size = new System.Drawing.Size(620, 45);
             this.trackBarPosChartNet.TabIndex = 12;
             this.trackBarPosChartNet.Value = 10;
             this.trackBarPosChartNet.Scroll += new System.EventHandler(this.trackBarPosChartNet_Scroll);
-            // 
-            // BytesSentLabel
-            // 
-            this.BytesSentLabel.AutoSize = true;
-            this.BytesSentLabel.Location = new System.Drawing.Point(8, 53);
-            this.BytesSentLabel.Name = "BytesSentLabel";
-            this.BytesSentLabel.Size = new System.Drawing.Size(81, 16);
-            this.BytesSentLabel.TabIndex = 3;
-            this.BytesSentLabel.Text = "Sent bytes";
-            // 
-            // ReceivedBytesLabel
-            // 
-            this.ReceivedBytesLabel.AutoSize = true;
-            this.ReceivedBytesLabel.Location = new System.Drawing.Point(8, 37);
-            this.ReceivedBytesLabel.Name = "ReceivedBytesLabel";
-            this.ReceivedBytesLabel.Size = new System.Drawing.Size(117, 16);
-            this.ReceivedBytesLabel.TabIndex = 2;
-            this.ReceivedBytesLabel.Text = "Received bytes";
-            // 
-            // LabelItemsCount
-            // 
-            this.LabelItemsCount.AutoSize = true;
-            this.LabelItemsCount.Location = new System.Drawing.Point(8, 21);
-            this.LabelItemsCount.Name = "LabelItemsCount";
-            this.LabelItemsCount.Size = new System.Drawing.Size(123, 16);
-            this.LabelItemsCount.TabIndex = 1;
-            this.LabelItemsCount.Text = "LabelItemsCount";
             // 
             // tabPage1
             // 
@@ -317,179 +277,297 @@ namespace SystemMonitor
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer3.Panel1.Controls.Add(this.groupBox3);
+            this.splitContainer3.Panel1.Controls.Add(this.groupBox2);
             this.splitContainer3.Panel1.Controls.Add(this.groupBox1);
-            this.splitContainer3.Panel1.Controls.Add(this.groupBox6);
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer3.Panel2.Controls.Add(this.groupBox5);
+            this.splitContainer3.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer3.Size = new System.Drawing.Size(1276, 632);
             this.splitContainer3.SplitterDistance = 314;
             this.splitContainer3.TabIndex = 5;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.TrBarMem);
+            this.groupBox3.Controls.Add(this.ChartMemory);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(863, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(411, 312);
+            this.groupBox3.TabIndex = 13;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Memory";
+            // 
+            // TrBarMem
+            // 
+            this.TrBarMem.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TrBarMem.Location = new System.Drawing.Point(3, 264);
+            this.TrBarMem.Maximum = 500;
+            this.TrBarMem.Minimum = 10;
+            this.TrBarMem.Name = "TrBarMem";
+            this.TrBarMem.Size = new System.Drawing.Size(405, 45);
+            this.TrBarMem.TabIndex = 13;
+            this.TrBarMem.Value = 10;
+            this.TrBarMem.Scroll += new System.EventHandler(this.TrBarMem_Scroll);
+            // 
+            // ChartMemory
+            // 
+            this.ChartMemory.BackColor = System.Drawing.SystemColors.Control;
+            chartArea2.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea2.AxisX.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea2.AxisX.ScaleView.Size = 100D;
+            chartArea2.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
+            chartArea2.AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
+            chartArea2.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea2.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea2.BackColor = System.Drawing.Color.Transparent;
+            chartArea2.Name = "ChartArea1";
+            this.ChartMemory.ChartAreas.Add(chartArea2);
+            this.ChartMemory.Dock = System.Windows.Forms.DockStyle.Top;
+            legend2.Name = "Legend1";
+            this.ChartMemory.Legends.Add(legend2);
+            this.ChartMemory.Location = new System.Drawing.Point(3, 18);
+            this.ChartMemory.Name = "ChartMemory";
+            this.ChartMemory.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
+            series3.BorderWidth = 2;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            series3.Legend = "Legend1";
+            series3.Name = "Memory";
+            series4.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            series4.BorderWidth = 2;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            series4.Legend = "Legend1";
+            series4.Name = "Forecast";
+            this.ChartMemory.Series.Add(series3);
+            this.ChartMemory.Series.Add(series4);
+            this.ChartMemory.Size = new System.Drawing.Size(405, 246);
+            this.ChartMemory.TabIndex = 2;
+            this.ChartMemory.Text = "chart2";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.TrBarDisc);
+            this.groupBox2.Controls.Add(this.ChartDisc);
+            this.groupBox2.Controls.Add(this.trackBar1);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox2.Location = new System.Drawing.Point(440, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(423, 312);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Physical disc";
+            // 
+            // TrBarDisc
+            // 
+            this.TrBarDisc.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TrBarDisc.Location = new System.Drawing.Point(3, 264);
+            this.TrBarDisc.Maximum = 500;
+            this.TrBarDisc.Minimum = 10;
+            this.TrBarDisc.Name = "TrBarDisc";
+            this.TrBarDisc.Size = new System.Drawing.Size(417, 45);
+            this.TrBarDisc.TabIndex = 12;
+            this.TrBarDisc.Value = 10;
+            this.TrBarDisc.Scroll += new System.EventHandler(this.TrBarDisc_Scroll);
+            // 
+            // ChartDisc
+            // 
+            this.ChartDisc.BackColor = System.Drawing.SystemColors.Control;
+            chartArea3.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea3.AxisX.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea3.AxisX.ScaleView.Size = 100D;
+            chartArea3.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
+            chartArea3.AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
+            chartArea3.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea3.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea3.BackColor = System.Drawing.Color.Transparent;
+            chartArea3.Name = "ChartArea1";
+            this.ChartDisc.ChartAreas.Add(chartArea3);
+            this.ChartDisc.Dock = System.Windows.Forms.DockStyle.Top;
+            legend3.Name = "Legend1";
+            this.ChartDisc.Legends.Add(legend3);
+            this.ChartDisc.Location = new System.Drawing.Point(3, 18);
+            this.ChartDisc.Name = "ChartDisc";
+            this.ChartDisc.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
+            series5.BorderWidth = 2;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Color = System.Drawing.Color.Green;
+            series5.Legend = "Legend1";
+            series5.Name = "Phisycal disc";
+            series6.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            series6.BorderWidth = 2;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Color = System.Drawing.Color.Green;
+            series6.Legend = "Legend1";
+            series6.Name = "Forecast";
+            this.ChartDisc.Series.Add(series5);
+            this.ChartDisc.Series.Add(series6);
+            this.ChartDisc.Size = new System.Drawing.Size(417, 246);
+            this.ChartDisc.TabIndex = 2;
+            this.ChartDisc.Text = "chart1";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBar1.Location = new System.Drawing.Point(-570, 261);
+            this.trackBar1.Maximum = 500;
+            this.trackBar1.Minimum = 10;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(238, 45);
+            this.trackBar1.TabIndex = 11;
+            this.trackBar1.Value = 10;
+            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.ChartForSysRes);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(257, 0);
+            this.groupBox1.Controls.Add(this.ChartCPU);
+            this.groupBox1.Controls.Add(this.TrBarCPU);
+            this.groupBox1.Controls.Add(this.trackBarPosChartSR);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1017, 312);
+            this.groupBox1.Size = new System.Drawing.Size(440, 312);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "System parameters";
+            this.groupBox1.Text = "CPU";
+            // 
+            // ChartCPU
+            // 
+            this.ChartCPU.BackColor = System.Drawing.SystemColors.Control;
+            chartArea4.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea4.AxisX.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea4.AxisX.ScaleView.Size = 100D;
+            chartArea4.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
+            chartArea4.AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
+            chartArea4.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea4.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea4.BackColor = System.Drawing.Color.Transparent;
+            chartArea4.Name = "ChartArea1";
+            this.ChartCPU.ChartAreas.Add(chartArea4);
+            this.ChartCPU.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend4.Name = "Legend1";
+            this.ChartCPU.Legends.Add(legend4);
+            this.ChartCPU.Location = new System.Drawing.Point(3, 18);
+            this.ChartCPU.Name = "ChartCPU";
+            this.ChartCPU.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
+            series7.BorderWidth = 2;
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series7.Legend = "Legend1";
+            series7.LegendToolTip = "CPU";
+            series7.Name = "CPU";
+            series8.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            series8.BorderWidth = 2;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series8.LabelBorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            series8.Legend = "Legend1";
+            series8.LegendToolTip = "Forecast";
+            series8.Name = "Forecast";
+            this.ChartCPU.Series.Add(series7);
+            this.ChartCPU.Series.Add(series8);
+            this.ChartCPU.Size = new System.Drawing.Size(434, 246);
+            this.ChartCPU.TabIndex = 2;
+            this.ChartCPU.Text = "chart1";
+            // 
+            // TrBarCPU
+            // 
+            this.TrBarCPU.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TrBarCPU.Location = new System.Drawing.Point(3, 264);
+            this.TrBarCPU.Maximum = 500;
+            this.TrBarCPU.Minimum = 10;
+            this.TrBarCPU.Name = "TrBarCPU";
+            this.TrBarCPU.Size = new System.Drawing.Size(434, 45);
+            this.TrBarCPU.TabIndex = 11;
+            this.TrBarCPU.Value = 10;
+            this.TrBarCPU.Scroll += new System.EventHandler(this.TrBarCPU_Scroll);
             // 
             // trackBarPosChartSR
             // 
             this.trackBarPosChartSR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBarPosChartSR.Location = new System.Drawing.Point(6, 264);
+            this.trackBarPosChartSR.Location = new System.Drawing.Point(-553, 261);
             this.trackBarPosChartSR.Maximum = 500;
             this.trackBarPosChartSR.Minimum = 10;
             this.trackBarPosChartSR.Name = "trackBarPosChartSR";
             this.trackBarPosChartSR.Size = new System.Drawing.Size(238, 45);
             this.trackBarPosChartSR.TabIndex = 11;
             this.trackBarPosChartSR.Value = 10;
-            this.trackBarPosChartSR.Scroll += new System.EventHandler(this.trackBarPosChartSR_Scroll);
             // 
-            // CounterLB
+            // groupBox5
             // 
-            this.CounterLB.AutoSize = true;
-            this.CounterLB.Location = new System.Drawing.Point(8, 82);
-            this.CounterLB.Name = "CounterLB";
-            this.CounterLB.Size = new System.Drawing.Size(164, 16);
-            this.CounterLB.TabIndex = 10;
-            this.CounterLB.Text = "DataAnalysing counter";
+            this.groupBox5.Controls.Add(this.TrBarSent);
+            this.groupBox5.Controls.Add(this.ChartForSent);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox5.Location = new System.Drawing.Point(626, 0);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(648, 312);
+            this.groupBox5.TabIndex = 13;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Sent bytes";
             // 
-            // ForecastingTime
+            // TrBarSent
             // 
-            this.ForecastingTime.AutoSize = true;
-            this.ForecastingTime.Location = new System.Drawing.Point(8, 98);
-            this.ForecastingTime.Name = "ForecastingTime";
-            this.ForecastingTime.Size = new System.Drawing.Size(125, 16);
-            this.ForecastingTime.TabIndex = 9;
-            this.ForecastingTime.Text = "ForecastingTime";
+            this.TrBarSent.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TrBarSent.Location = new System.Drawing.Point(3, 264);
+            this.TrBarSent.Maximum = 500;
+            this.TrBarSent.Minimum = 10;
+            this.TrBarSent.Name = "TrBarSent";
+            this.TrBarSent.Size = new System.Drawing.Size(642, 45);
+            this.TrBarSent.TabIndex = 12;
+            this.TrBarSent.Value = 10;
+            this.TrBarSent.Scroll += new System.EventHandler(this.TrBarSent_Scroll);
             // 
-            // CountProcesses
+            // ChartForSent
             // 
-            this.CountProcesses.AutoSize = true;
-            this.CountProcesses.Location = new System.Drawing.Point(8, 18);
-            this.CountProcesses.Name = "CountProcesses";
-            this.CountProcesses.Size = new System.Drawing.Size(125, 16);
-            this.CountProcesses.TabIndex = 1;
-            this.CountProcesses.Text = "Count Processes";
-            // 
-            // LabelMemoryLoad
-            // 
-            this.LabelMemoryLoad.AutoSize = true;
-            this.LabelMemoryLoad.Location = new System.Drawing.Point(8, 66);
-            this.LabelMemoryLoad.Name = "LabelMemoryLoad";
-            this.LabelMemoryLoad.Size = new System.Drawing.Size(63, 16);
-            this.LabelMemoryLoad.TabIndex = 5;
-            this.LabelMemoryLoad.Text = "Memory";
-            // 
-            // LabelPhysicalDisk
-            // 
-            this.LabelPhysicalDisk.AutoSize = true;
-            this.LabelPhysicalDisk.Location = new System.Drawing.Point(8, 50);
-            this.LabelPhysicalDisk.Name = "LabelPhysicalDisk";
-            this.LabelPhysicalDisk.Size = new System.Drawing.Size(100, 16);
-            this.LabelPhysicalDisk.TabIndex = 3;
-            this.LabelPhysicalDisk.Text = "Physical disc";
-            // 
-            // ProcessLoadLabel
-            // 
-            this.ProcessLoadLabel.AutoSize = true;
-            this.ProcessLoadLabel.Location = new System.Drawing.Point(8, 34);
-            this.ProcessLoadLabel.Name = "ProcessLoadLabel";
-            this.ProcessLoadLabel.Size = new System.Drawing.Size(79, 16);
-            this.ProcessLoadLabel.TabIndex = 1;
-            this.ProcessLoadLabel.Text = "Processor";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.CountProcesses);
-            this.groupBox6.Controls.Add(this.trackBarPosChartSR);
-            this.groupBox6.Controls.Add(this.ProcessLoadLabel);
-            this.groupBox6.Controls.Add(this.CounterLB);
-            this.groupBox6.Controls.Add(this.LabelPhysicalDisk);
-            this.groupBox6.Controls.Add(this.ForecastingTime);
-            this.groupBox6.Controls.Add(this.LabelMemoryLoad);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox6.Location = new System.Drawing.Point(0, 0);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(257, 312);
-            this.groupBox6.TabIndex = 3;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Data";
-            // 
-            // ChartForSysRes
-            // 
-            this.ChartForSysRes.BackColor = System.Drawing.SystemColors.Control;
-            chartArea8.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea8.AxisX.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
-            chartArea8.AxisX.ScaleView.Size = 100D;
-            chartArea8.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
-            chartArea8.AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
-            chartArea8.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            chartArea8.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
-            chartArea8.BackColor = System.Drawing.Color.Transparent;
-            chartArea8.Name = "ChartArea1";
-            this.ChartForSysRes.ChartAreas.Add(chartArea8);
-            this.ChartForSysRes.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend8.Name = "Legend1";
-            this.ChartForSysRes.Legends.Add(legend8);
-            this.ChartForSysRes.Location = new System.Drawing.Point(3, 18);
-            this.ChartForSysRes.Name = "ChartForSysRes";
-            this.ChartForSysRes.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
-            series35.BorderWidth = 2;
-            series35.ChartArea = "ChartArea1";
-            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series35.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            series35.Legend = "Legend1";
-            series35.Name = "CPU";
-            series36.BorderWidth = 2;
-            series36.ChartArea = "ChartArea1";
-            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series36.Color = System.Drawing.Color.Green;
-            series36.Legend = "Legend1";
-            series36.Name = "Phisycal disc";
-            series37.BorderWidth = 2;
-            series37.ChartArea = "ChartArea1";
-            series37.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series37.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            series37.Legend = "Legend1";
-            series37.Name = "Memory";
-            series38.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            series38.BorderWidth = 2;
-            series38.ChartArea = "ChartArea1";
-            series38.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series38.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            series38.LabelBorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            series38.Legend = "Legend1";
-            series38.Name = "CPU forecast";
-            series39.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            series39.BorderWidth = 2;
-            series39.ChartArea = "ChartArea1";
-            series39.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series39.Color = System.Drawing.Color.Green;
-            series39.Legend = "Legend1";
-            series39.Name = "Physical disc forecast";
-            series40.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            series40.BorderWidth = 2;
-            series40.ChartArea = "ChartArea1";
-            series40.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series40.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            series40.Legend = "Legend1";
-            series40.Name = "Memory forecast";
-            this.ChartForSysRes.Series.Add(series35);
-            this.ChartForSysRes.Series.Add(series36);
-            this.ChartForSysRes.Series.Add(series37);
-            this.ChartForSysRes.Series.Add(series38);
-            this.ChartForSysRes.Series.Add(series39);
-            this.ChartForSysRes.Series.Add(series40);
-            this.ChartForSysRes.Size = new System.Drawing.Size(1011, 291);
-            this.ChartForSysRes.TabIndex = 2;
-            this.ChartForSysRes.Text = "chart1";
+            this.ChartForSent.BackColor = System.Drawing.SystemColors.Control;
+            chartArea5.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea5.AxisX.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea5.AxisX.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea5.AxisX.ScaleView.Size = 100D;
+            chartArea5.AxisX.ScaleView.Zoomable = false;
+            chartArea5.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.Gray;
+            chartArea5.AxisX.ScrollBar.LineColor = System.Drawing.Color.Black;
+            chartArea5.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea5.AxisY.MajorTickMark.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            chartArea5.AxisY.MajorTickMark.TickMarkStyle = System.Windows.Forms.DataVisualization.Charting.TickMarkStyle.InsideArea;
+            chartArea5.AxisY.ScrollBar.BackColor = System.Drawing.Color.DarkGray;
+            chartArea5.BackColor = System.Drawing.Color.Transparent;
+            chartArea5.Name = "ChartArea1";
+            this.ChartForSent.ChartAreas.Add(chartArea5);
+            this.ChartForSent.Dock = System.Windows.Forms.DockStyle.Top;
+            legend5.Name = "Legend1";
+            this.ChartForSent.Legends.Add(legend5);
+            this.ChartForSent.Location = new System.Drawing.Point(3, 18);
+            this.ChartForSent.Name = "ChartForSent";
+            this.ChartForSent.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
+            series9.BorderWidth = 2;
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Color = System.Drawing.Color.Teal;
+            series9.LabelBorderWidth = 3;
+            series9.Legend = "Legend1";
+            series9.Name = "Sent bytes";
+            series10.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+            series10.BorderWidth = 2;
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series10.Color = System.Drawing.Color.Teal;
+            series10.Legend = "Legend1";
+            series10.Name = "Forecast";
+            this.ChartForSent.Series.Add(series9);
+            this.ChartForSent.Series.Add(series10);
+            this.ChartForSent.Size = new System.Drawing.Size(642, 240);
+            this.ChartForSent.TabIndex = 6;
+            this.ChartForSent.Text = "chart3";
             // 
             // tabControl1
             // 
@@ -639,6 +717,7 @@ namespace SystemMonitor
             // 
             this.toolStrip1.BackColor = System.Drawing.Color.Gainsboro;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStrip1.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MainStartBtn,
             this.toolStripSeparator1,
@@ -648,11 +727,12 @@ namespace SystemMonitor
             this.toolStripSeparator6,
             this.ConnectToSqlData,
             this.toolStripSeparator5,
-            this.toolStripLabel2,
             this.StatConLbl,
             this.toolStripSeparator4,
-            this.toolStripLabel1,
+            this.ForecastingLabel,
             this.LabelValueIteration,
+            this.toolStripSeparator9,
+            this.ForecastingTime,
             this.toolStripSeparator3,
             this.LabelWrkTime,
             this.toolStripSeparator7,
@@ -668,11 +748,11 @@ namespace SystemMonitor
             // MainStartBtn
             // 
             this.MainStartBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.MainStartBtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MainStartBtn.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
             this.MainStartBtn.Image = ((System.Drawing.Image)(resources.GetObject("MainStartBtn.Image")));
             this.MainStartBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.MainStartBtn.Name = "MainStartBtn";
-            this.MainStartBtn.Size = new System.Drawing.Size(115, 32);
+            this.MainStartBtn.Size = new System.Drawing.Size(140, 32);
             this.MainStartBtn.Text = "Start monitoring";
             this.MainStartBtn.Click += new System.EventHandler(this.MainStartBtn_Click);
             // 
@@ -685,11 +765,11 @@ namespace SystemMonitor
             // 
             this.BtnStopWrk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.BtnStopWrk.Enabled = false;
-            this.BtnStopWrk.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
+            this.BtnStopWrk.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
             this.BtnStopWrk.Image = ((System.Drawing.Image)(resources.GetObject("BtnStopWrk.Image")));
             this.BtnStopWrk.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BtnStopWrk.Name = "BtnStopWrk";
-            this.BtnStopWrk.Size = new System.Drawing.Size(106, 32);
+            this.BtnStopWrk.Size = new System.Drawing.Size(124, 32);
             this.BtnStopWrk.Text = "Stop rendering";
             this.BtnStopWrk.Click += new System.EventHandler(this.BtnStopWrk_Click);
             // 
@@ -701,11 +781,11 @@ namespace SystemMonitor
             // ClearCharts
             // 
             this.ClearCharts.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ClearCharts.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
+            this.ClearCharts.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
             this.ClearCharts.Image = ((System.Drawing.Image)(resources.GetObject("ClearCharts.Image")));
             this.ClearCharts.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClearCharts.Name = "ClearCharts";
-            this.ClearCharts.Size = new System.Drawing.Size(89, 32);
+            this.ClearCharts.Size = new System.Drawing.Size(108, 32);
             this.ClearCharts.Text = "Clear Charts";
             this.ClearCharts.Click += new System.EventHandler(this.ClearCharts_Click);
             // 
@@ -717,11 +797,11 @@ namespace SystemMonitor
             // ConnectToSqlData
             // 
             this.ConnectToSqlData.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ConnectToSqlData.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
+            this.ConnectToSqlData.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
             this.ConnectToSqlData.Image = ((System.Drawing.Image)(resources.GetObject("ConnectToSqlData.Image")));
             this.ConnectToSqlData.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ConnectToSqlData.Name = "ConnectToSqlData";
-            this.ConnectToSqlData.Size = new System.Drawing.Size(139, 32);
+            this.ConnectToSqlData.Size = new System.Drawing.Size(164, 32);
             this.ConnectToSqlData.Text = "Connect to database";
             this.ConnectToSqlData.Click += new System.EventHandler(this.ConnectToSqlData_Click);
             // 
@@ -730,18 +810,11 @@ namespace SystemMonitor
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 35);
             // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(125, 32);
-            this.toolStripLabel2.Text = "Connection status:";
-            // 
             // StatConLbl
             // 
-            this.StatConLbl.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
+            this.StatConLbl.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
             this.StatConLbl.Name = "StatConLbl";
-            this.StatConLbl.Size = new System.Drawing.Size(93, 32);
+            this.StatConLbl.Size = new System.Drawing.Size(104, 32);
             this.StatConLbl.Text = "Disconnected";
             // 
             // toolStripSeparator4
@@ -749,19 +822,30 @@ namespace SystemMonitor
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 35);
             // 
-            // toolStripLabel1
+            // ForecastingLabel
             // 
-            this.toolStripLabel1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(212, 32);
-            this.toolStripLabel1.Text = "Number of iterations performed: ";
+            this.ForecastingLabel.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
+            this.ForecastingLabel.Name = "ForecastingLabel";
+            this.ForecastingLabel.Size = new System.Drawing.Size(16, 32);
+            this.ForecastingLabel.Text = "0";
             // 
             // LabelValueIteration
             // 
-            this.LabelValueIteration.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
+            this.LabelValueIteration.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
             this.LabelValueIteration.Name = "LabelValueIteration";
             this.LabelValueIteration.Size = new System.Drawing.Size(16, 32);
             this.LabelValueIteration.Text = "0";
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 35);
+            // 
+            // ForecastingTime
+            // 
+            this.ForecastingTime.Name = "ForecastingTime";
+            this.ForecastingTime.Size = new System.Drawing.Size(136, 32);
+            this.ForecastingTime.Text = "Forecasting time";
             // 
             // toolStripSeparator3
             // 
@@ -770,10 +854,10 @@ namespace SystemMonitor
             // 
             // LabelWrkTime
             // 
-            this.LabelWrkTime.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
+            this.LabelWrkTime.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
             this.LabelWrkTime.Name = "LabelWrkTime";
-            this.LabelWrkTime.Size = new System.Drawing.Size(258, 32);
-            this.LabelWrkTime.Text = "Working hours of the program: 00:00:00 ";
+            this.LabelWrkTime.Size = new System.Drawing.Size(192, 32);
+            this.LabelWrkTime.Text = "Working time: 00:00:00 ";
             // 
             // toolStripSeparator7
             // 
@@ -783,11 +867,11 @@ namespace SystemMonitor
             // OpenAnalysisBtn
             // 
             this.OpenAnalysisBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.OpenAnalysisBtn.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold);
+            this.OpenAnalysisBtn.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold);
             this.OpenAnalysisBtn.Image = ((System.Drawing.Image)(resources.GetObject("OpenAnalysisBtn.Image")));
             this.OpenAnalysisBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.OpenAnalysisBtn.Name = "OpenAnalysisBtn";
-            this.OpenAnalysisBtn.Size = new System.Drawing.Size(66, 32);
+            this.OpenAnalysisBtn.Size = new System.Drawing.Size(76, 32);
             this.OpenAnalysisBtn.Text = "Analysis";
             this.OpenAnalysisBtn.Click += new System.EventHandler(this.OpenAnalysisBtn_Click);
             // 
@@ -836,21 +920,33 @@ namespace SystemMonitor
             ((System.ComponentModel.ISupportInitialize)(this.Memory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BytesReceived)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SentBytes)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartForTCPCon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartForRec)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartNet)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBarMem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartMemory)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBarDisc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartDisc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartCPU)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBarCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosChartSR)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ChartForSysRes)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrBarSent)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartForSent)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -876,27 +972,18 @@ namespace SystemMonitor
         private System.Diagnostics.PerformanceCounter Memory;
         private System.Diagnostics.PerformanceCounter BytesReceived;
         private System.Diagnostics.PerformanceCounter SentBytes;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.DataVisualization.Charting.Chart ChartForTCPCon;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ChartForRec;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label BytesSentLabel;
-        private System.Windows.Forms.Label ReceivedBytesLabel;
-        private System.Windows.Forms.Label LabelItemsCount;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.DataVisualization.Charting.Chart ChartForSysRes;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ChartCPU;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label LabelMemoryLoad;
-        private System.Windows.Forms.Label LabelPhysicalDisk;
-        private System.Windows.Forms.Label ProcessLoadLabel;
         private System.Windows.Forms.Timer TimerWrkProgram;
-        private System.Windows.Forms.Label CountProcesses;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton MainStartBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton BtnStopWrk;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripLabel ForecastingLabel;
         private System.Windows.Forms.ToolStripLabel LabelValueIteration;
         private System.Windows.Forms.ToolStripLabel LabelWrkTime;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -904,7 +991,6 @@ namespace SystemMonitor
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridView MainDataGrid;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripLabel StatConLbl;
         private System.Windows.Forms.Button ClearTableDataSysRes;
         private System.Windows.Forms.Button DeleteTableSysRes;
@@ -924,10 +1010,21 @@ namespace SystemMonitor
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label ForecastingTime;
-        private System.Windows.Forms.Label CounterLB;
         private System.Windows.Forms.TrackBar trackBarPosChartSR;
         private System.Windows.Forms.TrackBar trackBarPosChartNet;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripLabel ForecastingTime;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ChartMemory;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ChartDisc;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TrackBar TrBarCPU;
+        private System.Windows.Forms.TrackBar TrBarMem;
+        private System.Windows.Forms.TrackBar TrBarDisc;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TrackBar TrBarSent;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ChartForSent;
     }
 }
 
