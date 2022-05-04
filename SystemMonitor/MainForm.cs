@@ -247,26 +247,62 @@ namespace SystemMonitor
                                 if (i == 0 && j == 0)
                                 {
                                     ChartCPU.Series["Forecast"].Points.AddXY(programIteration, procesLoadValue);
+                                    ChartCPU.Series["Max"].Points.AddXY(programIteration, procesLoadValue + (3 * Values.dispersion[0]));
+                                    ChartCPU.Series["Min"].Points.AddXY(programIteration, procesLoadValue - (3 * Values.dispersion[0]));
                                     ChartDisc.Series["Forecast"].Points.AddXY(programIteration, physicalDiscValue);
+                                    ChartDisc.Series["Max"].Points.AddXY(programIteration, physicalDiscValue + (3 * Values.dispersion[1]));
+                                    ChartDisc.Series["Min"].Points.AddXY(programIteration, physicalDiscValue - (3 * Values.dispersion[1]));
                                     ChartMemory.Series["Forecast"].Points.AddXY(programIteration, memoryValue);
+                                    ChartMemory.Series["Max"].Points.AddXY(programIteration, memoryValue + (3 * Values.dispersion[2]));
+                                    ChartMemory.Series["Min"].Points.AddXY(programIteration, memoryValue - (3 * Values.dispersion[2]));
                                 }
                                 if (j == 0)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess);
-                                    if (forecastVal > 0) ChartCPU.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartCPU.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0)
+                                    {
+                                        ChartCPU.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                        ChartCPU.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal + (3 * Values.dispersion[0]));
+                                        ChartCPU.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal - (3 * Values.dispersion[0]));
+                                    }
+                                    if (forecastVal < 0)
+                                    {
+                                        ChartCPU.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                        ChartCPU.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), 0 + (3 * Values.dispersion[0]));
+                                        ChartCPU.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), 0 - (3 * Values.dispersion[0]));
+                                    }
                                 }
                                 else if (j == 1)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess);
-                                    if (forecastVal > 0) ChartDisc.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartDisc.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0)
+                                    {
+                                        ChartDisc.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                        ChartDisc.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal + (3 * Values.dispersion[1]));
+                                        ChartDisc.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal - (3 * Values.dispersion[1]));
+                                    }
+                                    if (forecastVal < 0)
+                                    {
+                                        ChartDisc.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                        ChartDisc.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), 0 + (3 * Values.dispersion[1]));
+                                        ChartDisc.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), 0 - (3 * Values.dispersion[1]));
+                                    }
                                 }
                                 else if (j == 2)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(countProcess);
-                                    if (forecastVal > 0) ChartMemory.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartMemory.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0)
+                                    {
+                                        ChartMemory.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                        ChartMemory.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal + (3 * Values.dispersion[2]));
+                                        ChartMemory.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal - (3 * Values.dispersion[2]));
+                                    }
+                                    if (forecastVal < 0)
+                                    {
+                                        ChartMemory.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                        ChartMemory.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), 0 + (3 * Values.dispersion[2]));
+                                        ChartMemory.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), 0 - (3 * Values.dispersion[2]));
+                                    }
                                 }
                             }
                         }
@@ -284,19 +320,43 @@ namespace SystemMonitor
                                 if (i == 0 && j == 0)          
                                 {
                                     ChartForRec.Series["Forecast"].Points.AddXY(programIteration, recSegmentsValue);
+                                    ChartForRec.Series["Max"].Points.AddXY(programIteration, recSegmentsValue + (3 * Values.dispersion[0]));
+                                    ChartForRec.Series["Min"].Points.AddXY(programIteration, recSegmentsValue - (3 * Values.dispersion[0]));
                                     ChartForSent.Series["Forecast"].Points.AddXY(programIteration, sentSegmentsValue);
+                                    ChartForSent.Series["Max"].Points.AddXY(programIteration, sentSegmentsValue + (3 * Values.dispersion[1]));
+                                    ChartForSent.Series["Min"].Points.AddXY(programIteration, sentSegmentsValue - (3 * Values.dispersion[1]));
                                 }
                                 if (j == 0)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount);
-                                    if (forecastVal > 0) ChartForRec.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartForRec.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0)
+                                    {
+                                        ChartForRec.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                        ChartForRec.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal + (3 * Values.dispersion[0]));
+                                        ChartForRec.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal - (3 * Values.dispersion[0]));
+                                    }
+                                    if (forecastVal < 0)
+                                    {
+                                        ChartForRec.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                        ChartForRec.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), 0 + (3 * Values.dispersion[0]));
+                                        ChartForRec.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), 0 - (3 * Values.dispersion[0]));
+                                    }
                                 }
                                 else if (j == 1)
                                 {
                                     forecastVal = ForecastAnalize.forecast[i][j] * Convert.ToDouble(itemsCount);
-                                    if (forecastVal > 0) ChartForSent.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
-                                    if (forecastVal < 0) ChartForSent.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                    if (forecastVal > 0)
+                                    {
+                                        ChartForSent.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal);
+                                        ChartForSent.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal + (3 * Values.dispersion[1]));
+                                        ChartForSent.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), forecastVal - (3 * Values.dispersion[1]));
+                                    }
+                                    if (forecastVal < 0)
+                                    {
+                                        ChartForSent.Series["Forecast"].Points.AddXY(programIteration + (60 * (i + 1)), 0);
+                                        ChartForSent.Series["Max"].Points.AddXY(programIteration + (60 * (i + 1)), 0 + (3 * Values.dispersion[1]));
+                                        ChartForSent.Series["Min"].Points.AddXY(programIteration + (60 * (i + 1)), 0 - (3 * Values.dispersion[1]));
+                                    }
                                 }
                             }
                         }
