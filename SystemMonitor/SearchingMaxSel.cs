@@ -38,12 +38,14 @@ namespace SystemMonitor
             string time = "";
             if (table == "systemresources")
             {
-                columns = " avg(percproc)/avg(numberprocess), avg(percdisc)/avg(numberprocess), avg(percmemory)/avg(numberprocess) ";
+                //columns = " percproc*1.0/numberprocess, percdisc*1.0/numberprocess, percmemory*1.0/numberprocess ";
+                columns = " percproc, percdisc, percmemory ";
+
                 time = "timesysres";
             }
             else if (table == "network")
             {
-                columns = " avg(receivedbytes)/avg(connectionscount), avg(sentbyte)/avg(connectionscount) ";
+                columns = " receivedbytes, sentbyte ";
                 time = "timenetwork";
             }
             DataTable forecastMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +
@@ -77,11 +79,11 @@ namespace SystemMonitor
             }
 
             DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns} " +
-                $"from {table} where {time} between '{value.AddMinutes(-60):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}' " +
+                $"from {table} where {time} between '{value.AddMinutes(-12):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}' " +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
             DataTable tableMaxSel;
-            for (int i = 1; i < 30; i++)
+            for (int i = 15; i < 50; i++)
             {
                 tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +
                       $"from {table} where {time} between '{value.AddDays(-i).AddHours(-2):yyyy-MM-dd HH:mm:ss.fff}' and '{value.AddDays(-i).AddHours(2):yyyy-MM-dd HH:mm:ss.fff}' " +
@@ -91,7 +93,7 @@ namespace SystemMonitor
                     days = i;
                     break;
                 }
-                else if (i == 29)
+                else if (i == 49)
                     return;
             }
             tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +

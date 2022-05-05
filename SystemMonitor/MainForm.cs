@@ -219,7 +219,7 @@ namespace SystemMonitor
         private void ForecastingAnalysingMethod()
         {
             //Изменить параметры прогнозированных графиков            
-            if (programIteration > 4000)
+            if (programIteration > 800)
             {
                 if (cnt == 0 || programIteration == cnt)
                 {
