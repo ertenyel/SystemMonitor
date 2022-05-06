@@ -37,8 +37,7 @@ namespace SystemMonitor
         //Query
         public static DataTable LetsQuery(string query)
         {
-            DataTable dTable = new DataTable();
-            String sqlQuery;
+            DataTable dTable = new DataTable();            
 
             if (m_dbConn.State != ConnectionState.Open)
             {
@@ -47,9 +46,8 @@ namespace SystemMonitor
             }
 
             try
-            {
-                sqlQuery = query;
-                var adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
+            {                
+                var adapter = new SQLiteDataAdapter(query, m_dbConn);
                 adapter.Fill(dTable);
 
                 if (dTable.Rows.Count > 0)

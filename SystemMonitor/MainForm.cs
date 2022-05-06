@@ -219,7 +219,7 @@ namespace SystemMonitor
         private void ForecastingAnalysingMethod()
         {
             //Изменить параметры прогнозированных графиков            
-            if (programIteration > 800)
+            if (programIteration > 4000)
             {
                 if (cnt == 0 || programIteration == cnt)
                 {
@@ -228,10 +228,20 @@ namespace SystemMonitor
                     stopwatch.Start();
 
                     ChartCPU.Series["Forecast"].Points.Clear();
+                    ChartCPU.Series["Max"].Points.Clear();
+                    ChartCPU.Series["Min"].Points.Clear();
                     ChartDisc.Series["Forecast"].Points.Clear();
+                    ChartDisc.Series["Max"].Points.Clear();
+                    ChartDisc.Series["Min"].Points.Clear();
                     ChartMemory.Series["Forecast"].Points.Clear();
+                    ChartMemory.Series["Max"].Points.Clear();
+                    ChartMemory.Series["Min"].Points.Clear();
                     ChartForRec.Series["Forecast"].Points.Clear();
+                    ChartForRec.Series["Max"].Points.Clear();
+                    ChartForRec.Series["Min"].Points.Clear();
                     ChartForSent.Series["Forecast"].Points.Clear();
+                    ChartForSent.Series["Max"].Points.Clear();
+                    ChartForSent.Series["Min"].Points.Clear();
 
                     SearchingMaxSel.InitializeValues(DateTime.Now, "systemresources");
                     ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1],

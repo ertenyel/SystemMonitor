@@ -79,11 +79,11 @@ namespace SystemMonitor
             }
 
             DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns} " +
-                $"from {table} where {time} between '{value.AddMinutes(-12):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}' " +
+                $"from {table} where {time} between '{value.AddMinutes(-60):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}' " +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
             DataTable tableMaxSel;
-            for (int i = 15; i < 50; i++)
+            for (int i = 0; i < 40; i++)
             {
                 tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +
                       $"from {table} where {time} between '{value.AddDays(-i).AddHours(-2):yyyy-MM-dd HH:mm:ss.fff}' and '{value.AddDays(-i).AddHours(2):yyyy-MM-dd HH:mm:ss.fff}' " +
@@ -93,7 +93,7 @@ namespace SystemMonitor
                     days = i;
                     break;
                 }
-                else if (i == 49)
+                else if (i == 39)
                     return;
             }
             tableMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +
