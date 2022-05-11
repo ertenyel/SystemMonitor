@@ -38,14 +38,12 @@ namespace SystemMonitor
             string time = "";
             if (table == "systemresources")
             {
-                //columns = " percproc*1.0/numberprocess, percdisc*1.0/numberprocess, percmemory*1.0/numberprocess ";
-                columns = " percproc, percdisc, percmemory ";
-
+                columns = " percproc*1.0/numberprocess, percdisc*1.0/numberprocess, percmemory*1.0/numberprocess ";                
                 time = "timesysres";
             }
             else if (table == "network")
             {
-                columns = " receivedbytes, sentbyte ";
+                columns = " receivedbytes*1.0/connectionscount, sentbyte*1.0/connectionscount ";
                 time = "timenetwork";
             }
             DataTable forecastMaxSel = SqlLiteDataBase.LetsQuery($"select {columns} " +
@@ -60,7 +58,7 @@ namespace SystemMonitor
             }
             ComputeParameters(forecastMaxSelArr, "sko");
         }
-        public static void InitializeValues(DateTime value , string table)
+        public static void InitializeValues(DateTime value, string table)
         {
             maxFactor = 0;
             string columns = "";
@@ -79,7 +77,7 @@ namespace SystemMonitor
             }
 
             DataTable tableNewStory = SqlLiteDataBase.LetsQuery($"select {columns} " +
-                $"from {table} where {time} between '{value.AddMinutes(-60):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}' " +
+                $"from {table} where {time} between '{value.AddMinutes(-12):yyyy-MM-dd HH:mm:ss.fff}' and '{value:yyyy-MM-dd HH:mm:ss.fff}' " +
                 $"group by strftime('%Y-%m-%d %H:%M', {time})");
 
             DataTable tableMaxSel;
@@ -129,7 +127,7 @@ namespace SystemMonitor
             }
             ct = 0;
             ComputeParameters(Values.newStory, "x");
-            SearchMaxSel(Values.maxSel, Values.newStory.Length);            
+            SearchMaxSel(Values.maxSel, Values.newStory.Length);
         }
         private static void ComputeParameters(double[][] inputArray, string xOrYorSKO)
         {
@@ -163,7 +161,7 @@ namespace SystemMonitor
                         ZMarksX[i][j] = (inputArray[i][j] - avgVal[j]) / dispersion[j];
                 }
             }
-            else if(xOrYorSKO == "y")
+            else if (xOrYorSKO == "y")
             {
                 factor = 0;
                 ZMarksY = new double[inputArray.Length][];
@@ -188,7 +186,7 @@ namespace SystemMonitor
                 {
                     maxFactor = factor;
                     Values.resultMaxSel = Values.maybeMaxSel;
-                    Values.dateTimeResultMaxSel = Values.dateTimeMaybeMaxSel;                    
+                    Values.dateTimeResultMaxSel = Values.dateTimeMaybeMaxSel;
                 }
                 ct++;
                 if (ct == Values.maxSel.Length - Values.newStory.Length - 1) return;

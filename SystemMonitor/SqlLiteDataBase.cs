@@ -9,7 +9,7 @@ namespace SystemMonitor
     class SqlLiteDataBase
     {
         //variables
-        private static string dbFileName = "sample.sqlite";        
+        private static string dbFileName = "sample.sqlite";
         private static SQLiteConnection m_dbConn;
         private static SQLiteCommand m_sqlCmd;
 
@@ -37,7 +37,7 @@ namespace SystemMonitor
         //Query
         public static DataTable LetsQuery(string query)
         {
-            DataTable dTable = new DataTable();            
+            DataTable dTable = new DataTable();
 
             if (m_dbConn.State != ConnectionState.Open)
             {
@@ -46,8 +46,8 @@ namespace SystemMonitor
             }
 
             try
-            {                
-                var adapter = new SQLiteDataAdapter(query, m_dbConn);
+            {
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, m_dbConn);
                 adapter.Fill(dTable);
 
                 if (dTable.Rows.Count > 0)
@@ -126,7 +126,7 @@ namespace SystemMonitor
             try
             {
                 sqlQuery = "SELECT * FROM SystemResources";
-                var adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
                 adapter.Fill(dTable);
 
                 if (dTable.Rows.Count > 0)
@@ -229,7 +229,7 @@ namespace SystemMonitor
             try
             {
                 sqlQuery = "SELECT * FROM Security";
-                var adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
                 adapter.Fill(dTable);
 
                 if (dTable.Rows.Count > 0)
@@ -332,7 +332,7 @@ namespace SystemMonitor
             try
             {
                 sqlQuery = "SELECT * FROM Network";
-                var adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, m_dbConn);
                 adapter.Fill(dTable);
 
                 if (dTable.Rows.Count > 0)
