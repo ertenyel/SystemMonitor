@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SystemMonitor
 {
@@ -12,6 +13,7 @@ namespace SystemMonitor
     {
         public static string timeWritten;
         public static string audit;
+        private static double value;
         public string numberAuditValue;
         public int recSegmentsValue;
         public int sentSegmentsValue;
@@ -70,6 +72,7 @@ namespace SystemMonitor
             ShowActiveTcpConnections();
             if (btnWrkBool) InitializeParameters(ref procesLoadValue, ref physicalDiscValue, ref memoryValue, ref recSegmentsValue, ref sentSegmentsValue);
             else InitializeParameters(ref procesLoadValue, ref physicalDiscValue, ref memoryValue, ref recSegmentsValue, ref sentSegmentsValue, true);
+            InterpolationMethod();
             SqlLiteDataBase.SqlAddSysRes(countProcess, procesLoadValue, physicalDiscValue, memoryValue);
             SqlLiteDataBase.SqlAddNetwork(itemsCount, recSegmentsValue, sentSegmentsValue);
             ForecastingAnalysingMethod();
@@ -94,11 +97,67 @@ namespace SystemMonitor
             sentSegmentsValue = (int)Math.Round(SentBytes.NextValue());
         }
 
+        private void InterpolationMethod()
+        {
+            ComputeInterpolation(ChartCPU.Series["Max"].Points, "CPU", true);
+            ComputeInterpolation(ChartCPU.Series["Min"].Points, "CPU", false);
+            ComputeInterpolation(ChartDisc.Series["Max"].Points, "disc", true);
+            ComputeInterpolation(ChartDisc.Series["Min"].Points, "disc", false);
+            ComputeInterpolation(ChartMemory.Series["Max"].Points, "memory", true);
+            ComputeInterpolation(ChartMemory.Series["Min"].Points, "memory", false);
+            ComputeInterpolation(ChartForRec.Series["Max"].Points, "rb", true);
+            ComputeInterpolation(ChartForRec.Series["Min"].Points, "rb", false);
+            ComputeInterpolation(ChartForSent.Series["Max"].Points, "sb", true);
+            ComputeInterpolation(ChartForSent.Series["Min"].Points, "sb", false);
+        }
+
+        private void ComputeInterpolation(DataPointCollection dataPoints, string parameters, bool max)
+        {
+            value = 0.0;
+            if (parameters == "CPU") value = procesLoadValue;
+            if (parameters == "disc") value = physicalDiscValue;
+            if (parameters == "memory") value = memoryValue;
+            if (parameters == "rb") value = recSegmentsValue;
+            if (parameters == "sb") value = sentSegmentsValue;
+
+            if (dataPoints.Count > 0)
+            {
+                for (int i = 0; i < dataPoints.Count; i++)
+                {
+                    if (i == dataPoints.Count - 1) return;
+
+                    if (programIteration > dataPoints[i].XValue && programIteration < dataPoints[i + 1].XValue)
+                    {
+                        double X = programIteration;
+                        double x1 = dataPoints[i].XValue;
+                        double y1 = dataPoints[i].YValues[0];
+                        double x2 = dataPoints[i + 1].XValue;
+                        double y2 = dataPoints[i + 1].YValues[0];
+
+                        double Y = y1 + (X - x1) * (y2 - y1) / (x2 - x1);
+                        if (max)
+                        {
+                            if (value > Y)
+                            {                                
+                                listBox1.Items.Add("the value exceeded the allowed interval. Forecast value: " + Y + " Real value: " + value + " DateTime: " + DateTime.Now + " Program iteration: " + programIteration + " "  + parameters);
+                            }
+                        }
+                        else
+                        {
+                            if (value < Y)
+                            {
+                                listBox1.Items.Add("the value is below the allowed interval. Forecast value: " + Y + " Real value: " + value + " DateTime: " + DateTime.Now + " Program iteration: " + programIteration + " " + parameters);
+                            }
+                        }
+                    }
+                }
+            }
+        }        
         public void InitializeParameters(ref int valueCPUY, ref int valueDiscY, ref int valueMemY, ref int valueConRecY, ref int valueConSentY, bool count = false)
         {
             if (!count)
             {
-                ChartCPU.Series["CPU"].Points.AddXY(programIteration, valueCPUY);
+                ChartCPU.Series["CPU"].Points.AddXY(programIteration, valueCPUY);                             
                 ChartDisc.Series["Phisycal disc"].Points.AddXY(programIteration, valueDiscY);
                 ChartMemory.Series["Memory"].Points.AddXY(programIteration, valueMemY);
                 ChartForRec.Series["Received bytes"].Points.AddXY(programIteration, valueConRecY);
@@ -249,13 +308,13 @@ namespace SystemMonitor
                     SearchingMaxSel.ComputeInterval(Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length - 1], "systemresources");
                     if (ForecastAnalize.ComputeParamteres(ref Values.testMaxSel, ref Values.testNewStory, ref Values.resultMaxSel, ref Values.newStory))
                     {
-                        double forecastVal;
+                        double forecastVal;                                                
                         for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
                         {
                             for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
-                            {
+                            {                                                                
                                 if (i == 0 && j == 0)
-                                {
+                                {                                                                        
                                     ChartCPU.Series["Forecast"].Points.AddXY(programIteration, procesLoadValue);
                                     ChartCPU.Series["Max"].Points.AddXY(programIteration, procesLoadValue + (3 * countProcess * Values.dispersion[0]));
                                     ChartCPU.Series["Min"].Points.AddXY(programIteration, procesLoadValue - (3 * countProcess * Values.dispersion[0]));
