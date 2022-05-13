@@ -46,7 +46,7 @@ namespace SystemMonitor
             else
                 hoursStr = $"{hours}";
 
-            return $"Working hours of the program: {hoursStr}:{minutesStr}:{secondsStr}";
+            return $"Working time: {hoursStr}:{minutesStr}:{secondsStr}";
         }
     }
 }

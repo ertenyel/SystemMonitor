@@ -138,20 +138,18 @@ namespace SystemMonitor
                         if (max)
                         {
                             if (value > Y)
-                            {                                
-                                listBox1.Items.Add("the value exceeded the allowed interval. Forecast value: " + Y + " Real value: " + value + " DateTime: " + DateTime.Now + " Program iteration: " + programIteration + " "  + parameters);
-                            }
+                                listBox1.Items.Add("the value exceeded the allowed interval. Forecast value: " + Y + " Real value: " + value + " DateTime: " + DateTime.Now + " Program iteration: " + programIteration + " " + parameters);
                         }
                         else
                         {
                             if (value < Y)
-                            {
                                 listBox1.Items.Add("the value is below the allowed interval. Forecast value: " + Y + " Real value: " + value + " DateTime: " + DateTime.Now + " Program iteration: " + programIteration + " " + parameters);
-                            }
                         }
                     }
                 }
             }
+            if (listBox1.Items.Count > 10)
+                listBox1.Items.RemoveAt(0);
         }        
         public void InitializeParameters(ref int valueCPUY, ref int valueDiscY, ref int valueMemY, ref int valueConRecY, ref int valueConSentY, bool count = false)
         {
@@ -278,7 +276,7 @@ namespace SystemMonitor
         private void ForecastingAnalysingMethod()
         {
             //Изменить параметры прогнозированных графиков            
-            if (programIteration > 800)
+            if (programIteration > 4000)
             {
                 if (cnt == 0 || programIteration == cnt)
                 {
