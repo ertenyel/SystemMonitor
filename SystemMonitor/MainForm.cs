@@ -99,6 +99,8 @@ namespace SystemMonitor
 
         private void InterpolationMethod()
         {
+            if (listBox1.Items.Count > 10)
+                listBox1.Items.RemoveAt(0);
             ComputeInterpolation(ChartCPU.Series["Max"].Points, "CPU", true);
             ComputeInterpolation(ChartCPU.Series["Min"].Points, "CPU", false);
             ComputeInterpolation(ChartDisc.Series["Max"].Points, "disc", true);
@@ -148,8 +150,6 @@ namespace SystemMonitor
                     }
                 }
             }
-            if (listBox1.Items.Count > 10)
-                listBox1.Items.RemoveAt(0);
         }        
         public void InitializeParameters(ref int valueCPUY, ref int valueDiscY, ref int valueMemY, ref int valueConRecY, ref int valueConSentY, bool count = false)
         {
