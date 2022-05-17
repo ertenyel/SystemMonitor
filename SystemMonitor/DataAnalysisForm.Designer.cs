@@ -31,58 +31,49 @@ namespace SystemMonitor
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series31 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series32 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series33 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series34 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series35 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series36 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series37 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series38 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series39 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series40 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series41 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series42 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series43 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series44 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series45 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series46 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series47 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series48 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series49 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series50 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series51 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series52 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series53 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series54 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series55 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series56 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series57 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series58 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series59 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series60 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series61 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series62 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series63 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series64 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.chartForOutputHistory = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.cbForSelCol = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.comboBoxTableForModel = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.beginDateTime = new System.Windows.Forms.DateTimePicker();
@@ -110,12 +101,14 @@ namespace SystemMonitor
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbForSysResData = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.DtpForClust = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
             this.BtnSysRes = new System.Windows.Forms.Button();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.DtpForClust = new System.Windows.Forms.DateTimePicker();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -153,6 +146,7 @@ namespace SystemMonitor
             this.tabControl3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -181,7 +175,7 @@ namespace SystemMonitor
             // 
             this.splitContainer3.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer3.Size = new System.Drawing.Size(1333, 701);
-            this.splitContainer3.SplitterDistance = 460;
+            this.splitContainer3.SplitterDistance = 613;
             this.splitContainer3.TabIndex = 1;
             // 
             // chartForOutputHistory
@@ -199,126 +193,58 @@ namespace SystemMonitor
             this.chartForOutputHistory.Legends.Add(legend7);
             this.chartForOutputHistory.Location = new System.Drawing.Point(0, 0);
             this.chartForOutputHistory.Name = "chartForOutputHistory";
-            series33.ChartArea = "ChartArea1";
-            series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series33.Legend = "Legend1";
-            series33.Name = "Series1";
-            series34.ChartArea = "ChartArea1";
-            series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series34.Legend = "Legend1";
-            series34.Name = "Series2";
-            series35.ChartArea = "ChartArea1";
-            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series35.Legend = "Legend1";
-            series35.Name = "Series3";
-            series36.ChartArea = "ChartArea1";
-            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series36.Legend = "Legend1";
-            series36.Name = "Series4";
-            series37.ChartArea = "ChartArea1";
-            series37.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series37.Legend = "Legend1";
-            series37.Name = "Series5";
-            series38.ChartArea = "ChartArea1";
-            series38.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series38.Legend = "Legend1";
-            series38.Name = "Series6";
-            series39.ChartArea = "ChartArea1";
-            series39.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series39.Legend = "Legend1";
-            series39.Name = "Series7";
-            this.chartForOutputHistory.Series.Add(series33);
-            this.chartForOutputHistory.Series.Add(series34);
-            this.chartForOutputHistory.Series.Add(series35);
-            this.chartForOutputHistory.Series.Add(series36);
-            this.chartForOutputHistory.Series.Add(series37);
-            this.chartForOutputHistory.Series.Add(series38);
-            this.chartForOutputHistory.Series.Add(series39);
-            this.chartForOutputHistory.Size = new System.Drawing.Size(1329, 456);
+            series29.BorderWidth = 2;
+            series29.ChartArea = "ChartArea1";
+            series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series29.Legend = "Legend1";
+            series29.Name = "Процессор";
+            series30.BorderWidth = 2;
+            series30.ChartArea = "ChartArea1";
+            series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series30.Legend = "Legend1";
+            series30.Name = "Жесткий диск";
+            series31.BorderWidth = 2;
+            series31.ChartArea = "ChartArea1";
+            series31.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series31.Legend = "Legend1";
+            series31.Name = "Оперативная память";
+            this.chartForOutputHistory.Series.Add(series29);
+            this.chartForOutputHistory.Series.Add(series30);
+            this.chartForOutputHistory.Series.Add(series31);
+            this.chartForOutputHistory.Size = new System.Drawing.Size(1329, 609);
             this.chartForOutputHistory.TabIndex = 0;
             this.chartForOutputHistory.Text = "chart1";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.cbForSelCol);
-            this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Controls.Add(this.comboBoxTableForModel);
-            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.trackBar1);
             this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.richTextBox1);
             this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.beginDateTime);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1329, 233);
+            this.groupBox4.Size = new System.Drawing.Size(1329, 80);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Parameters";
             // 
-            // cbForSelCol
-            // 
-            this.cbForSelCol.FormattingEnabled = true;
-            this.cbForSelCol.Location = new System.Drawing.Point(118, 64);
-            this.cbForSelCol.Name = "cbForSelCol";
-            this.cbForSelCol.Size = new System.Drawing.Size(195, 28);
-            this.cbForSelCol.TabIndex = 20;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 25);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(106, 20);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "Select a table";
-            // 
-            // comboBoxTableForModel
-            // 
-            this.comboBoxTableForModel.FormattingEnabled = true;
-            this.comboBoxTableForModel.Items.AddRange(new object[] {
-            "systemresources",
-            "network"});
-            this.comboBoxTableForModel.Location = new System.Drawing.Point(118, 22);
-            this.comboBoxTableForModel.Name = "comboBoxTableForModel";
-            this.comboBoxTableForModel.Size = new System.Drawing.Size(195, 28);
-            this.comboBoxTableForModel.TabIndex = 18;
-            this.comboBoxTableForModel.SelectedIndexChanged += new System.EventHandler(this.comboBoxTableForModel_SelectedIndexChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 67);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 20);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Select column";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 203);
+            this.label5.Location = new System.Drawing.Point(6, 49);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(101, 20);
             this.label5.TabIndex = 15;
             this.label5.Text = "Working time";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(319, 22);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1007, 208);
-            this.richTextBox1.TabIndex = 14;
-            this.richTextBox1.Text = "";
-            // 
             // button1
             // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(10, 159);
+            this.button1.Location = new System.Drawing.Point(163, 49);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(303, 41);
+            this.button1.Size = new System.Drawing.Size(229, 25);
             this.button1.TabIndex = 13;
             this.button1.Text = "Test forecasting model";
             this.button1.UseVisualStyleBackColor = true;
@@ -327,7 +253,7 @@ namespace SystemMonitor
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 104);
+            this.label4.Location = new System.Drawing.Point(6, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(151, 20);
             this.label4.TabIndex = 6;
@@ -337,9 +263,9 @@ namespace SystemMonitor
             // 
             this.beginDateTime.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.beginDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.beginDateTime.Location = new System.Drawing.Point(118, 127);
+            this.beginDateTime.Location = new System.Drawing.Point(163, 17);
             this.beginDateTime.Name = "beginDateTime";
-            this.beginDateTime.Size = new System.Drawing.Size(195, 26);
+            this.beginDateTime.Size = new System.Drawing.Size(314, 26);
             this.beginDateTime.TabIndex = 4;
             // 
             // panel3
@@ -426,36 +352,36 @@ namespace SystemMonitor
             this.chartForNetRecClustAnalysis.Legends.Add(legend8);
             this.chartForNetRecClustAnalysis.Location = new System.Drawing.Point(3, 3);
             this.chartForNetRecClustAnalysis.Name = "chartForNetRecClustAnalysis";
-            series40.ChartArea = "ChartArea1";
-            series40.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series40.Legend = "Legend1";
-            series40.MarkerSize = 7;
-            series40.Name = "First cluster";
-            series41.ChartArea = "ChartArea1";
-            series41.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series41.Legend = "Legend1";
-            series41.MarkerSize = 7;
-            series41.Name = "Second cluster";
-            series42.ChartArea = "ChartArea1";
-            series42.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series42.Legend = "Legend1";
-            series42.MarkerSize = 7;
-            series42.Name = "Third cluster";
-            series43.ChartArea = "ChartArea1";
-            series43.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series43.Legend = "Legend1";
-            series43.MarkerSize = 7;
-            series43.Name = "Cluster four";
-            series44.ChartArea = "ChartArea1";
-            series44.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series44.Legend = "Legend1";
-            series44.MarkerSize = 7;
-            series44.Name = "Cluster five";
-            this.chartForNetRecClustAnalysis.Series.Add(series40);
-            this.chartForNetRecClustAnalysis.Series.Add(series41);
-            this.chartForNetRecClustAnalysis.Series.Add(series42);
-            this.chartForNetRecClustAnalysis.Series.Add(series43);
-            this.chartForNetRecClustAnalysis.Series.Add(series44);
+            series32.ChartArea = "ChartArea1";
+            series32.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series32.Legend = "Legend1";
+            series32.MarkerSize = 7;
+            series32.Name = "First cluster";
+            series33.ChartArea = "ChartArea1";
+            series33.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series33.Legend = "Legend1";
+            series33.MarkerSize = 7;
+            series33.Name = "Second cluster";
+            series34.ChartArea = "ChartArea1";
+            series34.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series34.Legend = "Legend1";
+            series34.MarkerSize = 7;
+            series34.Name = "Third cluster";
+            series35.ChartArea = "ChartArea1";
+            series35.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series35.Legend = "Legend1";
+            series35.MarkerSize = 7;
+            series35.Name = "Cluster four";
+            series36.ChartArea = "ChartArea1";
+            series36.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series36.Legend = "Legend1";
+            series36.MarkerSize = 7;
+            series36.Name = "Cluster five";
+            this.chartForNetRecClustAnalysis.Series.Add(series32);
+            this.chartForNetRecClustAnalysis.Series.Add(series33);
+            this.chartForNetRecClustAnalysis.Series.Add(series34);
+            this.chartForNetRecClustAnalysis.Series.Add(series35);
+            this.chartForNetRecClustAnalysis.Series.Add(series36);
             this.chartForNetRecClustAnalysis.Size = new System.Drawing.Size(633, 357);
             this.chartForNetRecClustAnalysis.TabIndex = 3;
             this.chartForNetRecClustAnalysis.Text = "chart1";
@@ -466,7 +392,7 @@ namespace SystemMonitor
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(639, 336);
+            this.tabPage6.Size = new System.Drawing.Size(639, 370);
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "Sent Bytes";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -487,37 +413,37 @@ namespace SystemMonitor
             this.chartForNetSenAnalysis.Legends.Add(legend9);
             this.chartForNetSenAnalysis.Location = new System.Drawing.Point(3, 3);
             this.chartForNetSenAnalysis.Name = "chartForNetSenAnalysis";
-            series45.ChartArea = "ChartArea1";
-            series45.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series45.Legend = "Legend1";
-            series45.MarkerSize = 7;
-            series45.Name = "First cluster";
-            series46.ChartArea = "ChartArea1";
-            series46.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series46.Legend = "Legend1";
-            series46.MarkerSize = 7;
-            series46.Name = "Second cluster";
-            series47.ChartArea = "ChartArea1";
-            series47.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series47.Legend = "Legend1";
-            series47.MarkerSize = 7;
-            series47.Name = "Third cluster";
-            series48.ChartArea = "ChartArea1";
-            series48.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series48.Legend = "Legend1";
-            series48.MarkerSize = 7;
-            series48.Name = "Cluster four";
-            series49.ChartArea = "ChartArea1";
-            series49.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series49.Legend = "Legend1";
-            series49.MarkerSize = 7;
-            series49.Name = "Cluster five";
-            this.chartForNetSenAnalysis.Series.Add(series45);
-            this.chartForNetSenAnalysis.Series.Add(series46);
-            this.chartForNetSenAnalysis.Series.Add(series47);
-            this.chartForNetSenAnalysis.Series.Add(series48);
-            this.chartForNetSenAnalysis.Series.Add(series49);
-            this.chartForNetSenAnalysis.Size = new System.Drawing.Size(633, 330);
+            series37.ChartArea = "ChartArea1";
+            series37.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series37.Legend = "Legend1";
+            series37.MarkerSize = 7;
+            series37.Name = "First cluster";
+            series38.ChartArea = "ChartArea1";
+            series38.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series38.Legend = "Legend1";
+            series38.MarkerSize = 7;
+            series38.Name = "Second cluster";
+            series39.ChartArea = "ChartArea1";
+            series39.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series39.Legend = "Legend1";
+            series39.MarkerSize = 7;
+            series39.Name = "Third cluster";
+            series40.ChartArea = "ChartArea1";
+            series40.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series40.Legend = "Legend1";
+            series40.MarkerSize = 7;
+            series40.Name = "Cluster four";
+            series41.ChartArea = "ChartArea1";
+            series41.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series41.Legend = "Legend1";
+            series41.MarkerSize = 7;
+            series41.Name = "Cluster five";
+            this.chartForNetSenAnalysis.Series.Add(series37);
+            this.chartForNetSenAnalysis.Series.Add(series38);
+            this.chartForNetSenAnalysis.Series.Add(series39);
+            this.chartForNetSenAnalysis.Series.Add(series40);
+            this.chartForNetSenAnalysis.Series.Add(series41);
+            this.chartForNetSenAnalysis.Size = new System.Drawing.Size(633, 364);
             this.chartForNetSenAnalysis.TabIndex = 4;
             this.chartForNetSenAnalysis.Text = "chart1";
             // 
@@ -639,36 +565,36 @@ namespace SystemMonitor
             this.chartForDataAnalysisCpu.Legends.Add(legend10);
             this.chartForDataAnalysisCpu.Location = new System.Drawing.Point(3, 3);
             this.chartForDataAnalysisCpu.Name = "chartForDataAnalysisCpu";
-            series50.ChartArea = "ChartArea1";
-            series50.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series50.Legend = "Legend1";
-            series50.MarkerSize = 7;
-            series50.Name = "First cluster";
-            series51.ChartArea = "ChartArea1";
-            series51.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series51.Legend = "Legend1";
-            series51.MarkerSize = 7;
-            series51.Name = "Second cluster";
-            series52.ChartArea = "ChartArea1";
-            series52.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series52.Legend = "Legend1";
-            series52.MarkerSize = 7;
-            series52.Name = "Third cluster";
-            series53.ChartArea = "ChartArea1";
-            series53.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series53.Legend = "Legend1";
-            series53.MarkerSize = 7;
-            series53.Name = "Cluster four";
-            series54.ChartArea = "ChartArea1";
-            series54.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series54.Legend = "Legend1";
-            series54.MarkerSize = 7;
-            series54.Name = "Cluster five";
-            this.chartForDataAnalysisCpu.Series.Add(series50);
-            this.chartForDataAnalysisCpu.Series.Add(series51);
-            this.chartForDataAnalysisCpu.Series.Add(series52);
-            this.chartForDataAnalysisCpu.Series.Add(series53);
-            this.chartForDataAnalysisCpu.Series.Add(series54);
+            series42.ChartArea = "ChartArea1";
+            series42.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series42.Legend = "Legend1";
+            series42.MarkerSize = 7;
+            series42.Name = "First cluster";
+            series43.ChartArea = "ChartArea1";
+            series43.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series43.Legend = "Legend1";
+            series43.MarkerSize = 7;
+            series43.Name = "Second cluster";
+            series44.ChartArea = "ChartArea1";
+            series44.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series44.Legend = "Legend1";
+            series44.MarkerSize = 7;
+            series44.Name = "Third cluster";
+            series45.ChartArea = "ChartArea1";
+            series45.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series45.Legend = "Legend1";
+            series45.MarkerSize = 7;
+            series45.Name = "Cluster four";
+            series46.ChartArea = "ChartArea1";
+            series46.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series46.Legend = "Legend1";
+            series46.MarkerSize = 7;
+            series46.Name = "Cluster five";
+            this.chartForDataAnalysisCpu.Series.Add(series42);
+            this.chartForDataAnalysisCpu.Series.Add(series43);
+            this.chartForDataAnalysisCpu.Series.Add(series44);
+            this.chartForDataAnalysisCpu.Series.Add(series45);
+            this.chartForDataAnalysisCpu.Series.Add(series46);
             this.chartForDataAnalysisCpu.Size = new System.Drawing.Size(656, 358);
             this.chartForDataAnalysisCpu.TabIndex = 2;
             this.chartForDataAnalysisCpu.Text = "chart1";
@@ -676,10 +602,10 @@ namespace SystemMonitor
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.chartForDataAnalysisDisc);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(662, 364);
+            this.tabPage2.Size = new System.Drawing.Size(662, 371);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Disk usage %";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -699,37 +625,37 @@ namespace SystemMonitor
             this.chartForDataAnalysisDisc.Legends.Add(legend11);
             this.chartForDataAnalysisDisc.Location = new System.Drawing.Point(3, 3);
             this.chartForDataAnalysisDisc.Name = "chartForDataAnalysisDisc";
-            series55.ChartArea = "ChartArea1";
-            series55.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series55.Legend = "Legend1";
-            series55.MarkerSize = 7;
-            series55.Name = "First cluster";
-            series56.ChartArea = "ChartArea1";
-            series56.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series56.Legend = "Legend1";
-            series56.MarkerSize = 7;
-            series56.Name = "Second cluster";
-            series57.ChartArea = "ChartArea1";
-            series57.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series57.Legend = "Legend1";
-            series57.MarkerSize = 7;
-            series57.Name = "Third cluster";
-            series58.ChartArea = "ChartArea1";
-            series58.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series58.Legend = "Legend1";
-            series58.MarkerSize = 7;
-            series58.Name = "Cluster four";
-            series59.ChartArea = "ChartArea1";
-            series59.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series59.Legend = "Legend1";
-            series59.MarkerSize = 7;
-            series59.Name = "Cluster five";
-            this.chartForDataAnalysisDisc.Series.Add(series55);
-            this.chartForDataAnalysisDisc.Series.Add(series56);
-            this.chartForDataAnalysisDisc.Series.Add(series57);
-            this.chartForDataAnalysisDisc.Series.Add(series58);
-            this.chartForDataAnalysisDisc.Series.Add(series59);
-            this.chartForDataAnalysisDisc.Size = new System.Drawing.Size(656, 358);
+            series47.ChartArea = "ChartArea1";
+            series47.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series47.Legend = "Legend1";
+            series47.MarkerSize = 7;
+            series47.Name = "First cluster";
+            series48.ChartArea = "ChartArea1";
+            series48.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series48.Legend = "Legend1";
+            series48.MarkerSize = 7;
+            series48.Name = "Second cluster";
+            series49.ChartArea = "ChartArea1";
+            series49.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series49.Legend = "Legend1";
+            series49.MarkerSize = 7;
+            series49.Name = "Third cluster";
+            series50.ChartArea = "ChartArea1";
+            series50.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series50.Legend = "Legend1";
+            series50.MarkerSize = 7;
+            series50.Name = "Cluster four";
+            series51.ChartArea = "ChartArea1";
+            series51.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series51.Legend = "Legend1";
+            series51.MarkerSize = 7;
+            series51.Name = "Cluster five";
+            this.chartForDataAnalysisDisc.Series.Add(series47);
+            this.chartForDataAnalysisDisc.Series.Add(series48);
+            this.chartForDataAnalysisDisc.Series.Add(series49);
+            this.chartForDataAnalysisDisc.Series.Add(series50);
+            this.chartForDataAnalysisDisc.Series.Add(series51);
+            this.chartForDataAnalysisDisc.Size = new System.Drawing.Size(656, 365);
             this.chartForDataAnalysisDisc.TabIndex = 3;
             this.chartForDataAnalysisDisc.Text = "chart1";
             // 
@@ -739,7 +665,7 @@ namespace SystemMonitor
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(662, 337);
+            this.tabPage4.Size = new System.Drawing.Size(662, 371);
             this.tabPage4.TabIndex = 2;
             this.tabPage4.Text = "% of RAM usage";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -760,37 +686,37 @@ namespace SystemMonitor
             this.chartForDataAnalysisMem.Legends.Add(legend12);
             this.chartForDataAnalysisMem.Location = new System.Drawing.Point(3, 3);
             this.chartForDataAnalysisMem.Name = "chartForDataAnalysisMem";
-            series60.ChartArea = "ChartArea1";
-            series60.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series60.Legend = "Legend1";
-            series60.MarkerSize = 7;
-            series60.Name = "First cluster";
-            series61.ChartArea = "ChartArea1";
-            series61.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series61.Legend = "Legend1";
-            series61.MarkerSize = 7;
-            series61.Name = "Second cluster";
-            series62.ChartArea = "ChartArea1";
-            series62.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series62.Legend = "Legend1";
-            series62.MarkerSize = 7;
-            series62.Name = "Third cluster";
-            series63.ChartArea = "ChartArea1";
-            series63.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series63.Legend = "Legend1";
-            series63.MarkerSize = 7;
-            series63.Name = "Cluster four";
-            series64.ChartArea = "ChartArea1";
-            series64.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
-            series64.Legend = "Legend1";
-            series64.MarkerSize = 7;
-            series64.Name = "Cluster five";
-            this.chartForDataAnalysisMem.Series.Add(series60);
-            this.chartForDataAnalysisMem.Series.Add(series61);
-            this.chartForDataAnalysisMem.Series.Add(series62);
-            this.chartForDataAnalysisMem.Series.Add(series63);
-            this.chartForDataAnalysisMem.Series.Add(series64);
-            this.chartForDataAnalysisMem.Size = new System.Drawing.Size(656, 331);
+            series52.ChartArea = "ChartArea1";
+            series52.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series52.Legend = "Legend1";
+            series52.MarkerSize = 7;
+            series52.Name = "First cluster";
+            series53.ChartArea = "ChartArea1";
+            series53.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series53.Legend = "Legend1";
+            series53.MarkerSize = 7;
+            series53.Name = "Second cluster";
+            series54.ChartArea = "ChartArea1";
+            series54.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series54.Legend = "Legend1";
+            series54.MarkerSize = 7;
+            series54.Name = "Third cluster";
+            series55.ChartArea = "ChartArea1";
+            series55.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series55.Legend = "Legend1";
+            series55.MarkerSize = 7;
+            series55.Name = "Cluster four";
+            series56.ChartArea = "ChartArea1";
+            series56.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
+            series56.Legend = "Legend1";
+            series56.MarkerSize = 7;
+            series56.Name = "Cluster five";
+            this.chartForDataAnalysisMem.Series.Add(series52);
+            this.chartForDataAnalysisMem.Series.Add(series53);
+            this.chartForDataAnalysisMem.Series.Add(series54);
+            this.chartForDataAnalysisMem.Series.Add(series55);
+            this.chartForDataAnalysisMem.Series.Add(series56);
+            this.chartForDataAnalysisMem.Size = new System.Drawing.Size(656, 365);
             this.chartForDataAnalysisMem.TabIndex = 4;
             this.chartForDataAnalysisMem.Text = "chart1";
             // 
@@ -827,6 +753,24 @@ namespace SystemMonitor
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(674, 78);
             this.panel4.TabIndex = 3;
+            // 
+            // DtpForClust
+            // 
+            this.DtpForClust.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.DtpForClust.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DtpForClust.Location = new System.Drawing.Point(7, 10);
+            this.DtpForClust.Name = "DtpForClust";
+            this.DtpForClust.Size = new System.Drawing.Size(195, 26);
+            this.DtpForClust.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(489, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "label3";
             // 
             // BtnSysRes
             // 
@@ -873,23 +817,25 @@ namespace SystemMonitor
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "The maximum similarity model";
             // 
-            // label3
+            // trackBar1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(489, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 20);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "label3";
+            this.trackBar1.Location = new System.Drawing.Point(483, 29);
+            this.trackBar1.Maximum = 2000;
+            this.trackBar1.Minimum = 10;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(840, 45);
+            this.trackBar1.TabIndex = 1;
+            this.trackBar1.Value = 10;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
-            // DtpForClust
+            // label1
             // 
-            this.DtpForClust.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.DtpForClust.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DtpForClust.Location = new System.Drawing.Point(7, 10);
-            this.DtpForClust.Name = "DtpForClust";
-            this.DtpForClust.Size = new System.Drawing.Size(195, 26);
-            this.DtpForClust.TabIndex = 5;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(398, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "label1";
             // 
             // DataAnalysisForm
             // 
@@ -944,6 +890,7 @@ namespace SystemMonitor
             this.tabControl3.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -981,16 +928,13 @@ namespace SystemMonitor
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartForOutputHistory;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboBoxTableForModel;
-        private System.Windows.Forms.ComboBox cbForSelCol;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker DtpForClust;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label label1;
     }
 }

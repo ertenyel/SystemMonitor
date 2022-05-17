@@ -122,6 +122,7 @@ namespace SystemMonitor
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Processor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Disk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Memory)).BeginInit();
@@ -729,6 +730,7 @@ namespace SystemMonitor
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.label1);
             this.splitContainer2.Panel1.Controls.Add(this.ClearTableDataSysRes);
             this.splitContainer2.Panel1.Controls.Add(this.CreateTableSysRes);
             this.splitContainer2.Panel1.Controls.Add(this.GoBtnSysRes);
@@ -1025,6 +1027,15 @@ namespace SystemMonitor
             this.panel2.Size = new System.Drawing.Size(1428, 733);
             this.panel2.TabIndex = 8;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 464);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 16);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "label1";
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1079,6 +1090,7 @@ namespace SystemMonitor
             this.tabControl1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
@@ -1156,6 +1168,7 @@ namespace SystemMonitor
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartForSent;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

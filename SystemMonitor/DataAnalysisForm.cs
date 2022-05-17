@@ -126,79 +126,28 @@ namespace SystemMonitor
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            richTextBox1.Clear();
-
-            SearchingMaxSel.InitializeValues(beginDateTime.Value, comboBoxTableForModel.Text);
-            ForecastAnalize.InitializeValuesTests(Values.dateTimeResultMaxSel[0], Values.dateTimeResultMaxSel[Values.dateTimeResultMaxSel.Length-1], 
-                Values.dateTimeNewStory[0], Values.dateTimeNewStory[Values.dateTimeNewStory.Length - 1], comboBoxTableForModel.Text);
-            ForecastAnalize.ComputeParamteres(ref Values.testMaxSel, ref Values.testNewStory, ref Values.resultMaxSel, ref Values.newStory);
-
-            for (int i = 0; i < Values.newStory.Length; i++)
+            DataTable dataTable = SqlLiteDataBase.LetsQuery($"select avg(percproc), avg(percdisc), avg(percmemory) " +
+                      $"from systemresources where timesysres between '{beginDateTime.Value:yyyy-MM-dd HH:mm:ss.fff}' and '{beginDateTime.Value.AddDays(2):yyyy-MM-dd HH:mm:ss.fff}' " +
+                      $"group by strftime('%Y-%m-%d %H:%M', timesysres)");
+            for (int i = 0; i < dataTable.Rows.Count; i++)
             {
-                richTextBox1.AppendText($"{Values.dateTimeNewStory[i]}\t");
-
-                for (int j = 0; j < Values.newStory[i].Length; j++)
-                    richTextBox1.AppendText($"{Values.newStory[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
+                chartForOutputHistory.Series[0].Points.AddXY(i, dataTable.Rows[i][0]);
+                /*for (int j = 0; j < dataTable.Columns.Count; j++)
+                {
+                    
+                } */
             }
 
-            richTextBox1.AppendText($"{Environment.NewLine}");
 
-            for (int i = 0; i < Values.testNewStory.Length; i++)
-            {
-                richTextBox1.AppendText($"{Values.dateTimeTestNewStory[i]}\t");
-
-                for (int j = 0; j < Values.testNewStory[i].Length; j++)
-                    richTextBox1.AppendText($"{Values.testNewStory[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-            }
-
-            richTextBox1.AppendText($"{Environment.NewLine}");
-
-            for (int i = 0; i < Values.resultMaxSel.Length; i++)
-            {
-
-                richTextBox1.AppendText($"{Values.dateTimeResultMaxSel[i]}\t");
-
-                for (int j = 0; j < Values.resultMaxSel[i].Length; j++)
-                    richTextBox1.AppendText($"{Values.resultMaxSel[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-            }
-
-            richTextBox1.AppendText($"{Environment.NewLine}");
-
-            for (int i = 0; i < Values.testMaxSel.Length; i++)
-            {
-                richTextBox1.AppendText($"{Values.dateTimeTestMaxSel[i]}\t");
-
-                for (int j = 0; j < Values.testMaxSel[i].Length; j++)
-                    richTextBox1.AppendText($"{Values.testMaxSel[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-            }
-
-            richTextBox1.AppendText($"{Environment.NewLine}");
-
-            for (int i = 0; i < ForecastAnalize.forecast.Length; i++)
-            {
-                for (int j = 0; j < ForecastAnalize.forecast[i].Length; j++)
-                    richTextBox1.AppendText($"{ForecastAnalize.forecast[i][j]}\t");
-                richTextBox1.AppendText($"{Environment.NewLine}");
-            }
-
-            richTextBox1.AppendText($"{Environment.NewLine}");
-            richTextBox1.AppendText($"Max factor: {SearchingMaxSel.maxFactor}");
-            richTextBox1.AppendText($"{Environment.NewLine}");
-            richTextBox1.AppendText($"factorNewBt: {ForecastAnalize.factorNewBt}");
-            richTextBox1.AppendText($"{Environment.NewLine}");
-            richTextBox1.AppendText($"factorNewCt: {ForecastAnalize.factorNewCt}"); 
-             stopwatch.Stop();
+            stopwatch.Stop();
 
             label5.Text = "Working time: " + stopwatch.ElapsedMilliseconds.ToString() + " ms";
         }
 
-        private void comboBoxTableForModel_SelectedIndexChanged(object sender, EventArgs e)
+        private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            button1.Enabled = true;
+            chartForOutputHistory.ChartAreas[0].AxisX.ScaleView.Size = trackBar1.Value;
+            label1.Text = Convert.ToString(trackBar1.Value);
         }
     }
 }

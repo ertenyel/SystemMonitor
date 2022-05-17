@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
+using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -206,7 +207,7 @@ namespace SystemMonitor
         }
         private void ClearTableDataSysRes_Click(object sender, EventArgs e) => MainDataGrid.Rows.Clear();
         private void GoBtnSysRes_Click(object sender, EventArgs e)
-        {
+        {            
             if (SqlLiteDataBase.LetsQuery(richTextBoxSysRes.Text) != null)
             {
                 MainDataGrid.Rows.Clear();
@@ -218,7 +219,7 @@ namespace SystemMonitor
                     MainDataGrid.Rows.Add(query.Rows[i].ItemArray);
             }
             else
-                MessageBox.Show("The data was not uploaded");
+                MessageBox.Show("The data was not uploaded");           
         }
         //button clear charts
         private void ClearCharts_Click(object sender, EventArgs e) => clearChartsMethod(false);
