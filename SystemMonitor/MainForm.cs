@@ -141,12 +141,14 @@ namespace SystemMonitor
                         if (max)
                         {
                             if (value > Y)
-                                listBox1.Items.Add("the value exceeded the allowed interval. Forecast value: " + Y + " Real value: " + value + " DateTime: " + DateTime.Now + " Program iteration: " + programIteration + " " + parameters);
+                                listBox1.Items.Add("the value exceeded the allowed interval. Forecast value: " + Y + " Real value: " + 
+                                    value + " DateTime: " + DateTime.Now + " Program iteration: " + programIteration + " " + parameters);
                         }
                         else
                         {
                             if (value < Y)
-                                listBox1.Items.Add("the value is below the allowed interval. Forecast value: " + Y + " Real value: " + value + " DateTime: " + DateTime.Now + " Program iteration: " + programIteration + " " + parameters);
+                                listBox1.Items.Add("the value is below the allowed interval. Forecast value: " + Y + " Real value: " + 
+                                    value + " DateTime: " + DateTime.Now + " Program iteration: " + programIteration + " " + parameters);
                         }
                     }
                 }
